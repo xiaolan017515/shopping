@@ -107,49 +107,6 @@ message组件为消息弹框，主要分为三类：
 - 单纯的数据展示表格；
 
 - 后续增加赋值操作等事件。
-
-### screenshot
-    
-暂时只支持<code>video</code>和<code>img</code>目标截图
-
-~~~javascript
-$("targetParentID").screenshot("targetID", "previewBoxID", isSave);
-~~~
-
-注:
-
-- targetParentID: 截图目标父级盒子ID；
-
-- targetID: 截图目标ID；
-
-- previewBoxID: 截图预览盒子ID；
-
-- isSave: 是否保存截图；
-
-|   params  |  description |
-|:-------------| :--------------|
-| targetParentID | 截图目标父级盒子ID |
-| targetID | 截图目标ID |
-| previewBoxID | 截图预览盒子ID,不预览则传空值 |
-| isSave | 是否保存截图，默认不保存 |
-
-### video(废弃，已集成成熟的video.js插件)
-
-~~~html
-<div id="video-parent-box">
-    <video id="target" preload="auto"poster="style/xxx.png">
-        <source src="style/xxx.mp4" type="video/mp4" />
-        <source src="style/xxx.webm" type="video/webm" />
-        <source src="style/xxx.ogv" type="video/ogg" />
-        <track kind="subtitles" src="" srclang="zh" label="Language">
-    </video>
-</div>
-~~~
-注:
-
-- <code>video</code>外包一层<code>div</code>.video-parent-box的盒子；
-- 自定义视频播放器，配合screenshot插件，可以完成视频框选截图。
-
   
 
 
