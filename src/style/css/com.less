@@ -1,0 +1,54 @@
+@import "color";
+body {
+  min-width: 1000px;
+  overflow-x: hidden;
+}
+.clr-float::after {
+  /*==for FF/chrome/opera/IE8==*/
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  clear: both;
+
+  visibility: hidden;
+  /*==for IE6/7 Maxthon2==*/
+  zoom: 1;
+}
+.icon::before {
+  margin-right: 5px;
+}
+
+.footer {
+  width: 100%;
+  height: 60px;
+  margin-top: 20px;
+  padding-top: 10px;
+  margin-bottom: 10px;
+  border-top: 1px solid @c-border;
+  text-align: center;
+  &.fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
+}
+.segmentation {
+  width: 100%;
+  //height: 1px;
+  border-bottom: 1px solid @c-border-sub;
+  margin-top: -2px;
+}
+.bread {
+  width: 1000px;
+  height: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  a {
+    display: inline-block;
+    padding: 5px 5px 0 0;
+    &:hover {
+      color: @c-wrong;
+    }
+  }
+}

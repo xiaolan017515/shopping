@@ -1,0 +1,51 @@
+@import "../../style/css/base";
+.popup {
+  min-width: 100%;
+  position: absolute;
+  border: solid 1px @c-border;
+  box-sizing: border-box;
+  display: none;
+  z-index: 9999;
+  &.open {
+    display: block;
+  }
+  button {
+    border-radius: 2px;
+    min-width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    border-bottom: 1px solid @c-border-sub;
+    &.btnClicked {
+      background-color: @c-ok;
+      color: @c-light-0;
+    }
+    &:last-child {
+      border-bottom: none;
+    }
+    &:hover {
+      background-color: @c-ok;
+      color: @c-light-0;
+    }
+    >.ico-caret-right {
+      position: absolute;
+      right: 10px;
+      top: 30%;
+    }
+  }
+  .subbox {
+    min-width: 100%;
+    position: relative;
+    .sub {
+      min-width: 100%;
+      position: absolute;
+      left: 100%;
+      top: -2px;
+      box-sizing: border-box;
+      border: solid 1px @c-border;
+      display: none;
+      &.open {
+        display: block;
+      }
+    }
+  }
+}

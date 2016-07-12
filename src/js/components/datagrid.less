@@ -1,0 +1,40 @@
+@import "../../style/css/base";
+.box {
+  display: flex;
+}
+.box-lr {
+  flex-flow: row;
+}
+.box-tb {
+  flex-flow: column;
+}
+.wrap {
+  flex-wrap: wrap;
+}
+.nowrap {
+  flex-wrap: nowrap;
+}
+.flex {
+  flex: 1;
+}
+.flex-shrink {
+  flex-shrink: 0;
+}
+.flex-grow {
+  flex-grow: 1;
+}
+.datagrid {
+  border-left: 1px solid @c-border;
+  .head {
+    background-color: @c-dark-1;
+    color: @c-light-0;
+  }
+  .cell {
+    padding: 10px;
+    border-right: 1px solid @c-border;
+    border-bottom: 1px solid @c-border;
+  }
+  .content {
+
+  }
+}

@@ -1,0 +1,126 @@
+@import "color";
+/* 让非ie浏览器默认也显示垂直滚动条，防止因滚动条引起的闪烁 */
+html, body {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+  min-width: 850px;
+}
+/* 清除内外边距 */
+body, p, ul {
+  /* table elements 表格元素 */
+  margin: 0;
+  padding: 0;
+}
+/* 设置默认字体 */
+body * {
+  /* 用 ascii 字符表示，使得在任何编码下都无问题 */
+  font-size: 14px;
+  font-family:"Microsoft YaHei", Arial, "Microsoft JhengHei","华文细黑",STHeiti,MingLiu, Tahoma, Helvetica, "\5b8b\4f53", sans-serif;
+}
+/* 重置文本格式元素 */
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+abbr[title],
+acronym[title] {
+  /* 注：1.ie6 不支持 abbr; 2.这里用了属性选择符，ie6 下无效果 */
+  border-bottom: 1px dotted;
+  cursor: help;
+}
+/* 重置表单元素 */
+legend {
+  color: #000;
+}
+/* for ie6 */
+fieldset,
+img {
+  border: none;
+}
+/* img 搭车：让链接里的 img 无边框 */
+/* 注：optgroup 无法扶正 */
+button,
+input,
+select,
+textarea {
+  font-size: 100%;
+  /* 使得表单元素在 ie 下能继承字体大小 */
+}
+/* 重置表格元素 */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/*滚动条*/
+::-webkit-scrollbar-track-piece{
+  -webkit-border-radius:0;
+}
+::-webkit-scrollbar{
+  width:5px;
+  height:5px;
+}
+::-webkit-scrollbar-thumb{
+  height:50px;
+  background-color: #878787;
+  -webkit-border-radius:2px;
+  outline-offset:-1px;
+  border: 2px solid #737373;
+}
+::-webkit-scrollbar-thumb:hover{
+  height:50px;
+  background-color: #5c5c5c;
+  -webkit-border-radius:4px;
+}
+
+body {
+  scrollbar-arrow-color:#737373; /*三角箭头的颜色*/
+  scrollbar-face-color:#5c5c5c; /*立体滚动条的颜色（包括箭头部分的背景色）*/
+  scrollbar-3dlight-color:#878787; /*立体滚动条亮边的颜色*/
+  scrollbar-highlight-color:#878787; /*滚动条的高亮颜色（左阴影？）*/
+  scrollbar-shadow-color:#878787; /*立体滚动条阴影的颜色*/
+  scrollbar-darkshadow-color:#878787; /*立体滚动条外阴影的颜色*/
+  scrollbar-track-color:#737373; /*立体滚动条背景颜色*/
+  scrollbar-base-color:#878787; /*滚动条的基色*/
+  background-color: @c-light-1;
+}
+
+input {
+  border: 1px solid @c-button;
+  outline: none;
+  padding: 5px 8px;
+  box-sizing: border-box;
+}
+button, .button {
+  padding: 10px 20px;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  outline:none;
+}
+
+a {
+  color: @c-dark-2;
+}
+
+ul {
+  li {
+    list-style: none;
+  }
+  &.tab {
+    li {
+      cursor: pointer;
+      float: left;
+      padding: 8px 10px;
+      background-color: @c-dark-2;
+      color: @c-light-0;
+      &.active {
+        background-color: @c-dark-0;
+      }
+    }
+  }
+}
