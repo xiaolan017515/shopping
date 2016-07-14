@@ -18,6 +18,77 @@ body {
 .icon::before {
   margin-right: 5px;
 }
+body {
+  > div {
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    &.content {
+      height: auto;
+      .section {
+        background-color: @c-light-0;
+      }
+      > div {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        &.searchBox {
+          width: 100%;
+          height: 60px;
+          > div {
+            float: left;
+            &.logo {
+              width: 145px;
+              height: 58px;
+              background-image: url("../images/logo.jpg");
+            }
+            &.search {
+              width: 450px;
+              margin-left: 155px;
+              height: 100%;
+              display: inline-table;
+              word-spacing: -6px;
+              input {
+                width: 250px;
+                height: 40px;
+                border-right: none;
+              }
+              button {
+                width: 80px;
+                height: 40px;
+                padding: 0;
+                color: @c-light-0;
+                background-color: @c-purple-2;
+              }
+            }
+            &.cart {
+              padding-left: 10px;
+              padding-right: 10px;
+              height: 40px;
+              margin-left: 30px;
+              text-align: left;
+              line-height: 40px;
+              border: 1px solid @c-border;
+              background-color: @c-light-0;
+              cursor: pointer;
+              span {
+                display: inline-block;
+                margin-left: 5px;
+                margin-right: 5px;
+                color: @c-purple-4;
+                font-size: 25px;
+                &.num {
+                  font-size: 18px;
+                  font-weight: bold;
+                  color: @c-purple-3;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
 .header {
   width: 100%;
   height: 30px;;
@@ -32,6 +103,7 @@ body {
       float: left;
       .ico {
         color: @c-purple-4;
+        font-size: 16px;
       }
       &.login {
         width: 30%;
@@ -100,77 +172,6 @@ body {
   border-bottom: 1px solid @c-border-sub;
   margin-top: -2px;
 }
-body {
-  > div {
-    width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
-    &.content {
-      height: auto;
-      .section {
-        background-color: @c-light-0;
-      }
-      > div {
-        margin-top: 10px;
-        margin-bottom: 10px;
-        &.searchBox {
-          width: 100%;
-          height: 60px;
-          > div {
-            float: left;
-            &.logo {
-              width: 145px;
-              height: 58px;
-              background-image: url("../images/logo.jpg");
-            }
-            &.search {
-              width: 450px;
-              margin-left: 155px;
-              height: 100%;
-              display: inline-table;
-              word-spacing: -6px;
-              input {
-                width: 250px;
-                height: 40px;
-                border-right: none;
-              }
-              button {
-                width: 80px;
-                height: 40px;
-                padding: 0;
-                color: @c-light-0;
-                background-color: @c-purple-2;
-              }
-            }
-            &.cart {
-              padding-left: 10px;
-              padding-right: 10px;
-              height: 40px;
-              margin-left: 30px;
-              text-align: left;
-              line-height: 40px;
-              border: 1px solid @c-border;
-              background-color: @c-light-0;
-              cursor: pointer;
-              span {
-                display: inline-block;
-                margin-left: 5px;
-                margin-right: 5px;
-                color: @c-purple-4;
-                &.num {
-                  font-size: 18px;
-                  font-weight: bold;
-                  color: @c-purple-3;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
 .bread {
   width: 1000px;
   height: 30px;
@@ -182,5 +183,25 @@ body {
     &:hover {
       color: @c-wrong;
     }
+  }
+}
+#gotoTop {
+  display: none;
+  position: fixed;
+  right: 15px;
+  bottom: 50px;
+  z-index: 999;
+  font-size: 30px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  background-color: @c-light-0;
+  color: @c-purple-2;
+  transition: all 200ms;
+  cursor: pointer;
+  &:hover {
+    background-color: @c-purple-2;
+    color: @c-light-0;
   }
 }

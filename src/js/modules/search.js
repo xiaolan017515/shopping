@@ -1,7 +1,7 @@
 /**
  * Created by fdr08 on 2016/7/6.
  */
-import "../../style/css/icomoon.less";
+import "../../style/css/awesome.less";
 import "../../style/css/base.less";
 import "../../style/css/com.less";
 import "../../style/css/search.less";
@@ -11,8 +11,9 @@ function init() {
     /**
      * 条件选项过多自动折叠
      */
-    var t =  $(".condition"), fold = $(".expand"), h = t.height();
-    if(h > 220) {
+    var t = $(".condition"), fold = $(".expand"), h = t.height();
+    if (h > 220) {
+        t.css({height: "200px"});
         t.addClass("autoExpand");
         fold.on("click", function () {
             var fold = !$(this).hasClass("fold");
@@ -26,42 +27,95 @@ function init() {
                 $(this).removeClass("fold");
             }
         })
-    }else {
+    } else {
         t.removeClass("autoExpand");
     }
 }
 init();
 
-
-
 /**
- * 开启多选模式
+ * 多选模式
  */
 $(".checkmore").on("click", function () {
-   var open = !$(this).parent().hasClass("checkMode");
-    if(open) {
-        $(".select>span").removeClass("active").unbind("click");
+    var open = !$(this).parent().hasClass("checkMode"),
+        span = $(this).prev().find("span");
+    if (open) {
+        span.removeClass("active");
+        span.unbind("click");
         $(this).children("button").html("确定");
         $(this).parent().addClass("checkMode");
-    }else {
-        $(this).children("button").html("多选");
-        $(this).parent().removeClass("checkMode");
-        $(".select>span").on("click", radioEvent);
+    } else {
+        var t = span.find('input:checked').parent();
+        if (t && t.length > 0) {
+
+            var v = "", group = '';
+            var _id = $(this).parent().attr("id");
+            $.each(t, function (i, d) {
+                v += $(d).text();
+            });
+            group = '<div class="group">' +
+                '<span class="val">' + v + '</span>' +
+                '<span id="parent-' + _id + '" class="ico ico-close"></span>' +
+                '>' +
+                '</div>';
+            $(".hasSelected").append(group);
+            /**
+             * 移除已筛选条件栏
+             */
+            $(this).parent().css({display: "none"});
+            /**
+             * 删除筛选条件
+             */
+            var $that = $(this);
+            $(".ico").on("click", function () {
+                var id = $(this).attr("id").replace("parent-", "");
+                $(this).parent().remove();
+                $("#" + id).css({display: "block"}).children(".select").children("span").removeClass("active");
+
+                $that.children("button").html("多选");
+                $that.parent().removeClass("checkMode");
+            });
+
+            span.on("click", radioEvent);
+        } else {
+            $(this).children("button").html("多选");
+            $(this).parent().removeClass("checkMode");
+        }
     }
 });
 
 /**
- * 条件删选
+ * 单选模式
  */
 $(".select>span").on("click", radioEvent);
-
 function radioEvent() {
     $(this).addClass("active").siblings("span").removeClass("active");
+    var _id = $(this).parent().parent().attr("id");
+    var v = $(this).text(),
+        group = '<div class="group">' +
+            '<span class="val">' + v + '</span>' +
+            '<span id="parent-' + _id + '" class="ico ico-close"></span>' +
+            '>' +
+            '</div>';
+    $(".hasSelected").append(group);
+    /**
+     * 移除已筛选条件栏
+     */
+    $(this).parent().parent().css({display: "none"});
+    /**
+     * 删除筛选条件
+     */
+    $(".ico").on("click", function () {
+        var id = $(this).attr("id").replace("parent-", "");
+        $(this).parent().remove();
+        $("#" + id).css({display: "block"}).children(".select").children("span").removeClass("active");
+    })
 }
 
 /**
  * 删选结果排序
  */
-$(".sortGroup>button").on("click", function () {
-    $(this).toggleClass("active").siblings("span").toggleClass("ico-sort-amount-desc");
+$(".sort").on("click", ">.group", function () {
+    $(this).toggleClass("active").children("span").toggleClass("ico-sort-asc");
 });
+

@@ -1,10 +1,10 @@
 /**
  * Created by drfu on 6/2/16.
  */
-
-import "../../style/css/icomoon.less";
+import "../../style/css/awesome.less";
 import "../../style/css/base.less";
 import "../../style/css/com.less";
+import "../../style/css/index.less";
 import "../common/com";
 // import "../lib/core";
 // import "../lib/jquery.screenshot";
@@ -53,8 +53,6 @@ import "../common/com";
 //
 //});
 
-
-
 // $("#aaa").message({
 //     title: "警告",
 //     content: "确认删除当前项目，一旦删除不可恢复！",
@@ -66,10 +64,6 @@ import "../common/com";
 
 // $("#aaa").shortMessage(false, false, "删除失败，请重试...", 2500);
 
-
-
-
-
 // $("#test").throwMsg(
 //     '这是一个jQuery插件弹框测试，看看效果呢...',
 //     'ok' , false, {
@@ -79,4 +73,8 @@ import "../common/com";
 // function fun() {
 //     $(".con").addClass("animated bounceOut");
 // }
+
+$(window).scroll(function () {
+    alert(1);
+});
 

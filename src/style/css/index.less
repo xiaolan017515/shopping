@@ -3,7 +3,7 @@
 body {
   > div {
     &.content {
-      &.expand {
+      .expand {
         width: 100%;
         height: auto;
         margin-bottom: 0;
@@ -41,16 +41,6 @@ body {
                 span {
                   display: inline-block;
                   padding: 0 5px;
-                  &.ico-circle-right {
-                    color: @c-light-0;
-                    width: 15px;
-                    height: 30px;
-                    line-height: 30px;
-                    text-align: center;
-                    position: absolute;
-                    right: 0;
-                    top: 0;
-                  }
                 }
                 .subMenu {
                   display: none;
@@ -108,6 +98,7 @@ body {
               margin: 0 5px 8px 5px;
               box-shadow: 0 0 5px 1px @c-border-sub;
               position: relative;
+              cursor: pointer;
               overflow: hidden;
               &:hover .desc {
                 color: @c-purple-4;
@@ -144,7 +135,7 @@ body {
           }
         }
       }
-      &.guess {
+      .guess {
         width: 100%;
         height: auto;
         margin-top: 0;
@@ -194,7 +185,6 @@ body {
                   width: 100%;
                   &.name {
                     color: @c-dark-2;
-                    font-size: 16px;
                     font-weight: bold;
                   }
                   &.price {
@@ -210,7 +200,7 @@ body {
           }
         }
       }
-      &.hotSale, &.hotSearch {
+      .hotSale, .hotSearch {
         width: 100%;
         height: auto;
         .title {
@@ -257,7 +247,6 @@ body {
                   width: 100%;
                   &.name {
                     color: @c-dark-2;
-                    font-size: 16px;
                     font-weight: bold;
                   }
                   &.price {
@@ -273,7 +262,7 @@ body {
           }
         }
       }
-      &.mixin {
+      .mixin {
         .title {
           width: 100%;
           height: 30px;
@@ -294,29 +283,33 @@ body {
           .pin {
             padding: 5px 7.5px 0 7.5px;
             float: left;
-            .box {
-              background-color: @c-light-0;
-              padding: 10px;
-              border: 1px solid @c-border;
-              box-shadow: 0 0 6px @c-border;
-              border-radius: 3px;
-              img {
-                width: 162px;
-                height: auto;
-              }
-              p {
-                width: 100%;
-                &.name {
-                  color: @c-dark-2;
-                  font-size: 16px;
-                  font-weight: bold;
+            a {
+              display: inline-block;
+              width: 100%;
+              height: 100%;
+              .box {
+                background-color: @c-light-0;
+                padding: 10px;
+                border: 1px solid @c-border;
+                box-shadow: 0 0 6px @c-border;
+                border-radius: 3px;
+                img {
+                  width: 162px;
+                  height: auto;
                 }
-                &.price {
-                  color: @c-purple-4;
-                  font-weight: bold;
-                }
-                &.desc {
-                  color: @c-dark-2;
+                p {
+                  width: 100%;
+                  &.name {
+                    color: @c-dark-2;
+                    font-weight: bold;
+                  }
+                  &.price {
+                    color: @c-purple-4;
+                    font-weight: bold;
+                  }
+                  &.desc {
+                    color: @c-dark-2;
+                  }
                 }
               }
             }
