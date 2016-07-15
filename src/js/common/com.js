@@ -20,7 +20,6 @@ function gotoTop(min_height) {
     $(window).on("scroll", function () {
 //获取窗口的滚动条的垂直位置
         var s = $(document).scrollTop();
-        console.log(s);
 //当窗口的滚动条的垂直位置大于页面的最小高度时，让返回顶部元素渐现，否则渐隐
         if (s > min_height) {
             $("#gotoTop").fadeIn(100);
@@ -30,9 +29,6 @@ function gotoTop(min_height) {
     });
 }
 gotoTop();
-
-
-
 
 /**
  * 导航栏点击事件

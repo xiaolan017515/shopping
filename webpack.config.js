@@ -77,6 +77,7 @@ module.exports = {
         // 模块别名定义，方便后续直接引用别名
         alias: {
             'jquery': "../lib/jquery-2.2.4.min.js"
+            // 'jquery': "../lib/jquery-1.9.1.min.js"
         }
     }
 };

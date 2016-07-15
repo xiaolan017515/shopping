@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>订单</title>
+    <link rel="stylesheet" href="../assets/commons.css">
+    <link rel="stylesheet" href="../assets/order.css">
+</head>
+<body>
+<div class="header clr-float">
+    <div class="middle">
+        <div class="login">
+            <a href="login.html" target="_blank">登录</a>
+            <a href="register.html" target="_blank">快速注册</a>
+        </div>
+        <div class="user">
+                <span>
+                    <span class="ico ico-star"></span>
+                    收藏夹
+                </span>
+            <span>订单中心</span>
+            <span>客服中心</span>
+                <span class="tel">
+                    <span class="ico ico-mobile"></span>手机版
+                    <img src="style/images/qr.jpg" alt="手机版">
+                </span>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="searchBox clr-float">
+        <div class="logo"></div>
+        <div class="search">
+            <input type="text">
+            <button>搜索</button>
+        </div>
+        <div class="cart">
+            <a href="order.html">
+                <span class="ico ico-shopping-cart"></span>
+                购物车
+                <span class="num">25</span>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="segmentation"></div>
+<div class="order">
+    <div class="head clr-float">
+        <div class="checkbox checkAll">
+            <input type="checkbox">全选
+        </div>
+        <div class="name">
+            商品名
+        </div>
+        <div class="price">
+            单价
+        </div>
+        <div class="num">
+            数量
+        </div>
+        <div class="money">
+            小计/元
+        </div>
+        <div class="operate">
+            操作
+        </div>
+    </div>
+    <div class="lists" id="lists">
+        <div class="item clr-float">
+            <div class="checkbox">
+                <input type="checkbox">
+            </div>
+            <div class="name clr-float">
+                <div class="pic">
+                    <img src="style/images/2.jpg" alt="">
+                </div>
+                <div class="desc clr-float">
+                    <p class="name">
+                        <a href="###">TCL XQB55-36SP 5.5公斤 全自动波轮洗衣机 一键脱水</a>
+                    </p>
+                    <p class="type">颜色：5.5公斤普及款</p>
+                </div>
+            </div>
+            <div id="price" class="price">699.0</div>
+            <div class="chooseNum">
+                <div class="addTool">
+                    <span class="reduce">-</span>
+                    <input type="text" value="1">
+                    <span class="add">+</span>
+                </div>
+            </div>
+            <div class="money">
+                699.0
+            </div>
+            <div class="operate">
+                <button>删除</button>
+            </div>
+        </div>
+        <div class="item clr-float">
+            <div class="checkbox">
+                <input type="checkbox">
+            </div>
+            <div class="name clr-float">
+                <div class="pic">
+                    <img src="style/images/2.jpg" alt="">
+                </div>
+                <div class="desc clr-float">
+                    <p class="name">
+                        <a href="###">TCL XQB55-36SP 5.5公斤 全自动波轮洗衣机 一键脱水</a>
+                    </p>
+                    <p class="type">颜色：5.5公斤普及款</p>
+                </div>
+            </div>
+            <div class="price">699.0</div>
+            <div class="chooseNum">
+                <div class="addTool">
+                    <span class="reduce">-</span>
+                    <input type="text" value="1">
+                    <span class="add">+</span>
+                </div>
+            </div>
+            <div class="money">
+                699.0
+            </div>
+            <div class="operate">
+                <button>删除</button>
+            </div>
+        </div>
+        <div class="item clr-float">
+            <div class="checkbox">
+                <input type="checkbox">
+            </div>
+            <div class="name clr-float">
+                <div class="pic">
+                    <img src="style/images/2.jpg" alt="">
+                </div>
+                <div class="desc clr-float">
+                    <p class="name">
+                        <a href="###">TCL XQB55-36SP 5.5公斤 全自动波轮洗衣机 一键脱水</a>
+                    </p>
+                    <p class="type">颜色：5.5公斤普及款</p>
+                </div>
+            </div>
+            <div class="price"> 45.7</div>
+            <div class="chooseNum">
+                <div class="addTool">
+                    <span class="reduce">-</span>
+                    <input type="text" value="1">
+                    <span class="add">+</span>
+                </div>
+            </div>
+            <div class="money">
+                45.7
+            </div>
+            <div class="operate">
+                <button>删除</button>
+            </div>
+        </div>
+    </div>
+    <div class="tool clr-float">
+        <div class="checkbox checkAll">
+            <input type="checkbox">全选
+        </div>
+        <div class="sumMoney" id="sumMoney">
+            <!--<span>已选择<strong>12</strong>件商品</span>-->
+            总价:<strong>0.00</strong>
+
+        </div>
+        <div class="gotoPay">去结算</div>
+    </div>
+</div>
+
+
+
+<div class="footer">
+    <a href="###">广告服务</a> - <a
+        href="###">客服中心</a> - <a
+        href="###">联系方式</a> - <a
+        href="###">保护隐私权</a> - <a
+        href="###">About XXX</a> - <a
+        href="###">公司介绍</a> <br>
+    Copyright <span class="fontArial" style="font-family:arial">©</span>
+    <script>document.write(new Date().getFullYear());</script>
+    2016 XXXX.com Inc. All Rights Reserved. XXXXXXX有限公司<span class="unline"></span> <br>请仔细阅读 <a
+        href="###">版权声明</a> 、<a
+        href="###">反盗版和反盗链权利声明</a> 举报邮箱：<a
+        href="###">XXX@XXX.com</a>
+</div>
+<script src="../assets/commons.js"></script>
+<script src="../assets/order.js"></script>
+</body>
+</html>

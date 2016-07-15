@@ -70,16 +70,20 @@ body {
               border: 1px solid @c-border;
               background-color: @c-light-0;
               cursor: pointer;
-              span {
+              a {
                 display: inline-block;
-                margin-left: 5px;
-                margin-right: 5px;
-                color: @c-purple-4;
-                font-size: 25px;
-                &.num {
-                  font-size: 18px;
-                  font-weight: bold;
-                  color: @c-purple-3;
+                text-decoration: none;
+                span {
+                  display: inline-block;
+                  margin-left: 5px;
+                  margin-right: 5px;
+                  color: @c-purple-4;
+                  font-size: 25px;
+                  &.num {
+                    font-size: 18px;
+                    font-weight: bold;
+                    color: @c-purple-3;
+                  }
                 }
               }
             }
@@ -185,6 +189,43 @@ body {
     }
   }
 }
+.addTool {
+    width: 110px;
+    height: 25px;
+    border: 1px solid @c-border;
+    position: relative;
+    span {
+      width: 25px;
+      height: 25px;
+      display: inline-block;
+      line-height: 25px;
+      position: absolute;
+      top: 0;
+      z-index: 999;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      &.reduce {
+        border-right: 1px solid @c-border;
+        left: 0;
+      }
+      &.add {
+        border-left: 1px solid @c-border;
+        right: 0;
+      }
+    }
+    input {
+      width: 59px;
+      height: 100%;
+      border: none;
+      padding: 0;
+      position: absolute;
+      left: 26px;
+      top: 0;
+      text-align: center;
+      z-index: 999;
+    }
+  }
 #gotoTop {
   display: none;
   position: fixed;

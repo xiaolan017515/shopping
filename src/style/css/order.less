@@ -1,0 +1,172 @@
+@import "color";
+.order {
+  min-height: 400px;
+  .checkbox {
+    width: 70px;
+  }
+  .name {
+    width: 460px;
+  }
+  .price {
+    width: 100px;
+  }
+  .chooseNum {
+    text-align: center;
+    width: 110px;
+    //.addTool {
+    //  width: 110px;
+    //  height: 25px;
+    //  border: 1px solid @c-border;
+    //  position: relative;
+    //  span {
+    //    width: 25px;
+    //    height: 25px;
+    //    display: inline-block;
+    //    line-height: 25px;
+    //    position: absolute;
+    //    top: 0;
+    //    z-index: 999;
+    //    text-align: center;
+    //    cursor: pointer;
+    //    user-select: none;
+    //    &.reduce {
+    //      border-right: 1px solid @c-border;
+    //      left: 0;
+    //    }
+    //    &.add {
+    //      border-left: 1px solid @c-border;
+    //      right: 0;
+    //    }
+    //  }
+    //  input {
+    //    width: 59px;
+    //    height: 100%;
+    //    border: none;
+    //    padding: 0;
+    //    position: absolute;
+    //    left: 26px;
+    //    top: 0;
+    //    text-align: center;
+    //    z-index: 999;
+    //  }
+    //}
+  }
+  .money {
+    text-align: center;
+    width: 110px;
+  }
+  .operate {
+    width: 130px;
+  }
+  >div {
+    width: 100%;
+    &.head {
+      width: 980px;
+      padding: 10px 10px;
+      height: 30px;
+      line-height: 30px;
+      border: 1px solid @c-border-sub;
+      background-color: @c-light-0;
+      margin-bottom: 10px;
+      >div {
+        float: left;
+        height: 100%;
+        line-height: 30px;
+      }
+    }
+    &.lists {
+      height: auto;
+      >.item {
+        width: 980px;
+        padding: 10px 10px;
+        height: 100%;
+        line-height: 30px;
+        background-color: @c-light-0;
+        border-bottom: 1px solid @c-border;
+        >div {
+          float: left;
+          height: 100%;
+          &.name {
+            >div {
+              float: left;
+              &.pic {
+                width: 100px;
+                height: 100px;
+                img {
+                  width: 100%;
+                  height: 100%;
+                }
+              }
+              &.desc {
+                width: 330px;
+                padding-left: 15px;
+                padding-right: 15px;
+                p {
+                  float: left;
+                  height: 50%;
+                  word-break: break-all;
+                  &.name {
+                    width: 190px;
+                    a {
+                      color: @c-dark-1!important;
+                      text-decoration: none;
+                      &:hover {
+                        color: @c-purple-3;
+                      }
+                    }
+                  }
+                  &.type {
+                    width: 130px;
+                    margin-left: 10px;
+                    color: @c-dark-2;
+                  }
+                }
+              }
+            }
+          }
+          &.operate {
+            button {
+              padding: 3px 8px;
+              background-color: @c-purple-2;
+              color: @c-light-0;
+            }
+          }
+        }
+      }
+    }
+    &.tool {
+      height: 45px;
+      width: 980px;
+      padding-left: 10px;
+      padding-right: 10px;
+      line-height: 45px;
+      background-color: @c-light-1;
+      margin-top: 5px;
+      >div {
+        line-height: 45px;
+        float: left;
+        height: 100%;
+        &.sumMoney {
+          text-align: right;
+          width: 750px;
+          margin-right: 15px;
+          strong {
+            color: @c-purple-3;
+            margin-left: 5px;
+            margin-right: 5px;
+          }
+          span {
+            margin-right: 20px;
+          }
+        }
+        &.gotoPay {
+          width: 120px;
+          background-color: @c-purple-2;
+          color: @c-light-0;
+          text-align: center;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
