@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>订单结算页</title>
+    <link rel="stylesheet" href="../assets/commons.css">
+    <link rel="stylesheet" href="../assets/pay.css">
+</head>
+<body>
+<div class="header clr-float">
+    <div class="middle">
+        <div class="login">
+            <a href="login.html" target="_blank">登录</a>
+            <a href="register.html" target="_blank">快速注册</a>
+        </div>
+        <div class="user">
+                <span>
+                    <span class="ico ico-star"></span>
+                    收藏夹
+                </span>
+            <span>订单中心</span>
+            <span>客服中心</span>
+                <span class="tel">
+                    <span class="ico ico-mobile"></span>手机版
+                    <img src="style/images/qr.jpg" alt="手机版">
+                </span>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="searchBox clr-float">
+        <div class="logo"></div>
+        <div class="search">
+            <input type="text">
+            <button>搜索</button>
+        </div>
+        <div class="cart">
+            <a href="order.html">
+                <span class="ico ico-shopping-cart"></span>
+                购物车
+                <span class="num">25</span>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="segmentation"></div>
+<div class="userInfo">
+    <div class="title">收货人信息
+        <span>新增收货地址</span>
+    </div>
+    <div class="addr">
+        <div class="group clr-float">
+            <div class="name">公司</div>
+            <div class="desc">四川 成都市 高新区 城区益州大道中段1800号移动互联网创</div>
+            <div class="tel">17622220000</div>
+        </div>
+        <div class="group">
+            <div class="name">公司</div>
+            <div class="desc">四川 成都市 高新区 城区益州大道中段1800号移动互联网创</div>
+            <div class="tel">17622220000</div>
+        </div>
+    </div>
+</div>
+<div class="payMethod">
+    <div class="title">支付方式</div>
+    <div class="methods clr-float">
+        <div class="method">支付宝</div>
+        <div class="method">微信支付</div>
+        <div class="method">银联支付</div>
+        <div class="method">信用卡支付</div>
+    </div>
+</div>
+<!--<div class="invoice">-->
+<!--<div class="title">发票信息</div>-->
+<!--</div>-->
+<div class="submitOrder">
+    <span class="money">总金额： <span>3652.00</span></span>
+    <button class="submit">提交订单</button>
+</div>
+
+
+<div class="footer">
+    <a href="###">广告服务</a> - <a
+        href="###">客服中心</a> - <a
+        href="###">联系方式</a> - <a
+        href="###">保护隐私权</a> - <a
+        href="###">About XXX</a> - <a
+        href="###">公司介绍</a> <br>
+    Copyright <span class="fontArial" style="font-family:arial">©</span>
+    <script>document.write(new Date().getFullYear());</script>
+    2016 XXXX.com Inc. All Rights Reserved. XXXXXXX有限公司<span class="unline"></span> <br>请仔细阅读 <a
+        href="###">版权声明</a> 、<a
+        href="###">反盗版和反盗链权利声明</a> 举报邮箱：<a
+        href="###">XXX@XXX.com</a>
+</div>
+
+<div class="newAddress">
+    <div class="title">新增收货人信息</div>
+    <div class="username">
+        <span class="name">收货人:</span>
+        <input type="text" placeholder="张三">
+        <span class="tips">格式不正确......</span>
+    </div>
+    <div class="tel">
+        <span class="name">手机号码:</span>
+        <input type="text" placeholder="135xxxxxxxx">
+        <span class="tips">格式不正确......</span>
+    </div>
+    <div class="area">
+        <span class="name">地区:</span>
+        <div id="selectCity">
+            <select id="province"></select>
+            <select id="city"></select>
+            <select id="area"></select>
+        </div>
+    </div>
+</div>
+<div class="detailArea">
+    <span class="name">详细地址:</span>
+    <input type="text">
+    <span class="tips">格式不正确......</span>
+</div>
+<div class="email">
+    <span class="name">邮箱:</span>
+    <input type="text">
+    <span class="tips">格式不正确......</span>
+</div>
+<div class="save">
+    <span class="name"></span>
+    <button>保存收货人信息</button>
+</div>
+
+</div>
+<div class="mask"></div>
+
+<script src="../assets/commons.js"></script>
+<script src="../assets/pay.js"></script>
+</body>
+</html>

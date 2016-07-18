@@ -1,11 +1,12 @@
 /**
  * Created by fdr08 on 2016/7/12.
  */
-import "../../style/css/awesome.less";
-import "../../style/css/base.less";
-import "../../style/css/com.less";
+import "awesome";
+import "base";
+import "comCss";
 import "../../style/css/index.less";
-import "../common/com";
+import "comJs";
+
 var maxH = 0;
 window.onload = function () {
     waterfall('showmore', 'pin');

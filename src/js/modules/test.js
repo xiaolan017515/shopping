@@ -1,16 +1,16 @@
 /**
  * Created by drfu on 6/2/16.
  */
-import "../../style/css/awesome.less";
-import "../../style/css/base.less";
-import "../../style/css/com.less";
-import "../../style/css/index.less";
-import "../common/com";
+import "awesome";
+import "base";
+import "comCss";
+import "comJs";
 // import "../lib/core";
 // import "../lib/jquery.screenshot";
 // import "../components/video";
 // import "../components/popup.js";
-// import "../components/datagrid.js";
+// import "../co
+// mponents/datagrid.js";
 // import "../components/message.js";
 
 // window.onload = function() {

@@ -1,0 +1,160 @@
+@import "color";
+
+.userInfo, .payMethod, .submitOrder {
+  width: 960px;
+  height: auto;
+  background-color: @c-light-0;
+  border-bottom: 1px solid @c-border;
+  padding: 20px 20px;
+  >div {
+    width: 100%;
+    height: auto;
+    &.title {
+      font-weight: bold;
+      height: 30px;
+      line-height: 30px;
+    }
+  }
+}
+.userInfo {
+  .title {
+    position: relative;
+    left: 0;
+    top: 0;
+    span {
+      position: absolute;
+      right: 10px;
+      top: 0;
+      display: inline-block;
+      cursor: pointer;
+      &:hover {
+        color: @c-purple-4;
+      }
+    }
+  }
+  .addr {
+    width: 100%;
+    height: auto;
+    .group {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      width: 100%;
+      height: 30px;
+      border-bottom: 1px solid @c-border-sub;
+      >div {
+        float: left;
+        height: 100%;
+        line-height: 30px;
+        &.name {
+          width: 110px;
+          text-align: center;
+        }
+        &.desc {
+          width: auto;
+          padding-left: 25px;
+          padding-right: 25px;
+        }
+        &.tel {
+          width: 100px
+        }
+      }
+    }
+  }
+}
+.payMethod {
+  .methods {
+    margin-top: 10px;
+    .method {
+      float: left;
+      border: 1px solid @c-border;
+      margin-right: 15px;
+      padding: 10px 15px;
+      cursor: pointer;
+      &:hover {
+        border-color: @c-purple-2;
+      }
+    }
+  }
+}
+.submitOrder {
+  text-align: right;
+  .money {
+    span {
+      color: @c-purple-3;
+      font-size: 25px;
+      font-weight: bold;
+    }
+  }
+  button.submit {
+    background-color: @c-purple-2;
+    color: @c-light-0;
+    margin-left: 20px;
+  }
+}
+
+.newAddress {
+  background-color: @c-light-0;
+  border: 1px solid @c-border;
+  width: 680px;
+  height: 380px;
+  padding: 10px 10px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-left: -350px;
+  margin-top: -200px;
+  z-index: 999;
+  >div {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    #area {
+      display: inline-block;
+      width: 400px;
+      margin-left: 10px;
+      select {
+        width: 100px;
+        margin-right: 5px;
+        height: 30px;
+      }
+    }
+    span {
+      &.name {
+        display: inline-block;
+        width: 80px;
+        text-align: right;
+      }
+      &.tips {
+        margin-left: 25px;
+        display: inline-block;
+        color: @c-wrong;
+      }
+    }
+    input {
+      width: 200px;
+      margin-left: 10px;
+      border-color: @c-border;
+    }
+    &.detailArea {
+      input {
+        width: 350px;
+      }
+    }
+    &.save {
+      button {
+        background-color: @c-purple-2;
+        color: @c-light-0;
+      }
+    }
+  }
+}
+.mask {
+  width: 100%;
+  height: 100%;
+  background-color: @c-light-2;
+  opacity: 0.5;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 998;
+}

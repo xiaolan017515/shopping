@@ -1,17 +1,46 @@
 /**
  * Created by fdr08 on 2016/7/6.
  */
-import "../../style/css/awesome.less";
-import "../../style/css/base.less";
-import "../../style/css/com.less";
+import "awesome";
+import "base";
+import "comCss";
 import "../../style/css/search.less";
-import "../common/com";
+import "comJs";
+
+/**
+ * 格式化字符串
+ * @param args
+ * @returns {String}
+ */
+String.prototype.format = function (args) {
+    var result = this;
+    if (arguments.length > 0) {
+        if (arguments.length == 1 && typeof (args) == "object") {
+            for (var key in args) {
+                if (args[key] != undefined) {
+                    var reg = new RegExp("({" + key + "})", "g");
+                    result = result.replace(reg, args[key]);
+                }
+            }
+        }
+        else {
+            for (var i = 0; i < arguments.length; i++) {
+                if (arguments[i] != undefined) {
+                    var reg = new RegExp("({)" + i + "(})", "g");
+                    result = result.replace(reg, arguments[i]);
+                }
+            }
+        }
+    }
+    return result;
+};
 
 var condition = {
     els: {
         cm: $(".checkmore"),
         sp:　$(".select>span"),
-        st:　$(".sort")
+        st:　$(".sort"),
+        sv: $(".selectVal")
     },
     event: {
         init: function () {
@@ -38,13 +67,14 @@ var condition = {
         radio: function () {
             $(this).addClass("active").siblings("span").removeClass("active");
             var _id = $(this).parent().parent().attr("id");
-            var v = $(this).text(),
+            var data = $(this).find("span").html(),
                 group = '<div class="group">' +
-                    '<span class="val">' + v + '</span>' +
+                    '<span class="val">' + data + '</span>' +
                     '<span id="parent-' + _id + '" class="ico ico-close"></span>' +
                     '>' +
                     '</div>';
             $(".hasSelected").append(group);
+            condition.event.select(data);
             /**
              * 移除已筛选条件栏
              */
@@ -69,11 +99,11 @@ var condition = {
             } else {
                 var t = span.find('input:checked').parent();
                 if (t && t.length > 0) {
-
-                    var v = "", group = '';
+                    var v = "", group = '', data = [];
                     var _id = $(this).parent().attr("id");
                     $.each(t, function (i, d) {
-                        v += $(d).text();
+                        v += $(d).find("span").html();
+                        data[i] = $(d).find("span").html();
                     });
                     group = '<div class="group">' +
                         '<span class="val">' + v + '</span>' +
@@ -81,6 +111,7 @@ var condition = {
                         '>' +
                         '</div>';
                     $(".hasSelected").append(group);
+                    condition.event.select(data);
                     /**
                      * 移除已筛选条件栏
                      */
@@ -98,7 +129,7 @@ var condition = {
                         $that.parent().removeClass("checkMode");
                     });
 
-                    span.on("click", radioEvent);
+                    span.on("click", condition.event.radio);
                 } else {
                     $(this).children("button").html("多选");
                     $(this).parent().removeClass("checkMode");
@@ -107,6 +138,28 @@ var condition = {
         },
         sort: function () {
             $(this).toggleClass("active").children("span").toggleClass("ico-sort-asc");
+        },
+        select: function (data) {
+            console.log(data);
+            $.ajax({
+                type: "get",
+                url: "/Home/Search/ajaxAttr",
+                dataType: "json",
+                data: {'arr': data},
+                success: function (data) {
+                    var html = '';
+                    if (data && data.length > 0) {
+                        var i = 0;
+                        for (data; i < data.length; i++) {
+                            html += "<div class='item'> <a href='/Home/Index/Info/goods/{0}'><img src='/Public/Uploads/{1}' alt=''><div class='info'><p class='name'>{2}</p><p class='price'>￥<span>{3}</span></p><p class='desc'></p></div></a> </div>".format(data[i].id, data[i].sm_logo, data[i].goods_name, data[i].shop_price, data[i].goods_desc);
+                        }
+                    } else {
+                        html = "<span class='ico ico-sad2'></span>没有找到符合你要求的信息"
+                    }
+            
+                    $(".section").html(html);
+                }
+            })
         }
     }
 };
@@ -126,4 +179,3 @@ condition.els.sp.on("click", condition.event.radio);
  * 删选结果排序
  */
 condition.els.st.on("click", ">.group", condition.event.sort);
-
