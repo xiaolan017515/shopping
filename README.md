@@ -11,6 +11,7 @@
 ├── README.md
 ├── src
 │   ├── js
+│   │   ├── common
 │   │   ├── components
 │   │   ├── lib
 │   │   └── modules
@@ -24,6 +25,8 @@
 ~~~
 
 注:
+- common为公共模块；
+
 - components为组件目录，存放组件js/less文件；
 
 - modules为各页面入口文件；
