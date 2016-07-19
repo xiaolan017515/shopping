@@ -48,6 +48,14 @@
         &.name {
           width: 110px;
           text-align: center;
+          border: 1px solid transparent;
+          cursor: pointer;
+          &:hover {
+            border: 1px solid @c-purple-2;
+          }
+          &.selected {
+            border: 1px solid @c-purple-2;
+          }
         }
         &.desc {
           width: auto;
@@ -70,14 +78,86 @@
       margin-right: 15px;
       padding: 10px 15px;
       cursor: pointer;
+      &.selected {
+        border-color: @c-purple-2;
+      }
       &:hover {
         border-color: @c-purple-2;
       }
     }
   }
 }
+.goodsList {
+  min-height: 150px;
+  >.item {
+    width: 980px;
+    padding: 10px 10px;
+    height: 100%;
+    line-height: 30px;
+    background-color: @c-light-0;
+    border-bottom: 1px solid @c-border;
+    >div {
+      float: left;
+      height: 100%;
+      &.name {
+        >div {
+          float: left;
+          &.pic {
+            width: 100px;
+            height: 100px;
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+          &.desc {
+            width: 500px;
+            padding-left: 15px;
+            padding-right: 15px;
+            p {
+              float: left;
+              height: 50%;
+              word-break: break-all;
+              &.name {
+                width: 250px;
+                a {
+                  color: @c-dark-1!important;
+                  text-decoration: none;
+                  &:hover {
+                    color: @c-purple-3;
+                  }
+                }
+              }
+              &.type {
+                width: 200px;
+                margin-left: 10px;
+                color: @c-dark-2;
+              }
+            }
+          }
+        }
+      }
+      &.price {
+        width: 100px;
+      }
+      &.number {
+        width: 100px;
+        span {
+          margin-left: 8px;
+        }
+      }
+    }
+  }
+}
 .submitOrder {
   text-align: right;
+  .address {
+    text-align: right;
+    margin-bottom: 5px;
+    span {
+      margin-right: 15px;
+    }
+  }
   .money {
     span {
       color: @c-purple-3;
@@ -91,7 +171,6 @@
     margin-left: 20px;
   }
 }
-
 .newAddress {
   background-color: @c-light-0;
   border: 1px solid @c-border;
@@ -104,36 +183,41 @@
   margin-left: -350px;
   margin-top: -200px;
   z-index: 999;
+  box-shadow: 0 0 10px 2px @c-dark-2;
+  display: none;
+  &.show {
+    display: block;
+  }
   >div {
     width: 100%;
     margin-top: 10px;
-    margin-bottom: 10px;
-    #area {
-      display: inline-block;
-      width: 400px;
-      margin-left: 10px;
-      select {
-        width: 100px;
-        margin-right: 5px;
-        height: 30px;
+    margin-bottom: 20px;
+    &.title {
+      font-size: 16px;
+      position: relative;
+      span.ico-close {
+        padding: 10px;
+        position: absolute;
+        right: -5px;
+        top: -20px;
+        display: inline-block;
+        cursor: pointer;
+        font-size: 18px;
+        &:hover {
+          color: @c-purple-4;
+        }
       }
     }
-    span {
-      &.name {
-        display: inline-block;
-        width: 80px;
-        text-align: right;
+    &.area {
+      .selectCity {
+        margin-left: 10px;
+        select {
+          min-width: 100px;
+          height: 30px;
+          outline: none;
+          border-color: @c-border;
+        }
       }
-      &.tips {
-        margin-left: 25px;
-        display: inline-block;
-        color: @c-wrong;
-      }
-    }
-    input {
-      width: 200px;
-      margin-left: 10px;
-      border-color: @c-border;
     }
     &.detailArea {
       input {
@@ -144,17 +228,31 @@
       button {
         background-color: @c-purple-2;
         color: @c-light-0;
+        margin-left: 10px;
+      }
+    }
+    span {
+      &.name {
+        display: inline-block;
+        width: 80px;
+        text-align: right;
+      }
+      &.tips {
+        margin-left: 25px;
+        display: none;
+        color: @c-wrong;
+        &.show {
+          display: inline-block;
+        }
+      }
+    }
+    input {
+      width: 200px;
+      margin-left: 10px;
+      border-color: @c-border;
+      &.error {
+        border-color: @c-wrong;
       }
     }
   }
-}
-.mask {
-  width: 100%;
-  height: 100%;
-  background-color: @c-light-2;
-  opacity: 0.5;
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 998;
 }

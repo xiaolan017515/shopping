@@ -5,54 +5,91 @@ import "../../style/css/awesome.less";
 import "../../style/css/base.less";
 import "../../style/css/com.less";
 
-function gotoTop(min_height) {
-//预定义返回顶部的html代码，它的css样式默认为不显示 
-    var gotoTop_html = '<div id="gotoTop" class="ico ico-angle-double-up"></div>';
-//将返回顶部的html代码插入页面上id为page的元素的末尾 
-    $("body").append(gotoTop_html);
-    $("#gotoTop").click(//定义返回顶部点击向上滚动的动画 
-        function () {
-            $('html,body').animate({scrollTop: 0}, 700);
-        });
-//获取页面的最小高度，无传入值则默认为400像素
-    min_height = min_height ? min_height : 800;
-//为窗口的scroll事件绑定处理函数
-    $(window).on("scroll", function () {
-//获取窗口的滚动条的垂直位置
-        var s = $(document).scrollTop();
-//当窗口的滚动条的垂直位置大于页面的最小高度时，让返回顶部元素渐现，否则渐隐
-        if (s > min_height) {
-            $("#gotoTop").fadeIn(100);
-        } else {
-            $("#gotoTop").fadeOut(200);
+var common = {
+    els: {
+        body: $("body"),
+        top: null,
+        num: $(".tl-price .number"),
+        price: $(".tl-price .money"),
+        goods: $("#goods"),
+        sumCart: $(".sumCart"),
+        cartEmpty: $(".cartEmpty"),
+        cartNum: $(".cart .num")
+    },
+    event: {
+        gotoTop: function (min_height) {
+            var gotoTop_html = '<div id="gotoTop" class="ico ico-angle-double-up"></div>';
+            common.els.body.append(gotoTop_html);
+            common.els.top = $("#gotoTop");
+            common.els.top.click(function () {
+                $('html,body').animate({scrollTop: 0}, 700);
+            });
+            min_height = min_height ? min_height : 800;
+            $(window).on("scroll", function () {
+                var s = $(document).scrollTop();
+                if (s > min_height) {
+                    common.els.top.fadeIn(100);
+                } else {
+                    common.els.top.fadeOut(200);
+                }
+            });
+        },
+        calcCart: function () {
+            var t = common.els.goods.find(".li"),
+                num = 0,
+                money = 0;
+            $.each(t, function (i ,d) {
+                var o = $(d).find(".tl-price");
+                var _num = Number(o.find(".number").html());
+                num += _num;
+                money += Number(o.children(".money").html()) * _num;
+            });
+
+            common.els.cartNum.html(num);
+            common.els.sumCart.find(".num").html(num);
+            common.els.sumCart.find(".money").html(money);
+        },
+        remove: function () {
+            var n = Number(common.els.sumCart.find(".num").html());
+            var m = Number(common.els.sumCart.find(".money").html());
+            var _m = Number($(this).siblings(".money").html());
+            var _n = Number($(this).prev().find(".number").html());
+
+            common.els.sumCart.find(".num").html(n - _n);
+            common.els.sumCart.find(".money").html(m - (_m * _n));
+            
+            var totalNum = Number(common.els.cartNum.html());
+            common.els.cartNum.html(totalNum - _n);
+            
+            $(this).parent().parent().remove();
+            common.event.checkCart();
+        },
+        checkCart: function () {
+            var li = common.els.goods.children(".li");
+            if(li.length === 0) {
+                common.els.cartEmpty.addClass("show");
+                common.els.sumCart.addClass("hidden");
+            }else {
+                common.els.cartEmpty.removeClass("show");
+                common.els.sumCart.removeClass("hidden");
+            }
         }
-    });
-}
-gotoTop();
-
+    }
+};
 /**
- * 导航栏点击事件
+ * 返回顶部
  */
-// $(".nav").on("click", ">button", function () {
-//     $(this).addClass("active").siblings("button").removeClass("active");
-// });
+common.event.gotoTop();
+/**
+ * 检查购物车
+ */
+common.event.checkCart();
+/**
+ * 结算购物车数量/总计
+ */
+common.event.calcCart();
+/**
+ * 删除购物车，刷新购物车数量/总计
+ */
+common.els.goods.on("click", ">.li button", common.event.remove);
 
-
-// $(".inputSearch").on("click", ">li", function () {
-//     var that = $(this).parent();
-//     // $.ajax({
-//     //     type: "post",
-//     //     url: 'url',
-//     //     data:"base",
-//     //     dataType: "json",
-//     //     success: function (data) {
-//             that.removeClass("active");
-//         // },
-//         // fail: function (e) {
-//         //     console.log(e);
-//         // }
-//     // });
-// });
-// $(".search>input").on("focus", function () {
-//    $(".inputSearch").addClass("active");
-// });

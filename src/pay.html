@@ -34,19 +34,97 @@
             <input type="text">
             <button>搜索</button>
         </div>
-        <div class="cart">
+        <div class="cart" id="cart">
             <a href="order.html">
                 <span class="ico ico-shopping-cart"></span>
                 购物车
-                <span class="num">25</span>
+                <span class="num">0</span>
             </a>
+            <div class="cartList">
+                <div class="goods" id="goods">
+                    <div class="li clr-float">
+                        <div class="img">
+                            <img src="style/images/5.jpg" alt="">
+                        </div>
+                        <div class="desc">
+                            <a href="info.html">索尼（SONY）DSC-TX30 时尚便携式三防数码相机 卡片相机 黑色</a>
+                        </div>
+                        <div class="tl-price">
+                            <p class="money">100.00</p>
+                            <p>x<span class="number">2</span></p>
+                            <button>删除</button>
+                        </div>
+                    </div>
+                    <div class="li clr-float">
+                        <div class="img">
+                            <img src="style/images/5.jpg" alt="">
+                        </div>
+                        <div class="desc">
+                            <a href="info.html">索尼（SONY）DSC-TX30 时尚便携式三防数码相机 卡片相机 黑色</a>
+                        </div>
+                        <div class="tl-price">
+                            <p class="money">100.00</p>
+                            <p>x<span class="number">2</span></p>
+                            <button>删除</button>
+                        </div>
+                    </div>
+                    <div class="li clr-float">
+                        <div class="img">
+                            <img src="style/images/5.jpg" alt="">
+                        </div>
+                        <div class="desc">
+                            <a href="info.html">索尼（SONY）DSC-TX30 时尚便携式三防数码相机 卡片相机 黑色</a>
+                        </div>
+                        <div class="tl-price">
+                            <p class="money">100.00</p>
+                            <p>x<span class="number">2</span></p>
+                            <button>删除</button>
+                        </div>
+                    </div>
+                    <div class="li clr-float">
+                        <div class="img">
+                            <img src="style/images/5.jpg" alt="">
+                        </div>
+                        <div class="desc">
+                            <a href="info.html">索尼（SONY）DSC-TX30 时尚便携式三防数码相机 卡片相机 黑色</a>
+                        </div>
+                        <div class="tl-price">
+                            <p class="money">100.00</p>
+                            <p>x<span class="number">2</span></p>
+                            <button>删除</button>
+                        </div>
+                    </div>
+                    <div class="li clr-float">
+                        <div class="img">
+                            <img src="style/images/5.jpg" alt="">
+                        </div>
+                        <div class="desc">
+                            <a href="info.html">索尼（SONY）DSC-TX30 时尚便携式三防数码相机 卡片相机 黑色</a>
+                        </div>
+                        <div class="tl-price">
+                            <p class="money">100.00</p>
+                            <p>x<span class="number">2</span></p>
+                            <button>删除</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="sumCart">
+                    <span>共<span class="num">0</span>件商品</span>
+                    <span>共计<span class="money">0.00</span>元</span>
+                    <a href="order.html">去购物车</a>
+                </div>
+                <div class="cartEmpty">
+                    <span class="ico ico-cart-plus"></span>
+                    购物车空空如也~
+                </div>
+            </div>
         </div>
     </div>
 </div>
 <div class="segmentation"></div>
 <div class="userInfo">
     <div class="title">收货人信息
-        <span>新增收货地址</span>
+        <span id="newAddress">新增收货地址</span>
     </div>
     <div class="addr">
         <div class="group clr-float">
@@ -55,7 +133,7 @@
             <div class="tel">17622220000</div>
         </div>
         <div class="group">
-            <div class="name">公司</div>
+            <div class="name">私人</div>
             <div class="desc">四川 成都市 高新区 城区益州大道中段1800号移动互联网创</div>
             <div class="tel">17622220000</div>
         </div>
@@ -73,8 +151,70 @@
 <!--<div class="invoice">-->
 <!--<div class="title">发票信息</div>-->
 <!--</div>-->
+
+<div class="goodsList">
+    <div class="item clr-float">
+        <div class="name clr-float">
+            <div class="pic">
+                <img src="style/images/2.jpg" alt="">
+            </div>
+            <div class="desc clr-float">
+                <p class="name">
+                    <a href="info.html">TCL XQB55-36SP 5.5公斤 全自动波轮洗衣机 一键脱水</a>
+                </p>
+                <p class="type">颜色：5.5公斤普及款</p>
+            </div>
+        </div>
+        <div class="price">100.00</div>
+        <div class="number">
+            x <span>2</span>
+        </div>
+    </div>
+    <div class="item clr-float">
+        <div class="name clr-float">
+            <div class="pic">
+                <img src="style/images/2.jpg" alt="">
+            </div>
+            <div class="desc clr-float">
+                <p class="name">
+                    <a href="info.html">TCL XQB55-36SP 5.5公斤 全自动波轮洗衣机 一键脱水</a>
+                </p>
+                <p class="type">颜色：5.5公斤普及款</p>
+            </div>
+        </div>
+        <div class="price">111.00</div>
+        <div class="number">
+            x <span>1</span>
+        </div>
+    </div>
+    <div class="item clr-float">
+        <div class="name clr-float">
+            <div class="pic">
+                <img src="style/images/2.jpg" alt="">
+            </div>
+            <div class="desc clr-float">
+                <p class="name">
+                    <a href="info.html">TCL XQB55-36SP 5.5公斤 全自动波轮洗衣机 一键脱水</a>
+                </p>
+                <p class="type">颜色：5.5公斤普及款</p>
+            </div>
+        </div>
+        <div class="price">111.00</div>
+        <div class="number">
+            x <span>1</span>
+        </div>
+    </div>
+</div>
+
 <div class="submitOrder">
-    <span class="money">总金额： <span>3652.00</span></span>
+    <div class="address">
+        地址：
+        <span id="uAddr"></span>
+        收货人：
+        <span id="uName"></span>
+        <span id="uTel"></span>
+    </div>
+    <span class="money">总金额： <span id="totalMoney">0.00</span></span>
     <button class="submit">提交订单</button>
 </div>
 
@@ -95,42 +235,49 @@
 </div>
 
 <div class="newAddress">
-    <div class="title">新增收货人信息</div>
+    <div class="title">新增收货人信息
+    <span class="ico ico-close"></span>
+    </div>
     <div class="username">
         <span class="name">收货人:</span>
-        <input type="text" placeholder="张三">
-        <span class="tips">格式不正确......</span>
+        <input id="username" type="text" placeholder="张三">
+        <span class="tips">必填项</span>
     </div>
     <div class="tel">
         <span class="name">手机号码:</span>
-        <input type="text" placeholder="135xxxxxxxx">
-        <span class="tips">格式不正确......</span>
+        <input id="tel" type="tel" placeholder="135xxxxxxxx">
+        <span class="tips">必填项，电话号码格式不正确</span>
     </div>
     <div class="area">
         <span class="name">地区:</span>
-        <div id="selectCity">
-            <select id="province"></select>
-            <select id="city"></select>
-            <select id="area"></select>
-        </div>
+        <span class="selectCity">
+            <select id="province">
+                <option value="510000">四川</option>
+            </select>
+            <select id="city">
+                <option value="510100">成都</option>
+            </select>
+            <select id="area">
+                <option value="510101">武侯</option>
+            </select>
+        </span>
+    </div>
+    <div class="detailArea">
+        <span class="name">详细地址:</span>
+        <input type="text" placeholder="柳城大道花园小区">
+        <span class="tips">必填项，请输入字符串</span>
+    </div>
+    <div class="email">
+        <span class="name">邮箱:</span>
+        <input id="email" type="text" placeholder="user@vmente.com">
+        <span class="tips">选填项，格式不正确</span>
+    </div>
+    <div class="save">
+        <span class="name"></span>
+        <button id="submit">保存收货人信息</button>
     </div>
 </div>
-<div class="detailArea">
-    <span class="name">详细地址:</span>
-    <input type="text">
-    <span class="tips">格式不正确......</span>
-</div>
-<div class="email">
-    <span class="name">邮箱:</span>
-    <input type="text">
-    <span class="tips">格式不正确......</span>
-</div>
-<div class="save">
-    <span class="name"></span>
-    <button>保存收货人信息</button>
-</div>
 
-</div>
 <div class="mask"></div>
 
 <script src="../assets/commons.js"></script>
