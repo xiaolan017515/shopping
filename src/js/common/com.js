@@ -34,6 +34,9 @@ var common = {
                 }
             });
         },
+        cartHover: function () {
+            common.event.calcCart();
+        },
         calcCart: function () {
             var t = common.els.goods.find(".li"),
                 num = 0,

@@ -7,6 +7,29 @@ import "comCss";
 import "../../style/css/info.less";
 import "comJs";
 
+String.prototype.format = function (args) {
+    var result = this;
+    if (arguments.length > 0) {
+        if (arguments.length == 1 && typeof (args) == "object") {
+            for (var key in args) {
+                if (args[key] != undefined) {
+                    var reg = new RegExp("({" + key + "})", "g");
+                    result = result.replace(reg, args[key]);
+                }
+            }
+        }
+        else {
+            for (var i = 0; i < arguments.length; i++) {
+                if (arguments[i] != undefined) {
+                    var reg = new RegExp("({)" + i + "(})", "g");
+                    result = result.replace(reg, arguments[i]);
+                }
+            }
+        }
+    }
+    return result;
+};
+
 var preview = {
     els: {
         at: $(".addTool"),
@@ -14,7 +37,12 @@ var preview = {
         bp: $(".preview"),
         cart: $("#cart"),
         acb: $("#addCartBtn"),
-        option: $(".options")
+        option: $(".options"),
+        group: $(".group"),
+        goods: $("#goods"),
+        sumCart: $(".sumCart"),
+        cartEmpty: $(".cartEmpty"),
+        cartNum: $(".cart .num")
     },
     event: {
         addGoods: function () {
@@ -29,21 +57,41 @@ var preview = {
             } else {
                 $(this).siblings("input").val(++v);
             }
-            cart.event.calcMoney($(this), Number(v));
-            cart.event.calcAllMoney();
         },
         hover: function () {
             preview.els.bp.children("img").attr("src", $(this).attr("src"));
-            console.log($(this).attr("src"));
         },
         addToCart: function () {
             var v = $(this).prev().children("input").val(),
                 span = preview.els.cart.find("span.num");
             var total = Number(span.html()) + Number(v);
             span.html(total);
+
+            var price = preview.els.group.find(".price").html();
+            var number = preview.els.at.find("input").val();
+            
+            var li =  '<div class="li clr-float"><div class="img"><img src="{0}" alt=""></div><div class="desc"><a href="{1}">{2}</a></div><div class="tl-price"><p class="money">{3}</p><p>x<span class="number">{4}</span></p><button>删除</button></div></div>'.format("style/images/5.jpg", "info.html", "索尼（SONY）DSC-TX30 时尚便携式三防数码相机 卡片相机 黑色", price, number);
+
+            preview.els.goods.append(li);
+            preview.event.calcCart();
         },
         optionClick: function () {
             $(this).addClass("active").siblings(".option").removeClass("active")
+        },
+        calcCart: function () {
+            var t = preview.els.goods.find(".li"),
+                num = 0,
+                money = 0;
+            $.each(t, function (i ,d) {
+                var o = $(d).find(".tl-price");
+                var _num = Number(o.find(".number").html());
+                num += _num;
+                money += Number(o.children(".money").html()) * _num;
+            });
+
+            preview.els.cartNum.html(num);
+            preview.els.sumCart.find(".num").html(num);
+            preview.els.sumCart.find(".money").html(money.toFixed(2));
         }
     }
 };
