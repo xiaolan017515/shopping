@@ -1,44 +1,106 @@
 @import "color";
+
 .registerBox {
-  width: 60%;
-  min-width: 300px;
-  margin-left: 20%;
-  margin-top: 50px;
-  .title {
-    text-align: center;
-    width: 100%;
-    height: 30px;
-    font-size: 25px;
+  > div {
+    float: left;
   }
-  .form {
-    width: 100%;
-    height: auto;
-    margin-top: 20px;
-    >div {
-      width: 80%;
-      margin-left: 10%;
-      height: auto;
-      margin-top: 20px;
-      margin-bottom: 20px;
-      input {
-        width: 100%;
-        height: 40px;
+  .show {
+    width: 600px;
+    height: 400px;
+    margin-top: 50px;
+    .logo {
+      background-color: @c-light-0;
+      >div {
+        float: left;
       }
-      .tips {
-        display: none;
-        width: 100%;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        min-height: 25px;
-        color: @c-purple-2;
+      .img {
+        width: 160px;
+        height: 60px;
+        background-image: url("../images/logo2.jpg");
+      }
+      .desc {
+        font-size: 18px;
+        height: 100%;
+        line-height: 60px;
+        margin-left: 20px;
+        span {
+          color: @c-purple-2;
+        }
       }
     }
-    button {
-      width: 100px;
-      background-color: @c-purple-1;
-      color: @c-light-0;
-      margin-bottom: 30px;
-      margin-left: 10%;
+
+    .pic {
+      width: 100%;
+      height: 300px;
+      margin-top: 40px;
+      background: url("../images/desc.jpg");
+    }
+  }
+  .main {
+    width: 300px;
+    background-color: @c-light-0;
+    margin-top: 50px;
+    height: 400px;
+    margin-left: 50px;
+    padding-left: 50px;
+    .title {
+      width: 100%;
+      height: 60px;
+      line-height: 60px;
+    }
+    .form {
+      width: 100%;
+      height: auto;
+      margin-top: 20px;
+      .group {
+        width: 80%;
+        height: auto;
+        margin-top: 8px;
+        margin-bottom: 8px;
+        input {
+          width: 250px;
+          height: 40px;
+          &.error {
+            border-color: @c-wrong;
+          }
+        }
+        .tips {
+          display: none;
+          width: 100%;
+          margin-top: 5px;
+          min-height: 25px;
+          color: @c-purple-2;
+          &.show {
+            display: none;
+          }
+        }
+        &.btn {
+          margin-top: 20px;
+          a {
+            display: inline-block;
+            text-decoration: none;
+            width: 150px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+          }
+          button {
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            line-height: 40px;
+            text-align: center;
+            color: @c-light-0;
+            &.submit {
+              background-color: @c-purple-3;
+            }
+            &.notAllowed {
+              background-color: @c-dark-2;
+              cursor: not-allowed;
+            }
+          }
+        }
+      }
     }
   }
 }

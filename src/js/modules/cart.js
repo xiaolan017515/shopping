@@ -4,7 +4,7 @@
 import "awesome";
 import "base";
 import "comCss";
-import "../../style/css/order.less";
+import "../../style/css/cart.less";
 import "comJs";
 
 var cart = {
@@ -14,8 +14,8 @@ var cart = {
         ca: $(".checkAll"),
         cb: $(".checkbox"),
         it: $(".item"),
-        op: $(".operate")
-
+        op: $(".operate"),
+        pay: $("#gotoPay")
     },
     event: {
         addGoods: function () {
@@ -47,7 +47,7 @@ var cart = {
             }
         },
         /**
-         * 计算商品价格
+         * 点击计算商品价格
          * @param t 事件触发源
          * @param v input的value值
          */
@@ -83,6 +83,22 @@ var cart = {
             } else {
                 $(".checkAll>input").prop("checked", false);
             }
+        },
+        topay: function () {
+            var goods = $("#lists>.item").find("input[type=checkbox]"),
+                temp = [];
+            $.each(goods, function (i, d) {
+                if ($(d).prop("checked")) {
+                    temp.push(goods[i]);
+                }
+            });
+            if(temp.length === 0) {
+                alert("请至少选择一件商品！");
+            }else {
+                $.ajax({
+                    
+                })
+            }
         }
     }
 };
@@ -110,3 +126,7 @@ cart.els.it.on("click", "input", cart.event.isCheckedAll);
  * 删除购物车商品
  */
 cart.els.op.on("click", "button", cart.event.deleteGoods);
+/**
+ * 提交订单
+ */
+cart.els.pay.on("click", cart.event.topay);

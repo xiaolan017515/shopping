@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>订单</title>
     <link rel="stylesheet" href="../assets/commons.css">
-    <link rel="stylesheet" href="../assets/order.css">
+    <link rel="stylesheet" href="../assets/cart.css">
 </head>
 <body>
 <div class="header clr-float">
@@ -35,7 +35,7 @@
             <button>搜索</button>
         </div>
         <div class="cart" id="cart">
-            <a href="order.html">
+            <a href="cart.html">
                 <span class="ico ico-shopping-cart"></span>
                 购物车
                 <span class="num">0</span>
@@ -111,7 +111,7 @@
                 <div class="sumCart">
                     <span>共<span class="num">0</span>件商品</span>
                     <span>共计<span class="money">0.00</span>元</span>
-                    <a href="order.html">去购物车</a>
+                    <a href="cart.html">去购物车</a>
                 </div>
                 <div class="cartEmpty">
                     <span class="ico ico-cart-plus"></span>
@@ -133,7 +133,7 @@
         <div class="price">
             单价
         </div>
-        <div class="num">
+        <div class="chooseNum">
             数量
         </div>
         <div class="money">
@@ -244,7 +244,7 @@
             总价:<strong>0.00</strong>
 
         </div>
-        <div class="gotoPay"><a href="pay.html">去结算</a></div>
+        <div class="gotoPay" id="gotoPay"><a href="pay.html">去结算</a></div>
     </div>
 </div>
 
@@ -265,6 +265,6 @@
         href="###">XXX@XXX.com</a>
 </div>
 <script src="../assets/commons.js"></script>
-<script src="../assets/order.js"></script>
+<script src="../assets/cart.js"></script>
 </body>
 </html>

@@ -7,34 +7,6 @@ import "comCss";
 import "../../style/css/search.less";
 import "comJs";
 
-/**
- * 格式化字符串
- * @param args
- * @returns {String}
- */
-String.prototype.format = function (args) {
-    var result = this;
-    if (arguments.length > 0) {
-        if (arguments.length == 1 && typeof (args) == "object") {
-            for (var key in args) {
-                if (args[key] != undefined) {
-                    var reg = new RegExp("({" + key + "})", "g");
-                    result = result.replace(reg, args[key]);
-                }
-            }
-        }
-        else {
-            for (var i = 0; i < arguments.length; i++) {
-                if (arguments[i] != undefined) {
-                    var reg = new RegExp("({)" + i + "(})", "g");
-                    result = result.replace(reg, arguments[i]);
-                }
-            }
-        }
-    }
-    return result;
-};
-
 var condition = {
     els: {
         cm: $(".checkmore"),
@@ -74,7 +46,13 @@ var condition = {
                     '>' +
                     '</div>';
             $(".hasSelected").append(group);
-            condition.event.select(data);
+
+            var target = $(".hasSelected .group"), _data = [];
+            $.each(target, function(i, d) {
+                _data[i] = $(d).find("span.val").html();
+            });
+
+            condition.event.select(_data);
             /**
              * 移除已筛选条件栏
              */
@@ -85,7 +63,14 @@ var condition = {
             $(".ico").on("click", function () {
                 var id = $(this).attr("id").replace("parent-", "");
                 $(this).parent().remove();
+
                 $("#" + id).css({display: "block"}).children(".select").children("span").removeClass("active");
+                var t = $(".hasSelected .group"), _data = [];
+                $.each(t, function(i, d) {
+                    _data[i] = $(d).find("span.val").html();
+                });
+                
+                condition.event.select(_data);
             })
         },
         checkbox: function () {
@@ -111,7 +96,13 @@ var condition = {
                         '>' +
                         '</div>';
                     $(".hasSelected").append(group);
-                    condition.event.select(data);
+
+                    var target = $(".hasSelected .group"), _data = [];
+                    $.each(target, function(i, d) {
+                        _data[i] = $(d).find("span.val").html();
+                    });
+
+                    condition.event.select(_data);
                     /**
                      * 移除已筛选条件栏
                      */
