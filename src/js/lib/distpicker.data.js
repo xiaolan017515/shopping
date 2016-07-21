@@ -8,15 +8,15 @@
  * Date: 2016-06-01T15:05:52.606Z
  */
 
-(function (factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as anonymous module.
-    define('ChineseDistricts', [], factory);
-  } else {
-    // Browser globals.
-    factory();
-  }
-})(function () {
+// (function (factory) {
+//   if (typeof define === 'function' && define.amd) {
+//     // AMD. Register as anonymous module.
+//     define('ChineseDistricts', [], factory);
+//   } else {
+//     // Browser globals.
+//     factory();
+//   }
+// })(function () {
 
   var ChineseDistricts = {
     86: {
@@ -4024,6 +4024,6 @@
     window.ChineseDistricts = ChineseDistricts;
   }
 
-  return ChineseDistricts;
+  // return ChineseDistricts;
 
-});
+// });

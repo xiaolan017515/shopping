@@ -8,18 +8,18 @@
  * Date: 2016-06-01T15:05:52.606Z
  */
 
-(function (factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as anonymous module.
-    define(['jquery', 'ChineseDistricts'], factory);
-  } else if (typeof exports === 'object') {
-    // Node / CommonJS
-    factory(require('jquery'), require('ChineseDistricts'));
-  } else {
-    // Browser globals.
-    factory(jQuery, ChineseDistricts);
-  }
-})(function ($, ChineseDistricts) {
+// (function (factory) {
+//   if (typeof define === 'function' && define.amd) {
+//     // AMD. Register as anonymous module.
+//     define(['jquery', 'ChineseDistricts'], factory);
+//   } else if (typeof exports === 'object') {
+//     // Node / CommonJS
+//     factory(require('jquery'), require('ChineseDistricts'));
+//   } else {
+//     // Browser globals.
+//     factory(jQuery, ChineseDistricts);
+//   }
+// })(function ($, ChineseDistricts) {
 
   'use strict';
 
@@ -245,4 +245,3 @@
   $(function () {
     $('[data-toggle="distpicker"]').distpicker();
   });
-});

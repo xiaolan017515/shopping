@@ -236,7 +236,7 @@
 
 <div class="newAddress">
     <div class="title">新增收货人信息
-    <span class="ico ico-close"></span>
+        <span class="ico ico-close"></span>
     </div>
     <div class="username">
         <span class="name">收货人:</span>
@@ -250,21 +250,15 @@
     </div>
     <div class="area">
         <span class="name">地区:</span>
-        <span class="selectCity">
-            <select id="province">
-                <option value="510000">四川</option>
-            </select>
-            <select id="city">
-                <option value="510100">成都</option>
-            </select>
-            <select id="area">
-                <option value="510101">武侯</option>
-            </select>
+        <span id="chooseArea" data-toggle="distpicker">
+            <select id="province" data-province="---- 所在省 ----"></select>
+            <select id="city" data-city="---- 所在市 ----"></select>
+            <select data-district="---- 所在区 ----"></select>
         </span>
     </div>
     <div class="detailArea">
         <span class="name">详细地址:</span>
-        <input type="text" placeholder="柳城大道花园小区">
+        <input type="text" id="detailAddr" placeholder="柳城大道花园小区">
         <span class="tips">必填项，请输入字符串</span>
     </div>
     <div class="email">

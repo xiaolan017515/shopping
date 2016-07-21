@@ -21,17 +21,33 @@ var cart = {
     },
     event: {
         addGoods: function () {
-            var t = $(this).hasClass("reduce"),
+            var oper='', cart_id = $(this).parents(".item").attr("id"),
+                t = $(this).hasClass("reduce"),
                 v = $(this).siblings("input").val();
             if (t) {
                 if (v == 1) {
                     $(this).siblings("input").val(1);
                 } else {
                     $(this).siblings("input").val(--v);
+                    oper = 'reduce';
                 }
             } else {
                 $(this).siblings("input").val(++v);
+                oper = 'add';
             }
+            $.ajax({
+                type:'get',
+                url:'/Home/Cart/ajaxUpdateCart',
+                dataType:'json',
+                data:{'oper':oper,'cart_id':cart_id},
+                success:function success(data){
+
+                },
+                fail:function fail(e){
+                    $("body").shortMessage(true, false, e, 2000);
+                }
+            });
+
             cart.event.calcMoney($(this), Number(v));
             cart.event.calcAllMoney();
         },
@@ -68,7 +84,9 @@ var cart = {
             $("#sumMoney>strong").html(sum.toFixed(2));
         },
         isDelete: function () {
-
+            /**
+             * 点击删除
+             */
             var _this = $(this);
             $("body").message({
                 title: "删除",
@@ -78,26 +96,25 @@ var cart = {
                     cancel: "添加到收藏夹"
                 }
             }, "warn", function () {
-                /**
-                 * 点击删除
-                 */
-                // $.ajax({
-                //     url: "",
-                //     data: "",
-                //     type: "",
-                //     success: function (data) {
-                //
-                //
-                //
-                _this.parent().parent().remove();
-                cart.event.isCheckedAll();
-                cart.event.calcAllMoney();
-                $(".con-msg, .con-mark").remove();
-                //     },
-                //     fail: function (e) {
-                //         $("body").shortMessage(false, true, e, 1000);
-                //     }
-                // })
+                var cart_id = $(this).parent().parent().attr('id');
+                $.ajax({
+                    type: "get",
+                    url: "/Home/Cart/ajaxDelCart",
+                    dataType: "json",
+                    data: {'cart_id': cart_id},
+                    success: function success(data) {
+                        if(data.info=='ok'){
+                            _this.parent().parent().remove();
+                            cart.event.isCheckedAll();
+                            cart.event.calcAllMoney();
+                            $(".con-msg, .con-mark").remove();
+                        }
+                    },
+                    fail:function fail(e){
+                        $("body").shortMessage(false, true, e, 2000);
+                    }
+                });
+
             }, function () {
                 /**
                  * 添加到收藏
@@ -145,13 +162,28 @@ var cart = {
                 temp = [];
             $.each(goods, function (i, d) {
                 if ($(d).prop("checked")) {
-                    temp.push(goods[i]);
+                    temp.push($(goods[i]).parent().parent().attr("id"));
+
                 }
             });
             if (temp.length === 0) {
                 alert("请至少选择一件商品！");
             } else {
-                $.ajax({})
+                $.ajax({
+                    type: "get",
+                    url: "/Home/Cart/ajaxCartOrder",
+                    dataType: "json",
+                    data: {'cart_id': temp},
+                    success: function success(data) {
+                        if(data.info=='ok'){
+                            window.location.href = '/Home/Cart/pay';
+                        }
+                    },
+                    fail:function fail(e){
+                        console.log(e);
+                    }
+                });
+
             }
         }
     }

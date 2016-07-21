@@ -22,7 +22,7 @@ $.fn.message = function (option, type, submitFun, cancelFun, mark, css) {
     };
     var opt = $.extend(true, {}, defSet, option),
         box = '<div class="con con-msg"><div class="title">{0}</div><div class="content">{1}</div><div class="commands"><button class="submit" value="{2}">{2}</button><button class="cancel" value="{3}">{3}</button></div></div>'.format(opt.title, opt.content, opt.button.submit, opt.button.cancel);
-    this.css({position: "relative"});
+    // this.css({position: "relative"});
     if(mark && (mark === true || mark === "true")) {
         this.append('<div class="con-mark"></div>');
     }
