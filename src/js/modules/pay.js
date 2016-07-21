@@ -6,6 +6,7 @@ import "base";
 import "comCss";
 import "../../style/css/pay.less";
 import "comJs";
+import "msg";
 
 var verify = {
     els: {

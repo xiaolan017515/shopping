@@ -6,29 +6,7 @@ import "base";
 import "comCss";
 import "../../style/css/info.less";
 import "comJs";
-
-// String.prototype.format = function (args) {
-//     var result = this;
-//     if (arguments.length > 0) {
-//         if (arguments.length == 1 && typeof (args) == "object") {
-//             for (var key in args) {
-//                 if (args[key] != undefined) {
-//                     var reg = new RegExp("({" + key + "})", "g");
-//                     result = result.replace(reg, args[key]);
-//                 }
-//             }
-//         }
-//         else {
-//             for (var i = 0; i < arguments.length; i++) {
-//                 if (arguments[i] != undefined) {
-//                     var reg = new RegExp("({)" + i + "(})", "g");
-//                     result = result.replace(reg, arguments[i]);
-//                 }
-//             }
-//         }
-//     }
-//     return result;
-// };
+import "msg";
 
 var preview = {
     els: {
@@ -67,13 +45,13 @@ var preview = {
             var total = Number(span.html()) + Number(v);
             span.html(total);
 
-            var price = preview.els.group.find(".price").html();
-            var number = preview.els.at.find("input").val();
+            // var price = preview.els.group.find(".price").html();
+            // var number = preview.els.at.find("input").val();
             
-            var li =  '<div class="li clr-float"><div class="img"><img src="{0}" alt=""></div><div class="desc"><a href="{1}">{2}</a></div><div class="tl-price"><p class="money">{3}</p><p>x<span class="number">{4}</span></p><button>删除</button></div></div>'.format("style/images/5.jpg", "info.html", "索尼（SONY）DSC-TX30 时尚便携式三防数码相机 卡片相机 黑色", price, number);
-
-            preview.els.goods.append(li);
-            preview.event.calcCart();
+            // var li =  '<div class="li clr-float"><div class="img"><img src="{0}" alt=""></div><div class="desc"><a href="{1}">{2}</a></div><div class="tl-price"><p class="money">{3}</p><p>x<span class="number">{4}</span></p><button>删除</button></div></div>'.format("style/images/5.jpg", "info.html", "索尼（SONY）DSC-TX30 时尚便携式三防数码相机 卡片相机 黑色", price, number);
+            //
+            // preview.els.goods.append(li);
+            // preview.event.calcCart();
         },
         optionClick: function () {
             $(this).addClass("active").siblings(".option").removeClass("active")

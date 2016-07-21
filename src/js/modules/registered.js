@@ -6,5 +6,6 @@ import "base";
 import "comCss";
 import "../../style/css/registered.less";
 import "comJs";
+import "msg";
 
 

@@ -4,7 +4,7 @@
 import "./message.less";
 /**
  * 页面弹框消息
- * @param option 配置信息，包括标题，内容，按钮文本
+ * @param option[title, content, button[submit, cancel]] 配置信息，包括标题，内容，按钮文本
  * @param type 弹出框类型 （warn/wrong）
  * @param submitFun 提交事件
  * @param cancelFun 取消事件
@@ -42,8 +42,8 @@ $.fn.message = function (option, type, submitFun, cancelFun, mark, css) {
     if(css && $.isPlainObject(css)) {
         ele.h.css(css);
     }
-    
-    ele.h.css({marginTop: "-" + ele.h.height() / 2 + "px"});
+
+    ele.h.css({marginTop: "-" + ele.h.height() / 2 + "px", marginLeft:  "-" + ele.h.width() / 2 + "px"});
     
     this.find("button.submit").on("click", submitFun);
     this.find("button.cancel").on("click", cancelFun);
@@ -72,13 +72,13 @@ $.fn.shortMessage = function(type, mark, txt, duration, css) {
     }
 
     setTimeout(function() {
-        tar.removeClass("swing").addClass("fadeOutUp");
-        _mark.remove();
+        tar.fadeOut();
+        _mark.fadeOut();
+        
     }, duration < 1000 ? 1000 : duration);
     if(css && $.isPlainObject(css)) {
         tar.css(css);
     }
-    
     tar.css({marginTop: "-" + tar.height() / 2 + "px", marginLeft: "-" + tar.width() / 2 + "px"});
 };
 /**

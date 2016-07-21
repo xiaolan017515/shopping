@@ -5,6 +5,7 @@ import "awesome";
 import "base";
 import "comCss";
 import "comJs";
+import "msg";
 // import "../lib/core";
 // import "../lib/jquery.screenshot";
 // import "../components/video";

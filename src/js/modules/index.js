@@ -6,10 +6,10 @@ import "base";
 import "comCss";
 import "../../style/css/index.less";
 import "comJs";
+import "msg";
 
 var waterFall = {
     maxH: 0,
-    els: {},
     event: {
         load: function () {
             waterFall.event.waterfall('showmore', 'pin');
@@ -70,5 +70,9 @@ var waterFall = {
     }
 };
 
-window.onload = waterFall.event.load();
+window.onload = function () {
+    waterFall.event.waterfall('showmore', 'pin');
+    var dataInt = {'data': [{'src': '1.jpg'}, {'src': '2.jpg'}, {'src': '3.jpg'}, {'src': '4.jpg'}]};
+    document.getElementById("showmore").style.height = waterFall.maxH + "px";
+};
 

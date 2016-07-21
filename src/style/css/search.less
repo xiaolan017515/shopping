@@ -128,14 +128,27 @@
     &.sort {
       margin-top: 10px;
       margin-bottom: 10px;
-      .group {
+      .group, .price {
         float: left;
+      }
+      .group {
         &.active span{
           color: @c-purple-3;
         }
         button {
           padding: 5px 8px;
           margin-right: 15px;
+        }
+      }
+      .price {
+        button {
+          padding: 0;
+          width: 50px;
+          height: 30px;
+          text-align: center;
+          line-height: 30px;
+          background-color: @c-purple-2;
+          color: @c-light-0;
         }
       }
     }

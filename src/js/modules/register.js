@@ -6,6 +6,7 @@ import "base";
 import "comCss";
 import "../../style/css/register.less";
 import "comJs";
+import "msg";
 
 var register = {
     els: {

@@ -6,6 +6,8 @@ import "base";
 import "comCss";
 import "../../style/css/cart.less";
 import "comJs";
+import "msg";
+import "../lib/drfu.drag";
 
 var cart = {
     els: {
@@ -65,10 +67,64 @@ var cart = {
             });
             $("#sumMoney>strong").html(sum.toFixed(2));
         },
-        deleteGoods: function () {
-            $(this).parent().parent().remove();
-            cart.event.isCheckedAll();
-            cart.event.calcAllMoney();
+        isDelete: function () {
+
+            var _this = $(this);
+            $("body").message({
+                title: "删除",
+                content: "<span class='ico ico-warning'></span>您可以直接删除该商品或者删除并添加到收藏夹",
+                button: {
+                    submit: "直接删除",
+                    cancel: "添加到收藏夹"
+                }
+            }, "warn", function () {
+                /**
+                 * 点击删除
+                 */
+                // $.ajax({
+                //     url: "",
+                //     data: "",
+                //     type: "",
+                //     success: function (data) {
+                //
+                //
+                //
+                _this.parent().parent().remove();
+                cart.event.isCheckedAll();
+                cart.event.calcAllMoney();
+                $(".con-msg, .con-mark").remove();
+                //     },
+                //     fail: function (e) {
+                //         $("body").shortMessage(false, true, e, 1000);
+                //     }
+                // })
+            }, function () {
+                /**
+                 * 添加到收藏
+                 */
+                // $.ajax({
+                //     url: "",
+                //     data: "",
+                //     type: "",
+                //     success: function (data) {
+                //
+                //
+                //
+                _this.parent().parent().remove();
+                cart.event.isCheckedAll();
+                cart.event.calcAllMoney();
+                $(".con-msg, .con-mark").remove();
+                //     },
+                //     fail: function (e) {
+                //         $("body").shortMessage(false, true, e, 1000);
+                //     }
+                // })
+            }, true, {
+                width: "400px"
+            });
+            
+            $(".con-msg").drag(true);
+            
         },
         isCheckedAll: function () {
             var goods = $("#lists>.item").find("input[type=checkbox]"),
@@ -92,12 +148,10 @@ var cart = {
                     temp.push(goods[i]);
                 }
             });
-            if(temp.length === 0) {
+            if (temp.length === 0) {
                 alert("请至少选择一件商品！");
-            }else {
-                $.ajax({
-                    
-                })
+            } else {
+                $.ajax({})
             }
         }
     }
@@ -125,7 +179,7 @@ cart.els.it.on("click", "input", cart.event.isCheckedAll);
 /**
  * 删除购物车商品
  */
-cart.els.op.on("click", "button", cart.event.deleteGoods);
+cart.els.op.on("click", "button", cart.event.isDelete);
 /**
  * 提交订单
  */

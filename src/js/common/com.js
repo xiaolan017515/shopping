@@ -4,7 +4,7 @@
 import "../../style/css/awesome.less";
 import "../../style/css/base.less";
 import "../../style/css/com.less";
-
+var v = 1;
 String.prototype.format = function (args) {
     var result = this;
     if (arguments.length > 0) {
@@ -64,22 +64,21 @@ var common = {
                 url: "/Home/Cart/ajaxGetCart",
                 dataType: "json",
                 success: function success(data) {
-                    var html = '';
+                    var html = '', num = 0;
                     if (data && data.length > 0) {
                         var i = 0;
                         for (data; i < data.length; i++) {
                             html += '<div class="li clr-float"><div class="img"><img src="/Public/Uploads/{1}" alt=""></div><div class="desc"><a href="info.html">{2}{4}</a></div><div class="tl-price"><p class="money">{3}</p><p>x<span class="number">{5}</span></p><button id="delCart">删除<button><input type="hidden" value="{0}"/> <input type="hidden" value="{6}"/> <input type="hidden" value="{7}"/> </div> </div>'.format(data[i].goods_id, data[i].sm_logo, data[i].goods_name, data[i].price, data[i].goods_attr_str, data[i].goods_number, data[i].goods_attr_id, data[i].member_id);
+                            num += Number(data[i].goods_number);
                         }
-                    } else {
-                        html = "<span class='ico ico-sad2'></span>没有找到符合你要求的信息";
                     }
+                    common.els.cartNum.html(num);
                     $("#goods").html(html);
                 },
                 fail:function fail(e){
                     console.log(e);
                 }
             });
-            common.event.calcCart();
         },
         calcCart: function () {
             var t = common.els.goods.find(".li"),
@@ -118,14 +117,13 @@ var common = {
                 dataType: "json",
                 data: {'arr': v},
                 success: function success(data) {
+                    $(this).parent().parent().remove();
+                    common.event.checkCart();
                 },
                 fail:function fail(e){
                     console.log(e);
                 }
             });
-
-            $(this).parent().parent().remove();
-            common.event.checkCart();
         },
         checkCart: function () {
             var li = common.els.goods.children(".li");
@@ -158,5 +156,7 @@ common.els.goods.on("click", ">.li button", common.event.remove);
 /**
  * 购物车hover请求数据
  */
-common.els.cart.hover(common.event.cartHover);
+common.els.cart.hover(common.event.cartHover, function () {
+    
+});
 

@@ -6,3 +6,4 @@ import "base";
 import "comCss";
 import "../../style/css/forget.less";
 import "comJs";
+import "msg";

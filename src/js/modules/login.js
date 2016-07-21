@@ -6,6 +6,7 @@ import "base";
 import "comCss";
 import "../../style/css/login.less";
 import "comJs";
+import "msg";
 
 var login = {
         els: {

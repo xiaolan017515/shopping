@@ -76,7 +76,8 @@ module.exports = {
             'awesome': "../../style/css/awesome.less",
             'base': "../../style/css/base.less",
             'comCss': "../../style/css/com.less",
-            'comJs': "../common/com"
+            'comJs': "../common/com",
+            'msg': "../components/message.js"
         }
     }
 };
