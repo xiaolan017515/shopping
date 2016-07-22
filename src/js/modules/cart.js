@@ -41,15 +41,14 @@ var cart = {
                 dataType:'json',
                 data:{'oper':oper,'cart_id':cart_id},
                 success:function success(data){
-
+                    cart.event.calcMoney($(this), Number(v));
+                    cart.event.calcAllMoney();
                 },
                 fail:function fail(e){
                     $("body").shortMessage(true, false, e, 2000);
                 }
             });
 
-            cart.event.calcMoney($(this), Number(v));
-            cart.event.calcAllMoney();
         },
         inputGoodNum: function () {
             var v = $(this).val();

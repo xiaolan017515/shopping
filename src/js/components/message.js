@@ -67,7 +67,7 @@ $.fn.shortMessage = function(type, mark, txt, duration, css) {
 
     var tar = this.find(".con-shortMsg"),
         _mark = this.find(".con-mark");
-    if(type && (type === false || type === "false")) {
+    if(type === false || type === "false") {
         tar.css({backgroundColor: "#ffff66", color: "#c90000"});
     }
 

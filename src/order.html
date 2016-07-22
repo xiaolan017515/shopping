@@ -2,9 +2,9 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>订单</title>
+    <title>订单结算页</title>
     <link rel="stylesheet" href="../assets/commons.css">
-    <link rel="stylesheet" href="../assets/cart.css">
+    <link rel="stylesheet" href="../assets/pay.css">
 </head>
 <body>
 <div class="header clr-float">
@@ -122,140 +122,105 @@
     </div>
 </div>
 <div class="segmentation"></div>
-<div class="order">
-    <div class="head clr-float">
-        <div class="checkbox checkAll">
-            <input type="checkbox">全选
+<div class="userInfo">
+    <div class="title">收货人信息
+        <span id="newAddress">新增收货地址</span>
+    </div>
+    <div class="addr">
+        <div class="group clr-float">
+            <div class="name">公司</div>
+            <div class="desc">四川 成都市 高新区 城区益州大道中段1800号移动互联网创</div>
+            <div class="tel">17622220000</div>
         </div>
-        <div class="name">
-            商品名
-        </div>
-        <div class="price">
-            单价
-        </div>
-        <div class="chooseNum">
-            数量
-        </div>
-        <div class="money">
-            小计/元
-        </div>
-        <div class="operate">
-            操作
+        <div class="group">
+            <div class="name">私人</div>
+            <div class="desc">四川 成都市 高新区 城区益州大道中段1800号移动互联网创</div>
+            <div class="tel">17622220000</div>
         </div>
     </div>
-    <div class="lists" id="lists">
-        <div class="item clr-float">
-            <div class="checkbox">
-                <input type="checkbox">
-            </div>
-            <div class="name clr-float">
-                <div class="pic">
-                    <img src="style/images/2.jpg" alt="">
-                </div>
-                <div class="desc clr-float">
-                    <p class="name">
-                        <a href="info.html">TCL XQB55-36SP 5.5公斤 全自动波轮洗衣机 一键脱水</a>
-                    </p>
-                    <p class="type">颜色：5.5公斤普及款</p>
-                </div>
-            </div>
-            <div id="price" class="price">699.0</div>
-            <div class="chooseNum">
-                <div class="addTool">
-                    <span class="reduce">-</span>
-                    <input type="text" value="1">
-                    <span class="add">+</span>
-                </div>
-            </div>
-            <div class="money">
-                699.0
-            </div>
-            <div class="operate">
-                <button>删除</button>
-            </div>
-        </div>
-        <div class="item clr-float">
-            <div class="checkbox">
-                <input type="checkbox">
-            </div>
-            <div class="name clr-float">
-                <div class="pic">
-                    <img src="style/images/2.jpg" alt="">
-                </div>
-                <div class="desc clr-float">
-                    <p class="name">
-                        <a href="info.html">TCL XQB55-36SP 5.5公斤 全自动波轮洗衣机 一键脱水</a>
-                    </p>
-                    <p class="type">颜色：5.5公斤普及款</p>
-                </div>
-            </div>
-            <div class="price">699.0</div>
-            <div class="chooseNum">
-                <div class="addTool">
-                    <span class="reduce">-</span>
-                    <input type="text" value="1">
-                    <span class="add">+</span>
-                </div>
-            </div>
-            <div class="money">
-                699.0
-            </div>
-            <div class="operate">
-                <button>删除</button>
-            </div>
-        </div>
-        <div class="item clr-float">
-            <div class="checkbox">
-                <input type="checkbox">
-            </div>
-            <div class="name clr-float">
-                <div class="pic">
-                    <img src="style/images/2.jpg" alt="">
-                </div>
-                <div class="desc clr-float">
-                    <p class="name">
-                        <a href="info.html">TCL XQB55-36SP 5.5公斤 全自动波轮洗衣机 一键脱水</a>
-                    </p>
-                    <p class="type">颜色：5.5公斤普及款</p>
-                </div>
-            </div>
-            <div class="price"> 45.7</div>
-            <div class="chooseNum">
-                <div class="addTool">
-                    <span class="reduce">-</span>
-                    <input type="text" value="1">
-                    <span class="add">+</span>
-                </div>
-            </div>
-            <div class="money">
-                45.7
-            </div>
-            <div class="operate">
-                <button>删除</button>
-            </div>
-        </div>
+</div>
+<div class="payMethod">
+    <div class="title">支付方式</div>
+    <div class="methods clr-float">
+        <div class="method">支付宝</div>
+        <div class="method">微信支付</div>
+        <div class="method">银联支付</div>
+        <div class="method">信用卡支付</div>
     </div>
-    <div class="tool clr-float">
-        <div class="checkbox checkAll">
-            <input type="checkbox">全选
-        </div>
-        <div class="sumMoney" id="sumMoney">
-            <!--<span>已选择<strong>12</strong>件商品</span>-->
-            总价:<strong>0.00</strong>
+</div>
+<!--<div class="invoice">-->
+<!--<div class="title">发票信息</div>-->
+<!--</div>-->
 
+<div class="goodsList">
+    <div class="item clr-float">
+        <div class="name clr-float">
+            <div class="pic">
+                <img src="style/images/2.jpg" alt="">
+            </div>
+            <div class="desc clr-float">
+                <p class="name">
+                    <a href="info.html">TCL XQB55-36SP 5.5公斤 全自动波轮洗衣机 一键脱水</a>
+                </p>
+                <p class="type">颜色：5.5公斤普及款</p>
+            </div>
         </div>
-        <div class="gotoPay" id="gotoPay">
-            <a href="order.html">
-                去结算
-            </a>
+        <div class="price">100.00</div>
+        <div class="number">
+            x <span>2</span>
+        </div>
+    </div>
+    <div class="item clr-float">
+        <div class="name clr-float">
+            <div class="pic">
+                <img src="style/images/2.jpg" alt="">
+            </div>
+            <div class="desc clr-float">
+                <p class="name">
+                    <a href="info.html">TCL XQB55-36SP 5.5公斤 全自动波轮洗衣机 一键脱水</a>
+                </p>
+                <p class="type">颜色：5.5公斤普及款</p>
+            </div>
+        </div>
+        <div class="price">111.00</div>
+        <div class="number">
+            x <span>1</span>
+        </div>
+    </div>
+    <div class="item clr-float">
+        <div class="name clr-float">
+            <div class="pic">
+                <img src="style/images/2.jpg" alt="">
+            </div>
+            <div class="desc clr-float">
+                <p class="name">
+                    <a href="info.html">TCL XQB55-36SP 5.5公斤 全自动波轮洗衣机 一键脱水</a>
+                </p>
+                <p class="type">颜色：5.5公斤普及款</p>
+            </div>
+        </div>
+        <div class="price">111.00</div>
+        <div class="number">
+            x <span>1</span>
         </div>
     </div>
 </div>
 
+<div class="submitOrder">
+    <div class="address">
+        地址：
+        <span id="uAddr"></span>
+        收货人：
+        <span id="uName"></span>
+        <span id="uTel"></span>
+    </div>
+    <span class="money">总金额： <span id="totalMoney">0.00</span></span>
+    <button class="submit">提交订单</button>
+</div>
 
 
 <div class="footer">
-    <a href="info.html">广告服务</a> - <a
+    <a href="###">广告服务</a> - <a
         href="###">客服中心</a> - <a
         href="###">联系方式</a> - <a
         href="###">保护隐私权</a> - <a
@@ -268,7 +233,48 @@
         href="###">反盗版和反盗链权利声明</a> 举报邮箱：<a
         href="###">XXX@XXX.com</a>
 </div>
+
+<div class="newAddress">
+    <div class="title">新增收货人信息
+        <span class="ico ico-close"></span>
+    </div>
+    <div class="username">
+        <span class="name">收货人:</span>
+        <input id="username" type="text" placeholder="张三">
+        <span class="tips">必填项</span>
+    </div>
+    <div class="tel">
+        <span class="name">手机号码:</span>
+        <input id="tel" type="tel" placeholder="135xxxxxxxx">
+        <span class="tips">必填项，电话号码格式不正确</span>
+    </div>
+    <div class="area">
+        <span class="name">地区:</span>
+        <span id="chooseArea" data-toggle="distpicker">
+            <select id="province" data-province="---- 所在省 ----"></select>
+            <select id="city" data-city="---- 所在市 ----"></select>
+            <select data-district="---- 所在区 ----"></select>
+        </span>
+    </div>
+    <div class="detailArea">
+        <span class="name">详细地址:</span>
+        <input type="text" id="detailAddr" placeholder="柳城大道花园小区">
+        <span class="tips">必填项，请输入字符串</span>
+    </div>
+    <div class="email">
+        <span class="name">邮箱:</span>
+        <input id="email" type="text" placeholder="user@vmente.com">
+        <span class="tips">选填项，格式不正确</span>
+    </div>
+    <div class="save">
+        <span class="name"></span>
+        <button id="submit">保存收货人信息</button>
+    </div>
+</div>
+
+<div class="mask"></div>
+
 <script src="../assets/commons.js"></script>
-<script src="../assets/cart.js"></script>
+<script src="../assets/pay.js"></script>
 </body>
 </html>

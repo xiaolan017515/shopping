@@ -1,258 +1,228 @@
 @import "color";
 
-.userInfo, .payMethod, .submitOrder {
-  width: 960px;
+.head {
+  width: 980px;
   height: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   background-color: @c-light-0;
-  border-bottom: 1px solid @c-border;
-  padding: 20px 20px;
   >div {
-    width: 100%;
-    height: auto;
-    &.title {
+    float: left;
+    &.logo {
+      width: 160px;
+      height: 60px;
+      background-image: url("../images/logo2.jpg");
+    }
+    &.txt {
+      font-size: 18px;
       font-weight: bold;
-      height: 30px;
-      line-height: 30px;
+      height: 60px;
+      margin-left: 10px;
+      line-height: 60px;
     }
   }
 }
-.userInfo {
-  .title {
-    position: relative;
-    left: 0;
-    top: 0;
-    span {
-      position: absolute;
-      right: 10px;
-      top: 0;
-      display: inline-block;
-      cursor: pointer;
-      &:hover {
-        color: @c-purple-4;
-      }
-    }
-  }
-  .addr {
-    width: 100%;
-    height: auto;
-    .group {
-      padding-top: 10px;
-      padding-bottom: 10px;
-      width: 100%;
-      height: 30px;
-      border-bottom: 1px solid @c-border-sub;
-      >div {
-        float: left;
-        height: 100%;
-        line-height: 30px;
-        &.name {
-          width: 110px;
-          text-align: center;
-          border: 1px solid transparent;
-          cursor: pointer;
-          &:hover {
-            border: 1px solid @c-purple-2;
+.cardPay {
+  display: none;
+}
+.cards {
+  width: 980px;
+  height: auto;
+  padding: 10px;
+  background-color: @c-light-0;
+  >div {
+    float: left;
+    &.all {
+      width: 800px;
+      height: auto;
+      .card {
+        width: 100%;
+        height: 50px;
+        margin-bottom: 5px;
+        border: 1px solid @c-border-sub;
+        cursor: pointer;
+        position: relative;
+        >span {
+          display: none;
+          width: 0;
+          height: 0;
+          font-weight: bold;
+          position: absolute;
+          left: 0;
+          top: 0;
+          border: 15px solid transparent;
+          border-top-color: @c-purple-3;
+          border-left-color: @c-purple-3;
+          >.ico {
+            position: absolute;
+            left: -13px;
+            top: -14px;
+            font-size: 16px;
+            color: @c-light-0;
           }
-          &.selected {
-            border: 1px solid @c-purple-2;
+        }
+        &.checked {
+          border-color: @c-purple-4;
+          >span {
+            display: inline-block;
           }
         }
-        &.desc {
-          width: auto;
-          padding-left: 25px;
-          padding-right: 25px;
-        }
-        &.tel {
-          width: 100px
-        }
-      }
-    }
-  }
-}
-.payMethod {
-  .methods {
-    margin-top: 10px;
-    .method {
-      float: left;
-      border: 1px solid @c-border;
-      margin-right: 15px;
-      padding: 10px 15px;
-      cursor: pointer;
-      &.selected {
-        border-color: @c-purple-2;
-      }
-      &:hover {
-        border-color: @c-purple-2;
-      }
-    }
-  }
-}
-.goodsList {
-  min-height: 150px;
-  >.item {
-    width: 980px;
-    padding: 10px 10px;
-    height: 100%;
-    line-height: 30px;
-    background-color: @c-light-0;
-    border-bottom: 1px solid @c-border;
-    >div {
-      float: left;
-      height: 100%;
-      &.name {
         >div {
           float: left;
-          &.pic {
-            width: 100px;
-            height: 100px;
-            img {
-              width: 100%;
-              height: 100%;
+          height: 40px;
+          margin-top: 5px;
+          &.img {
+            width: 126px;
+            margin-left: 30px;
+            &.abc {//农行
+              background-image: url("../images/cards.jpg");
+              background-position: 0 -234px;
+            }
+            &.ccb {//建行
+              background-image: url("../images/cards.jpg");
+              background-position: 0 -193px;
+            }
+            &.boc {//中行
+              background-image: url("../images/cards.jpg");
+              background-position: 0 -39px;
+            }
+            &.icbc {//工商
+              background-image: url("../images/cards.jpg");
+              background-position: 0 0;
+            }
+            &.bcm {//交通
+              background-image: url("../images/cards.jpg");
+              background-position: 0 -117px;
+            }
+            &.psbc {//邮政
+              background-image: url("../images/cards.jpg");
+              background-position: 0 -79px;
+            }
+            &.cmb {//招商
+              background-image: url("../images/cards.jpg");
+              background-position: 0 -156px;
             }
           }
           &.desc {
-            width: 500px;
-            padding-left: 15px;
-            padding-right: 15px;
-            p {
-              float: left;
-              height: 50%;
-              word-break: break-all;
-              &.name {
-                width: 250px;
-                a {
-                  color: @c-dark-1!important;
-                  text-decoration: none;
-                  &:hover {
-                    color: @c-purple-3;
-                  }
-                }
+            margin-left: 50px;
+            line-height: 40px;
+            span {
+              margin: 0 15px;
+              &.isFast {
+                color: @c-orange;
               }
               &.type {
-                width: 200px;
-                margin-left: 10px;
-                color: @c-dark-2;
+                color: @c-ok;
+              }
+              &.tailNumber {
+                span {
+                  margin-left: 0;
+                  color: @c-purple-3;
+                }
               }
             }
           }
         }
       }
-      &.price {
-        width: 100px;
+    }
+
+    &.tips {
+      >div {
+        margin-left: 20px;
       }
-      &.number {
-        width: 100px;
+      .new {
+        width: 130px;
+        height: 30px;
+        cursor: pointer;
+        border: 1px solid @c-border;
+        line-height: 30px;
+        text-align: center;
+        &:hover {
+          background-color: @c-purple-2;
+          color: @c-light-0;
+        }
+        &:hover span {
+          color: @c-light-0;
+        }
+      }
+      .money {
+        margin-top: 20px;
         span {
-          margin-left: 8px;
+          font-size: 18px;
+          font-weight: bold;
+          color: @c-purple-4;
+          margin-top: 15px;
         }
       }
     }
+
+
   }
 }
-.submitOrder {
-  text-align: right;
-  .address {
-    text-align: right;
-    margin-bottom: 5px;
-    span {
-      margin-right: 15px;
-    }
-  }
-  .money {
-    span {
-      color: @c-purple-3;
-      font-size: 25px;
-      font-weight: bold;
-    }
-  }
-  button.submit {
-    background-color: @c-purple-2;
-    color: @c-light-0;
-    margin-left: 20px;
-  }
-}
-.newAddress {
+.payit {
+  width: 980px;
+  height: auto;
+  padding: 10px;
   background-color: @c-light-0;
-  border: 1px solid @c-border;
-  width: 680px;
-  height: 380px;
-  padding: 10px 10px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-left: -350px;
-  margin-top: -200px;
-  z-index: 999;
-  box-shadow: 0 0 10px 2px @c-dark-2;
+  button {
+    background-color: @c-purple-4;
+    color: @c-light-0;
+  }
+}
+.newCard {
   display: none;
-  &.show {
+}
+
+
+.qrPay {
+  width: 840px;
+  height: auto;
+  padding: 10px 80px;
+  background-color: @c-light-0;
+  img {
     display: block;
   }
-  >div {
+  .title {
     width: 100%;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    &.title {
-      font-size: 16px;
-      position: relative;
-      span.ico-close {
-        padding: 10px;
-        position: absolute;
-        right: -5px;
-        top: -20px;
-        display: inline-block;
-        cursor: pointer;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    span.time {
+      color: @c-purple-3;
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+  }
+  .qr {
+    width: 100%;
+    height: 400px;
+    >div {
+      float: left;
+    }
+    .qrCode {
+      width: 400px;
+      height: 400px;
+      .pic {
+        width: 300px;
+        height: 300px;
+        margin-left: 50px;
+      }
+      .tips {
+        width: 400px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
         font-size: 18px;
-        &:hover {
-          color: @c-purple-4;
-        }
+        color: @c-purple-2;
+        margin-top: 10px;
       }
     }
-    &.area {
-      #chooseArea {
-        margin-left: 10px;
-        select {
-          min-width: 100px;
-          height: 30px;
-          outline: none;
-          border-color: @c-border;
-        }
-      }
-    }
-    &.detailArea {
-      input {
-        width: 350px;
-      }
-    }
-    &.save {
-      button {
-        background-color: @c-purple-2;
-        color: @c-light-0;
-        margin-left: 10px;
-      }
-    }
-    span {
-      &.name {
-        display: inline-block;
-        width: 80px;
-        text-align: right;
-      }
-      &.tips {
-        margin-left: 25px;
-        display: none;
-        color: @c-wrong;
-        &.show {
-          display: inline-block;
-        }
-      }
-    }
-    input {
-      width: 200px;
-      margin-left: 10px;
-      border-color: @c-border;
-      &.error {
-        border-color: @c-wrong;
-      }
+    .phone {
+      width: 350px;
+      height: 350px;
+      margin-left: 50px;
     }
   }
 }
