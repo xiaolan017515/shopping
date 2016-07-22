@@ -82,10 +82,16 @@
     <div class="title">
         <span class="type">支付宝</span>支付
         二维码将在<span class="time">25</span>秒后过期，过期后刷新页面重新获取
+
+        <span class="money">
+            共支付： <span class="number">1526.06</span>元
+        </span>
     </div>
     <div class="qr clr-float">
         <div class="qrCode">
-            <img class="pic" draggable="false"  src="style/images/payqr.png" alt="">
+            <div class="pic" id="qrCode">
+
+            </div>
             <div class="tips">
                 请使用<span class="type">支付宝</span>扫一扫<br />
                 扫描二维码支付订单</div>
@@ -147,6 +153,17 @@
         href="###">XXX@XXX.com</a>
 </div>
 <script src="../assets/commons.js"></script>
+<!--<script src="js/lib/qrcode.min.js"></script>-->
 <script src="../assets/pay.js"></script>
+<!--<script>-->
+    <!--var qr = new QRCode('qrCode', {-->
+        <!--text: '该二维码是自动生成的，替换为支付地址',-->
+        <!--width: 300,-->
+        <!--height: 300,-->
+        <!--colorDark : '#000000',-->
+        <!--colorLight : '#ffffff',-->
+        <!--correctLevel : QRCode.CorrectLevel.H-->
+    <!--});-->
+<!--</script>-->
 </body>
 </html>

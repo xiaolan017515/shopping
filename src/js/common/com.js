@@ -4,7 +4,6 @@
 import "../../style/css/awesome.less";
 import "../../style/css/base.less";
 import "../../style/css/com.less";
-var v = 1;
 String.prototype.format = function (args) {
     var result = this;
     if (arguments.length > 0) {
@@ -38,7 +37,8 @@ var common = {
         sumCart: $(".sumCart"),
         cart: $("#cart"),
         cartEmpty: $(".cartEmpty"),
-        cartNum: $(".cart .num")
+        cartNum: $(".cart .num"),
+        login: $("#login")
     },
     event: {
         gotoTop: function (min_height) {
@@ -75,7 +75,7 @@ var common = {
                     common.els.cartNum.html(num);
                     $("#goods").html(html);
                 },
-                fail:function fail(e){
+                fail: function fail(e) {
                     console.log(e);
                 }
             });
@@ -107,7 +107,8 @@ var common = {
             var totalNum = Number(common.els.cartNum.html());
             common.els.cartNum.html(totalNum - _n);
 
-            var t = $(this).siblings("input");var v = [];
+            var t = $(this).siblings("input");
+            var v = [];
             $.each(t, function (i, d) {
                 v[i] = $(d).attr('value');
             });
@@ -120,7 +121,7 @@ var common = {
                     $(this).parent().parent().remove();
                     common.event.checkCart();
                 },
-                fail:function fail(e){
+                fail: function fail(e) {
                     console.log(e);
                 }
             });
@@ -134,6 +135,32 @@ var common = {
                 common.els.cartEmpty.removeClass("show");
                 common.els.sumCart.removeClass("hidden");
             }
+        },
+        isLogin: function () {
+            $.ajax({
+                type: "GET",
+                url: "/Home/Member/ajaxChkLogin",
+                dataType: "json",
+                success: function (data) {
+
+                    if (data.ok == 'success') {
+                        var html = "<button class='ico ico-user'>" + data.username + "</button><a href='/Home/Member/logout'>[退出]</a>";
+                        $("#logInfo").html(html);
+                    }
+                }
+            });
+        },
+        login: function () {
+            var url = window.location.pathname;
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "/Home/Member/saveLogin",
+                data: {'url': url},
+                success: function (data) {
+                    location.href = '/Home/Member/login?u=' + data;
+                }
+            });
         }
     }
 };
@@ -157,6 +184,15 @@ common.els.goods.on("click", ">.li button", common.event.remove);
  * 购物车hover请求数据
  */
 common.els.cart.hover(common.event.cartHover, function () {
-    
 });
+/**
+ * 判断是否登录
+ */
+common.event.isLogin();
+/**
+ * 点击登录
+ */
+common.els.login.on("click", common.event.login);
+
+
 

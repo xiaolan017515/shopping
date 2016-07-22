@@ -95,7 +95,7 @@ var cart = {
                     cancel: "添加到收藏夹"
                 }
             }, "warn", function () {
-                var cart_id = $(this).parent().parent().attr('id');
+                var cart_id = _this.parent().parent().attr('id');
                 $.ajax({
                     type: "get",
                     url: "/Home/Cart/ajaxDelCart",
@@ -166,7 +166,7 @@ var cart = {
                 }
             });
             if (temp.length === 0) {
-                alert("请至少选择一件商品！");
+                $("body").shortMessage(false, true, "请至少选择一件商品！", 1500);
             } else {
                 $.ajax({
                     type: "get",
@@ -175,7 +175,7 @@ var cart = {
                     data: {'cart_id': temp},
                     success: function success(data) {
                         if(data.info=='ok'){
-                            window.location.href = '/Home/Cart/pay';
+                            window.location.href = '/Home/Cart/order';
                         }
                     },
                     fail:function fail(e){

@@ -8,7 +8,7 @@
   margin-top: 10px;
   margin-bottom: 10px;
   background-color: @c-light-0;
-  >div {
+  > div {
     float: left;
     &.logo {
       width: 160px;
@@ -24,15 +24,17 @@
     }
   }
 }
+
 .cardPay {
   display: none;
 }
+
 .cards {
   width: 980px;
   height: auto;
   padding: 10px;
   background-color: @c-light-0;
-  >div {
+  > div {
     float: left;
     &.all {
       width: 800px;
@@ -44,7 +46,7 @@
         border: 1px solid @c-border-sub;
         cursor: pointer;
         position: relative;
-        >span {
+        > span {
           display: none;
           width: 0;
           height: 0;
@@ -55,7 +57,7 @@
           border: 15px solid transparent;
           border-top-color: @c-purple-3;
           border-left-color: @c-purple-3;
-          >.ico {
+          > .ico {
             position: absolute;
             left: -13px;
             top: -14px;
@@ -65,42 +67,42 @@
         }
         &.checked {
           border-color: @c-purple-4;
-          >span {
+          > span {
             display: inline-block;
           }
         }
-        >div {
+        > div {
           float: left;
           height: 40px;
           margin-top: 5px;
           &.img {
             width: 126px;
             margin-left: 30px;
-            &.abc {//农行
+            &.abc { //农行
               background-image: url("../images/cards.jpg");
               background-position: 0 -234px;
             }
-            &.ccb {//建行
+            &.ccb { //建行
               background-image: url("../images/cards.jpg");
               background-position: 0 -193px;
             }
-            &.boc {//中行
+            &.boc { //中行
               background-image: url("../images/cards.jpg");
               background-position: 0 -39px;
             }
-            &.icbc {//工商
+            &.icbc { //工商
               background-image: url("../images/cards.jpg");
               background-position: 0 0;
             }
-            &.bcm {//交通
+            &.bcm { //交通
               background-image: url("../images/cards.jpg");
               background-position: 0 -117px;
             }
-            &.psbc {//邮政
+            &.psbc { //邮政
               background-image: url("../images/cards.jpg");
               background-position: 0 -79px;
             }
-            &.cmb {//招商
+            &.cmb { //招商
               background-image: url("../images/cards.jpg");
               background-position: 0 -156px;
             }
@@ -129,7 +131,7 @@
     }
 
     &.tips {
-      >div {
+      > div {
         margin-left: 20px;
       }
       .new {
@@ -158,9 +160,9 @@
       }
     }
 
-
   }
 }
+
 .payit {
   width: 980px;
   height: auto;
@@ -171,10 +173,10 @@
     color: @c-light-0;
   }
 }
+
 .newCard {
   display: none;
 }
-
 
 .qrPay {
   width: 840px;
@@ -189,16 +191,29 @@
     padding-top: 10px;
     padding-bottom: 10px;
     margin-bottom: 10px;
+    position: relative;
     span.time {
       color: @c-purple-3;
       margin-left: 5px;
       margin-right: 5px;
     }
+    span.money {
+      position: absolute;
+      right: 10px;
+      top: 0;
+      span.number {
+        font-size: 20px;
+        font-weight: bold;
+        color: @c-purple-4;
+        margin-left: 5px;
+        margin-right: 5px;
+      }
+    }
   }
   .qr {
     width: 100%;
     height: 400px;
-    >div {
+    > div {
       float: left;
     }
     .qrCode {
@@ -217,6 +232,9 @@
         font-size: 18px;
         color: @c-purple-2;
         margin-top: 10px;
+        span {
+          font-size: 18px;
+        }
       }
     }
     .phone {

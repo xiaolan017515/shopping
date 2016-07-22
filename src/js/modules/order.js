@@ -7,9 +7,8 @@ import "comCss";
 import "../../style/css/order.less";
 import "comJs";
 import "msg";
-
-import "../lib/distpicker.data"
-import "../lib/distpicker"
+// import "../lib/distpicker.data"
+// import "../lib/distpicker"
 
 var verify = {
     els: {

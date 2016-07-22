@@ -11,24 +11,27 @@ import "msg";
 var register = {
     els: {
         form: $(".form"),
-        submit: $("#submit")
+        submit: $("#submit"),
+        username: $("#username"),
+        email: $("#email"),
+        password: $("#password")
     },
     reg: {
         name: /[a-zA-Z\u4e00-\u9fa5]{4,8}/i,
         email: /^[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?$/i,
         pwd: /^[a-zA-Z0-9_]{6,16}$/i
-},
+    },
     event: {
         check: function () {
             let v = $(this).val(),
                 type = $(this).attr("type");
             switch (type) {
                 case "text":
-                    if (v != "" && register.reg.name.test(v)){
+                    if (v != "" && register.reg.name.test(v)) {
                         register.els.submit.prop("disabled", false).removeClass("notAllowed");
                         $(this).removeClass("error");
                         $(this).next().removeClass("show");
-                    }else {
+                    } else {
                         register.els.submit.prop("disabled", true).addClass("notAllowed");
                         $(this).addClass("error");
                         $(this).next().addClass("show");
@@ -63,9 +66,26 @@ var register = {
             $(this).next().removeClass("show");
         },
         click: function () {
-            // $.ajax({
-            //
-            // })
+            var username = register.els.username.val();
+            var email = register.els.email.val();
+            var password = register.els.password.val();
+            $.ajax({
+                type: "POST",
+                url: "/Home/Member/ajaxGetRegister",
+                dataType: "json",
+                data: {"username": username, "email": email, "password": password},
+                success: function (data) {
+                    if (data.ok == 'success') {
+                        window.location.href = "www.myshop.com/index.php/Home/Member/registered/email/" + data.info
+
+                    } else if (data.ok == 'error') {
+                        $("body").shortMessage(false, true, data.info, 1000, {
+                            width: "200px",
+                            textAlign: "center"
+                        });
+                    }
+                }
+            })
         }
     }
 };
@@ -73,12 +93,23 @@ var register = {
  * 失去焦点校验input格式
  */
 var isInput = document.createElement('input');
-if('oninput' in isInput){
+if ('oninput' in isInput) {
     register.els.form.find("input").on("input", register.event.check);
-}else{
+} else {
     register.els.form.find("input").on("propertychange", register.event.check);
 }
 /**
- * 登录点击事件
+ * 注册点击事件
  */
 register.els.submit.click(register.event.click);
+/**
+ * Enter注册
+ */
+$(document).keydown(function(event){
+    var keyCode = (navigator.appname == "Netscape") ? event.keyCode : event.which;
+    if (keyCode == 13) {
+        register.event.click();
+    } else {
+        return false;
+    }
+});
