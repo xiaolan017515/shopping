@@ -66,9 +66,7 @@ var register = {
             $(this).next().removeClass("show");
         },
         click: function () {
-            var username = register.els.username.val();
-            var email = register.els.email.val();
-            var password = register.els.password.val();
+            var username = register.els.username.val(), email = register.els.email.val(), password = register.els.password.val();
             $.ajax({
                 type: "POST",
                 url: "/Home/Member/ajaxGetRegister",
