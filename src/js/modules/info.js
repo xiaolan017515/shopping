@@ -5,7 +5,7 @@ import "awesome";
 import "base";
 import "comCss";
 import "../../style/css/info.less";
-import "comJs";
+import {core} from "comJs";
 import "msg";
 
 var preview = {
@@ -23,7 +23,9 @@ var preview = {
         cartNum: $(".cart .num")
     },
     event: {
-        addGoods: function () {
+        addGoods: function() {
+            var oper='';
+            var cart_id = $(this).parents(".item").attr("id");
             var t = $(this).hasClass("reduce"),
                 v = $(this).siblings("input").val();
             if (t) {
@@ -31,11 +33,28 @@ var preview = {
                     $(this).siblings("input").val(1);
                 } else {
                     $(this).siblings("input").val(--v);
+                    oper = 'reduce';
                 }
             } else {
                 $(this).siblings("input").val(++v);
+                oper = 'add';
+            }
+            if(!core.debug) {
+                $.ajax({
+                    type:'get',
+                    url:'/Home/Cart/ajaxUpdateCart',
+                    dataType:'json',
+                    data:{'oper':oper,'cart_id':cart_id},
+                    success: function(data) {
+                        
+                    },
+                    fail: function(e) {
+                       $("body").shortMessage(false, true, "服务器可能开小差了，重新试试呢~", 1500);
+                    }
+                });
             }
         },
+
         hover: function () {
             preview.els.bp.children("img").attr("src", $(this).attr("src"));
         },

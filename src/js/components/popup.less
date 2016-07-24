@@ -1,29 +1,37 @@
 @import "../../style/css/base";
+*[data-popup] {
+  position: relative;
+  span.ico {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+  }
+}
 .popup {
-  min-width: 100%;
+  //min-width: 100%;
   position: absolute;
   border: solid 1px @c-border;
   box-sizing: border-box;
   display: none;
   z-index: 9999;
+  background-color: @c-light-0;
   &.open {
     display: block;
   }
   button {
-    border-radius: 2px;
-    min-width: 100%;
+    width: 100%;
     text-align: center;
     padding: 10px 0;
     border-bottom: 1px solid @c-border-sub;
     &.btnClicked {
-      background-color: @c-ok;
+      background-color: @c-purple-2;
       color: @c-light-0;
     }
     &:last-child {
       border-bottom: none;
     }
     &:hover {
-      background-color: @c-ok;
+      background-color: @c-purple-1;
       color: @c-light-0;
     }
     >.ico-caret-right {

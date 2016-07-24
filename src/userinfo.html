@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>个人信息</title>
     <link rel="stylesheet" href="../assets/commons.css">
-    <link rel="stylesheet" href="../assets/login.css">
+    <link rel="stylesheet" href="../assets/userinfo.css">
 </head>
 <body id="body">
 <div class="header clr-float">
@@ -122,11 +122,58 @@
     </div>
 </div>
 
-<div class="content clr-float">
-    <div class="tab"></div>
-    <div class="info"></div>
+<div class="content userinfo clr-float">
+    <div class="tab">
+        <div class="group">
+            <div class="dt">订单管理</div>
+            <div class="dd active">全部订单</div>
+            <div class="dd">待付款<span>5</span></div>
+            <div class="dd">待收货<span>3</span></div>
+            <div class="dd">待评价<span>10</span></div>
+            <div class="dd">已完成</div>
+            <div class="dd">已取消</div>
+        </div>
+        <div class="group">
+            <div class="dt">账户管理</div>
+            <div class="dd">个人信息</div>
+            <div class="dd">账号绑定</div>
+            <div class="dd active">收货地址</div>
+            <div class="dd">星级评定</div>
+        </div>
+    </div>
+    <div class="info">
+        <div class="head clr-float">
+            <div id="time" class="time" data-popup="chooseTime">近三个订单</div>
+            <div class="desc">商品详情</div>
+            <div class="consignee">收货人</div>
+            <div class="money">金额</div>
+            <div class="operate">操作</div>
+        </div>
+        <div class="items">
+            <div class="item clr-float">
+                <div class="goodName clr-float">
+                    <div class="pic">
+                        <img src="style/images/2.jpg" alt="">
+                    </div>
+                    <div class="desc">
+                        <p class="name">
+                            <a href="info.html">TCL XQB55-36SP 5.5公斤 全自动波轮洗衣机 一键脱水</a>
+                        </p>
+                        <p class="type">颜色：5.5公斤普及款</p>
+                    </div>
+                </div>
+                <div class="consignee">
+                    张三<br>
+                    四川省成都市双流县中和镇1253街道5号
+                </div>
+                <div class="price">100000.00</div>
+                <div class="operate">
+                    <button>立即购买</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
 
 <div class="footer">
     <a href="###">广告服务</a> - <a
@@ -142,7 +189,17 @@
         href="###">反盗版和反盗链权利声明</a> 举报邮箱：<a
         href="###">XXX@XXX.com</a>
 </div>
+
+
+<div class="popup" data-type="time" id="chooseTime">
+    <button value="last3">最近三个月</button>
+    <button value="2016">2016年订单</button>
+    <button value="2015">2015年订单</button>
+    <button value="2014">2014年订单</button>
+    <button value="far">更早</button>
+</div>
+
 <script src="../assets/commons.js"></script>
-<script src="../assets/login.js"></script>
+<script src="../assets/userinfo.js"></script>
 </body>
 </html>

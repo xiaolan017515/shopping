@@ -5,19 +5,16 @@ import "awesome";
 import "base";
 import "comCss";
 import "../../style/css/login.less";
-import "comJs";
+import {core} from "comJs";
 import "msg";
 
 var login = {
     els: {
+        main: $(".main"),
         form: $(".form"),
         login: $("#login"),
         email: $("#email"),
         password: $("#password")
-    },
-    reg: {
-        email: /^[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?$/i,
-        pwd: /^[a-zA-Z0-9_]{6,16}$/i
     },
     event: {
         check: function (e) {
@@ -26,11 +23,11 @@ var login = {
             
             switch (type) {
                 case "email":
-                    if (v != "" && login.reg.email.test(v)) {
+                    if (v != "" && core.reg.email.test(v)) {
                         if(Vpwd != "" && !pwd) {
                             login.els.login.prop("disabled", false).removeClass("notAllowed"); 
                         }
-                       
+                        
                         $(this).removeClass("error");
                         $(this).next().removeClass("show");
                     } else {
@@ -40,7 +37,7 @@ var login = {
                     }
                     break;
                 case "password":
-                    if (v != "" && login.reg.pwd.test(v)) {
+                    if (v != "" && core.reg.pwd.test(v)) {
                         if(Vemail != "" && !email) {
                             login.els.login.prop("disabled", false).removeClass("notAllowed"); 
                         }
@@ -61,27 +58,34 @@ var login = {
             $(this).next().removeClass("show");
         },
         click: function () {
-            var email = login.els.email.val(), password = login.els.password.val(), url_search = window.location.search;
-            // $.ajax({
-            //     type: "POST",
-            //     url: "/Home/Member/ajaxGetLogin",
-            //     dataType: "json",
-            //     data: {"email": email, "password": password, "url_search": url_search},
-            //     success: function (data) {
-            //         if (data.ok == 'success') {
-            //             if (data.info == '/') {
-            //                 window.document.location.href = "http://www.myshop.com";
-            //             } else {
-            //                 window.document.location.href = "http://www.myshop.com" + data.info;
-            //             }
-            //         } else if (data.ok == 'error') {
-            //             $("body").shortMessage(false, true, data.info, 1000, {
-            //                 width: "200px",
-            //                 textAlign: "center"
-            //             });
-            //         }
-            //     }
-            // })
+            // var email = login.els.email.val(), password = login.els.password.val(),
+            // var url_search = window.location.search;
+            var _data = core.dealData.serialize(login.els.form).result;
+            if(_data.email && _data.password) {
+                if(!core.debug) {
+                    _data.url_search = window.location.search;
+                    $.ajax({
+                        type: "POST",
+                        url: "/Home/Member/ajaxGetLogin",
+                        dataType: "json",
+                        data: _data,
+                        success: function (data) {
+                            if (data.ok == 'success') {
+                                if (data.info == '/') {
+                                    window.document.location.href = "http://www.myshop.com";
+                                } else {
+                                    window.document.location.href = "http://www.myshop.com" + data.info;
+                                }
+                            } else if (data.ok == 'error') {
+                                login.els.main.shortMessage(false, true, data.info, 1500);
+                            }
+                        }
+                    })
+                }
+                
+            }else {
+                login.els.main.shortMessage(false, true, "请输入完整的账号密码", 1500);
+            }
         }
     }
 };

@@ -5,7 +5,7 @@ import "awesome";
 import "base";
 import "comCss";
 import "../../style/css/search.less";
-import "comJs";
+import {core} from "comJs";
 import "msg";
 
 var condition = {
@@ -136,26 +136,28 @@ var condition = {
             var str =window.location.pathname;
             var reg = /cid\/.+?[\.\/]/;
             var result = reg.exec(str)[0].replace(/cid\//, "").replace(/[\.\/]$/, "");
-            
-            $.ajax({
-                type: "post",
-                url: "/Home/Search/ajaxAttr/cat/"+result,
-                dataType: "json",
-                data: { 'arr': data },
-                success: function success(data) {
-                    var html = '';
-                    if (data && data.length > 0) {
-                        var i = 0;
-                        for (data; i < data.length; i++) {
-                            html += "<div class='item'> <a href='/Home/Index/Info/goods/{0}'><img src='/Public/Uploads/{1}' alt=''><div class='info'><p class='name'>{2}</p><p class='price'>￥<span>{3}</span></p><p class='desc'></p></div></a> </div>".format(data[i].id, data[i].sm_logo, data[i].goods_name, data[i].shop_price, data[i].goods_desc);
+            if(!core.debug) {
+                $.ajax({
+                    type: "post",
+                    url: "/Home/Search/ajaxAttr/cat/"+result,
+                    dataType: "json",
+                    data: { 'arr': data },
+                    success: function success(data) {
+                        var html = '';
+                        if (data && data.length > 0) {
+                            var i = 0;
+                            for (data; i < data.length; i++) {
+                                html += "<div class='item'> <a href='/Home/Index/Info/goods/{0}'><img src='/Public/Uploads/{1}' alt=''><div class='info'><p class='name'>{2}</p><p class='price'>￥<span>{3}</span></p><p class='desc'></p></div></a> </div>".format(data[i].id, data[i].sm_logo, data[i].goods_name, data[i].shop_price, data[i].goods_desc);
+                            }
+                        } else {
+                            html = "<span class='ico ico-sad2'></span>没有找到符合你要求的信息";
                         }
-                    } else {
-                        html = "<span class='ico ico-sad2'></span>没有找到符合你要求的信息";
-                    }
 
-                    $(".section").html(html);
-                }
-            });
+                        $(".section").html(html);
+                    }
+                });
+            }
+            
         }
     }
 };

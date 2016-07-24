@@ -5,7 +5,7 @@ import "awesome";
 import "base";
 import "comCss";
 import "../../style/css/cart.less";
-import "comJs";
+import {core} from "comJs";
 import "msg";
 import "../lib/drfu.drag";
 
@@ -96,45 +96,49 @@ var cart = {
                 }
             }, "warn", function () {
                 var cart_id = _this.parent().parent().attr('id');
-                $.ajax({
-                    type: "get",
-                    url: "/Home/Cart/ajaxDelCart",
-                    dataType: "json",
-                    data: {'cart_id': cart_id},
-                    success: function success(data) {
-                        if(data.info=='ok'){
-                            _this.parent().parent().remove();
-                            cart.event.isCheckedAll();
-                            cart.event.calcAllMoney();
-                            $(".con-msg, .con-mark").remove();
+                if(!core.debug) {
+                    $.ajax({
+                        type: "get",
+                        url: "/Home/Cart/ajaxDelCart",
+                        dataType: "json",
+                        data: {'cart_id': cart_id},
+                        success: function success(data) {
+                            if(data.info=='ok'){
+                                _this.parent().parent().remove();
+                                cart.event.isCheckedAll();
+                                cart.event.calcAllMoney();
+                                $(".con-msg, .con-mark").remove();
+                            }
+                        },
+                        fail:function fail(e){
+                            $("body").shortMessage(false, true, e, 2000);
                         }
-                    },
-                    fail:function fail(e){
-                        $("body").shortMessage(false, true, e, 2000);
-                    }
-                });
-
+                    });
+                }
             }, function () {
                 /**
                  * 添加到收藏
                  */
-                // $.ajax({
-                //     url: "",
-                //     data: "",
-                //     type: "",
-                //     success: function (data) {
-                //
-                //
-                //
-                _this.parent().parent().remove();
-                cart.event.isCheckedAll();
-                cart.event.calcAllMoney();
-                $(".con-msg, .con-mark").remove();
-                //     },
-                //     fail: function (e) {
-                //         $("body").shortMessage(false, true, e, 1000);
-                //     }
-                // })
+                if(!core.debug) {
+                    // $.ajax({
+                    //     url: "",
+                    //     data: "",
+                    //     type: "",
+                    //     success: function (data) {
+                    //
+                    //
+                    //
+                    _this.parent().parent().remove();
+                    cart.event.isCheckedAll();
+                    cart.event.calcAllMoney();
+                    $(".con-msg, .con-mark").remove();
+                    //     },
+                    //     fail: function (e) {
+                    //         $("body").shortMessage(false, true, e, 1000);
+                    //     }
+                    // })
+                }
+         
             }, true, {
                 width: "400px"
             });
@@ -168,21 +172,22 @@ var cart = {
             if (temp.length === 0) {
                 $("body").shortMessage(false, true, "请至少选择一件商品！", 1500);
             } else {
-                $.ajax({
-                    type: "get",
-                    url: "/Home/Cart/ajaxCartOrder",
-                    dataType: "json",
-                    data: {'cart_id': temp},
-                    success: function success(data) {
-                        if(data.info=='ok'){
-                            window.location.href = '/Home/Cart/order';
+                if(!core.debug) {
+                    $.ajax({
+                        type: "get",
+                        url: "/Home/Cart/ajaxCartOrder",
+                        dataType: "json",
+                        data: {'cart_id': temp},
+                        success: function success(data) {
+                            if(data.info=='ok'){
+                                window.location.href = '/Home/Cart/order';
+                            }
+                        },
+                        fail:function fail(e){
+                            console.log(e);
                         }
-                    },
-                    fail:function fail(e){
-                        console.log(e);
-                    }
-                });
-
+                    });
+                }
             }
         }
     }

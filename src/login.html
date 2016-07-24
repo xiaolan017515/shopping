@@ -37,18 +37,18 @@
     </div>
     <div class="main">
         <div class="title">欢迎回来，请登录您的账号...</div>
-        <div class="form">
+        <div class="form" id="form">
             <div class="group">
-                <input type="email" id="email" placeholder="邮箱: vmente@mente.com">
+                <input type="email" id="email" placeholder="邮箱: vmente@mente.com" name="email">
                 <div class="ico ico-warning tips">邮箱格式不正确</div>
             </div>
             <div class="group">
-                <input type="password" id="password" placeholder="******">
-                <div class="ico ico-warning tips">密码由6-16位的英文大小写、数字或下划线组成</div>
+                <input type="password" id="password" placeholder="******" name="password">
+                <div class="ico ico-warning tips">由6-16位的英文、数字或下划线组成</div>
             </div>
             <div class="group btn">
                 <!--<a href="index.html">-->
-                    <button class="login notAllowed" id="login" disabled>登录</button>
+                    <button class="login" id="login">登录</button>
                 <!--</a>-->
             </div>
             <div class="group other">

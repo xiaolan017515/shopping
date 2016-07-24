@@ -20,7 +20,7 @@ module.exports = {
         path: path.join(__dirname, "assets"),
         filename: "[name].js"
     },
-    watch: true,// 观察者模式
+    // watch: true,// 观察者模式
     module: {
         preLoaders: [
             // 预先加载的loader

@@ -5,21 +5,17 @@ import "awesome";
 import "base";
 import "comCss";
 import "../../style/css/register.less";
-import "comJs";
+import {core} from "comJs";
 import "msg";
 
 var register = {
     els: {
+        main: $(".main"),
         form: $(".form"),
         submit: $("#submit"),
         username: $("#username"),
         email: $("#email"),
         password: $("#password")
-    },
-    reg: {
-        name: /[a-zA-Z\u4e00-\u9fa5]{4,8}/i,
-        email: /^[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?$/i,
-        pwd: /^[a-zA-Z0-9_]{6,16}$/i
     },
     event: {
         check: function () {
@@ -29,11 +25,10 @@ var register = {
                 type = $(this).attr("type");
             switch (type) {
                 case "text":
-                    if (v != "" && register.reg.name.test(v)) {
+                    if (v != "" && core.reg.account.test(v)) {
                         if(!email && Vemail != "" && !pwd && Vpwd) {
                             register.els.submit.prop("disabled", false).removeClass("notAllowed");
                         }
-                        
                         $(this).removeClass("error");
                         $(this).next().removeClass("show");
                     } else {
@@ -43,7 +38,7 @@ var register = {
                     }
                     break;
                 case "email":
-                    if (v != "" && register.reg.email.test(v)) {
+                    if (v != "" && core.reg.email.test(v)) {
                         if(!username && Vusername != "" && !pwd && Vpwd) {
                             register.els.submit.prop("disabled", false).removeClass("notAllowed");
                         }
@@ -57,7 +52,7 @@ var register = {
                     }
                     break;
                 case "password":
-                    if (v != "" && register.reg.pwd.test(v)) {
+                    if (v != "" && core.reg.pwd.test(v)) {
                         if(!email && Vemail != "" && !username && Vusername) {
                             register.els.submit.prop("disabled", false).removeClass("notAllowed");
                         }
@@ -77,24 +72,29 @@ var register = {
             $(this).next().removeClass("show");
         },
         click: function () {
-            var username = register.els.username.val(), email = register.els.email.val(), password = register.els.password.val();
-            $.ajax({
-                type: "POST",
-                url: "/Home/Member/ajaxGetRegister",
-                dataType: "json",
-                data: {"username": username, "email": email, "password": password},
-                success: function (data) {
-                    if (data.ok == 'success') {
-                        window.location.href = "www.myshop.com/index.php/Home/Member/registered/email/" + data.info
+            // var username = register.els.username.val(), email = register.els.email.val(), password = register.els.password.val();
+            var _data = core.dealData.serialize(register.els.form).result;
+            
+            if(_data.username && _data.email && _data.password) {
+                if(!core.debug) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/Home/Member/ajaxGetRegister",
+                        dataType: "json",
+                        data: _data,
+                        success: function (data) {
+                            if (data.ok == 'success') {
+                                window.location.href = "www.myshop.com/index.php/Home/Member/registered/email/" + data.info
 
-                    } else if (data.ok == 'error') {
-                        $("body").shortMessage(false, true, data.info, 1000, {
-                            width: "200px",
-                            textAlign: "center"
-                        });
-                    }
+                            } else if (data.ok == 'error') {
+                                register.els.main.shortMessage(false, true, data.info, 1500);
+                            }
+                        }
+                    })
                 }
-            })
+            }else {
+                register.els.main.shortMessage(false, true, "请输入完整的注册账号信息", 1500);
+            }
         }
     }
 };

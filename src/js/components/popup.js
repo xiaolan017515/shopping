@@ -16,8 +16,8 @@ var popup = {
         click: function (e) {
             e.data.pop.find('button').removeClass('btnClicked');
             $(this).addClass('btnClicked');
-            var v = e.currentTarget.value;
-            $(e.data.tar).html(v).val(v);
+            var v = $(e.currentTarget).html();
+            $(e.data.tar).text(v).val(v);
             e.data.pop.removeClass("open");
         }
     },
@@ -40,8 +40,16 @@ var popup = {
 
     binding: function () {
         $.each(ele.source, function (i, s) {
-            var popName = $(s).data("popup"), pop = $(".popup#" + popName);
-            $(s).on("focus", {pop: pop}, popup.method.open).on("blur", {pop: pop}, popup.method.hide);
+            var popName = $(s).data("popup"), pop = $(".popup#" + popName),
+                nodeName = s.nodeName;
+            var ico = '<span class="ico ico-angle-down"></span>';
+            $(s).append(ico);
+            if("INPUT" === nodeName) {
+                $(s).on("focus", {pop: pop}, popup.method.open).on("blur", {pop: pop}, popup.method.hide);
+            }else if("DIV,BUTTON".indexOf(nodeName) > -1) {
+                $(s).on("click", {pop: pop}, popup.method.open);
+            }
+            
         });
     },
     updatePosition: function (tar, pop) {
@@ -52,7 +60,7 @@ var popup = {
             if((browserW - ele.shift.x) < (subNum + 1) * ele.width) {
                 sub.css({left: '-100%'});
             }
-            pop.css({minWidth: ele.width + "px", left: ele.shift.x + "px", top: (ele.shift.y + ele.height) + "px"});
+            pop.css({width: ele.width + "px", left: ele.shift.x + "px", top: (ele.shift.y + ele.height) + "px"});
             pop.addClass("open");
             pop.find("button").on("click", {pop: pop, tar: tar}, popup.event.click);
         }
