@@ -24,11 +24,16 @@ var register = {
     event: {
         check: function () {
             let v = $(this).val(),
+                username = register.els.username.hasClass("error"), email = register.els.email.hasClass("error"), pwd = register.els.password.hasClass("error"),
+                Vusername = register.els.username.val(), Vemail = register.els.email.val(), Vpwd = register.els.password.val(),
                 type = $(this).attr("type");
             switch (type) {
                 case "text":
                     if (v != "" && register.reg.name.test(v)) {
-                        register.els.submit.prop("disabled", false).removeClass("notAllowed");
+                        if(!email && Vemail != "" && !pwd && Vpwd) {
+                            register.els.submit.prop("disabled", false).removeClass("notAllowed");
+                        }
+                        
                         $(this).removeClass("error");
                         $(this).next().removeClass("show");
                     } else {
@@ -39,7 +44,10 @@ var register = {
                     break;
                 case "email":
                     if (v != "" && register.reg.email.test(v)) {
-                        register.els.submit.prop("disabled", false).removeClass("notAllowed");
+                        if(!username && Vusername != "" && !pwd && Vpwd) {
+                            register.els.submit.prop("disabled", false).removeClass("notAllowed");
+                        }
+                        
                         $(this).removeClass("error");
                         $(this).next().removeClass("show");
                     } else {
@@ -50,7 +58,10 @@ var register = {
                     break;
                 case "password":
                     if (v != "" && register.reg.pwd.test(v)) {
-                        register.els.submit.prop("disabled", false);
+                        if(!email && Vemail != "" && !username && Vusername) {
+                            register.els.submit.prop("disabled", false).removeClass("notAllowed");
+                        }
+                        
                         $(this).css({borderColor: "rgba(0, 0, 0, 0.18)"});
                         $(this).next().css({display: "none"});
                     } else {
@@ -107,7 +118,5 @@ $(document).keydown(function(event){
     var keyCode = (navigator.appname == "Netscape") ? event.keyCode : event.which;
     if (keyCode == 13) {
         register.event.click();
-    } else {
-        return false;
     }
 });

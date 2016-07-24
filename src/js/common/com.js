@@ -4,6 +4,12 @@
 import "../../style/css/awesome.less";
 import "../../style/css/base.less";
 import "../../style/css/com.less";
+
+var count = 0;
+function logger(txt) {
+    console.log(++count + "." + txt);
+}
+
 String.prototype.format = function (args) {
     var result = this;
     if (arguments.length > 0) {
@@ -39,6 +45,33 @@ var common = {
         cartEmpty: $(".cartEmpty"),
         cartNum: $(".cart .num"),
         login: $("#login")
+    },
+    /**
+     * 定义正则表达式
+     */
+    reg: {
+        "color": /^(#[a-fA-F0-9]{3})|(#[a-fA-F0-9]{6})$/ig,
+        "number": /^\-?\d+(\.\d+)?$/ig,
+        "positiveNumber": /^\d+(\.\d+)?$/ig,
+        "int": /^\-?\d+$/ig,
+        "positiveInteger": /^\d+$/ig,
+        "account": /^[a-zA-Z_]\w{2,14}[a-zA-Z0-9_]$/ig,
+        "ip": /^((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]\d)|\d)(.((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]\d)|\d)){3}$/ig,
+        "host": /^[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+.?$/ig,
+        "url": new RegExp('^((https|http|ftp|rtsp|mms)?://)'
+            + '(([0-9a-z_!~*\'().&=+$%-]+: )?[0-9a-z_!~*\'().&=+$%-]+@)?' //ftp的user@
+            + '(([0-9]{1,3}.){3}[0-9]{1,3}' // IP形式的URL- 199.194.52.184
+            + '|' // 允许IP和DOMAIN（域名）
+            + '([0-9a-z_!~*\'()-]+.)*' // 域名- www.
+            + '([0-9a-z][0-9a-z-]{0,61})?[0-9a-z].' // 二级域名
+            + '[a-z]{2,6})' // first level domain- .com or .museum
+            + '(:[0-9]{1,4})?' // 端口- :80
+            + '((/?)|' // a slash isn't required if there is no file name
+            + '(/[0-9a-z_!~*\'().;?:@&=+$,%#-]+)+/?)$', "ig"),
+        "email": /^[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?$/ig,
+        "tel": /(^\d{11}$)|(^((\+?86)|(\(\+86\)))?(\d{3,4})?(\-|\s)?\d{7,8}((\-|\s)\d{3,4})?$)/ig,
+        "pwd": /^[a-zA-Z0-9_]{6,16}$/ig,
+        "pxsize": /^\d+px$/ig
     },
     event: {
         gotoTop: function (min_height) {
@@ -137,30 +170,30 @@ var common = {
             }
         },
         isLogin: function () {
-            $.ajax({
-                type: "GET",
-                url: "/Home/Member/ajaxChkLogin",
-                dataType: "json",
-                success: function (data) {
-
-                    if (data.ok == 'success') {
-                        var html = "<button class='ico ico-user'>" + data.username + "</button><a href='/Home/Member/logout'>[退出]</a>";
-                        $("#logInfo").html(html);
-                    }
-                }
-            });
+            // $.ajax({
+            //     type: "GET",
+            //     url: "/Home/Member/ajaxChkLogin",
+            //     dataType: "json",
+            //     success: function (data) {
+            //
+            //         if (data.ok == 'success') {
+            //             var html = "<button class='ico ico-user'>" + data.username + "</button><a href='/Home/Member/logout'>[退出]</a>";
+            //             $("#logInfo").html(html);
+            //         }
+            //     }
+            // });
         },
         login: function () {
-            var url = window.location.pathname;
-            $.ajax({
-                type: "GET",
-                dataType: "json",
-                url: "/Home/Member/saveLogin",
-                data: {'url': url},
-                success: function (data) {
-                    location.href = '/Home/Member/login?u=' + data;
-                }
-            });
+            // var url = window.location.pathname;
+            // $.ajax({
+            //     type: "GET",
+            //     dataType: "json",
+            //     url: "/Home/Member/saveLogin",
+            //     data: {'url': url},
+            //     success: function (data) {
+            //         location.href = '/Home/Member/login?u=' + data;
+            //     }
+            // });
         }
     }
 };
