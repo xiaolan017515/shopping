@@ -5,7 +5,7 @@ import "awesome";
 import "base";
 import "comCss";
 import "../../style/css/order.less";
-import "comJs";
+import {core} from "comJs";
 import "msg";
 // import "../lib/distpicker.data"
 // import "../lib/distpicker"
@@ -28,7 +28,8 @@ var verify = {
         uName: $("#uName"),
         uTel: $("#uTel"),
         gl: $(".goodsList"),
-        totalMoney: $("#totalMoney")
+        totalMoney: $("#totalMoney"),
+        so: $('#submitOrder')
     },
     event: {
         username: function () {
@@ -80,12 +81,20 @@ var verify = {
                 var shr_address = verify.els.detailAddr.val();
                 var shr_email = verify.els.email.val();
                 $.ajax({
-                    type:'get',
-                    url:'/Home/Order/ajaxAddress',
-                    dataType:'json',
-                    data:{'shr_name':shr_name,'shr_tel':shr_tel,'shr_province':shr_province,'shr_city':shr_city,'shr_area':shr_area,'shr_address':shr_address,'shr_email':shr_email},
-                    success:function(data){
-                        if(data.info=='ok'){
+                    type: 'get',
+                    url: '/Home/Order/ajaxAddress',
+                    dataType: 'json',
+                    data: {
+                        'shr_name': shr_name,
+                        'shr_tel': shr_tel,
+                        'shr_province': shr_province,
+                        'shr_city': shr_city,
+                        'shr_area': shr_area,
+                        'shr_address': shr_address,
+                        'shr_email': shr_email
+                    },
+                    success: function (data) {
+                        if (data.info == 'ok') {
                             $("body").shortMessage(true, false, '收货人信息保存成功，请选择收货人，提交订单！', 1000);
                             verify.els.box.removeClass("show");
                             verify.els.mask.removeClass("show");
@@ -134,21 +143,61 @@ var verify = {
                 totalMoney += _money;
                 verify.els.totalMoney.html(totalMoney.toFixed(2));
             })
+        },
+        submitOrder: function () {
+            var uAddr = $('#uAddr').html(),
+                uName = $('#uName').html(),
+                uTel = $('#uTel').html(),
+                totalMoney = $('#totalMoney').html(),
+                payMethod = $(".methods").find(".selected").html();
+            if (!core.debug) {
+                $.ajax({
+                    type: 'get',
+                    url: '/Home/Order/ajaxOrder',
+                    dataType: "json",
+                    data: {
+                        'uAddr': uAddr,
+                        'uName': uName,
+                        'uTel': uTel,
+                        'totalMoney': totalMoney,
+                        'payMethod': payMethod
+                    },
+                    success: function success(data) {
+                        if (data.info == 'success') {
+                            location.href = '/Home/Member/pay';
+                        }
+                    }
+                })
+            }
         }
     }
 };
-
+/**
+ * 失焦验证数据格式
+ */
 verify.els.username.blur(verify.event.username);
 verify.els.tel.blur(verify.event.tel);
 // verify.els.email.blur(verify.event.email);
+/**
+ * 打开新增收货地址
+ */
 verify.els.newAddr.click(verify.event.newAddr);
 verify.els.input.focus(verify.event.focus);
+/**
+ * 提交收货地址
+ */
 verify.els.submit.click(verify.event.submit);
+/**
+ * 关闭新增收货地址弹框
+ */
 verify.els.close.click(verify.event.close);
 verify.els.payMethod.click(verify.event.payMethod);
 verify.els.user.click(verify.event.user);
 verify.event.init();
-
+/**
+ * 提交订单
+ */
+verify.els.so.click(verify.event.submitOrder);
 
 /**
  * 区域选择
@@ -162,31 +211,33 @@ var address = {
     event: {
         proClick: function () {
             var par = $("#province option:selected").val();
-            var area =$("#city");
-            address.event.getArea(par,area);
+            var area = $("#city");
+            address.event.getArea(par, area);
         },
         cityClick: function () {
             var par = $("#city option:selected").val();
-            var area =$("#area");
-            address.event.getArea(par,area);
+            var area = $("#area");
+            address.event.getArea(par, area);
         },
-        getArea: function (par,area) {
-            $.ajax({
-                type: "get",
-                url: "/Home/Cart/ajaxCity",
-                dataType: "json",
-                data: {'par': par},
-                success: function success(data) {
-                    var html='';
-                    if(data && data.length > 0){
-                        var i = 0;
-                        for (data; i < data.length; i++) {
-                            html += "<option value='"+data[i].base_id+"'>"+data[i].name+"</option>";
+        getArea: function (par, area) {
+            if (!core.debug) {
+                $.ajax({
+                    type: "get",
+                    url: "/Home/Cart/ajaxCity",
+                    dataType: "json",
+                    data: {'par': par},
+                    success: function success(data) {
+                        var html = '';
+                        if (data && data.length > 0) {
+                            var i = 0;
+                            for (data; i < data.length; i++) {
+                                html += "<option value='" + data[i].base_id + "'>" + data[i].name + "</option>";
+                            }
                         }
+                        area.html(html);
                     }
-                    area.html(html);
-                }
-            });
+                });
+            }
         }
     }
 };

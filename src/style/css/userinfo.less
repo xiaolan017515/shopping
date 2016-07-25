@@ -1,6 +1,7 @@
 @import "color";
 
-.userinfo {
+.manage {
+  background-color: @c-light-0;
   >div {
     float: left;
   }
@@ -8,10 +9,8 @@
     .group {
       > div {
         margin-bottom: 5px;
-        width: 130px;
-        padding-top: 5px;
-        padding-bottom: 5px;
-
+        width: 100px;
+        padding: 5px 15px;
       }
     }
     .dt {
@@ -38,7 +37,14 @@
       }
     }
   }
-  .info {
+  .orderInfo {
+    //width: 870px;
+    //background-color: @c-light-0;
+    //min-height: 430px;
+    display: none;
+    &.active {
+      display: block;
+    }
     .head {
       width: 100%;
       height: 30px;
@@ -73,6 +79,11 @@
         line-height: 30px;
         background-color: @c-light-0;
         border-bottom: 1px solid @c-border;
+        margin-bottom: 10px;
+        position: relative;
+        &.cancel {
+          background-color: @c-light-1;
+        }
         >div {
           float: left;
           height: 100%;
@@ -123,37 +134,284 @@
           &.operate {
             width: 100px;
             button {
+              background-color: @c-purple-2;
+              color: @c-light-0;
+              display: none;
               width: 100%;
               text-align: center;
               padding-top: 5px;
               padding-bottom: 5px;
-              display: none;
               &:hover {
-                color: @c-purple-4;
+                //color: @c-purple-4;
+                background-color: @c-purple-3;
               }
-            }
-            &.done {
-              #done {
-                display: none;
-              }
-            }
-            &.done {
-              #done {
-                display: block;
-              }
-            }
-            &.paying {
-              #paying {
-                display: block;
-              }
-            }
-            &.getting {
-              #getting {
+              &.active {
                 display: block;
               }
             }
           }
         }
+        span.ico {
+          position: absolute;
+          right: 195px;
+          bottom: 15px;
+          font-size: 100px;
+          color: @c-dark-3;
+        }
+      }
+    }
+  }
+  .account {
+    //background-color: @c-light-0;
+    //min-height: 430px;
+    width: 870px;
+    display: none;
+    &.active {
+      display: block;
+    }
+    >div {
+      display: none;
+      &.active {
+        display: block;
+      }
+    }
+    .data {
+      width: 100%;
+      height: auto;
+      .group {
+        width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+        span {
+          display: inline-block;
+          input.notRadio {
+            width: 120px;
+            border: none;
+            background-color: transparent;
+            &.email {
+              width: 200px;
+            }
+            &.update {
+              border: 1px solid @c-border;
+              background-color: @c-light-0;
+            }
+          }
+          &.t {
+            text-align: right;
+            width: 80px;
+          }
+          &.d {
+            margin-left: 10px;
+          }
+          &.update {
+            color: @c-purple-3;
+            cursor: pointer;
+            margin-right: 10px;
+          }
+          &.tips {
+            color: @c-dark-2;
+          }
+        }
+        .error {
+          display: none;
+          color: @c-wrong;
+          span {
+            color: @c-wrong;
+          }
+          &.show {
+            display: block;
+          }
+        }
+      }
+      .saveInfo {
+        background-color: @c-purple-2;
+        color: @c-light-0;
+        padding: 5px 20px;
+        &:hover {
+          background-color: @c-purple-3;
+        }
+      }
+    }
+    .pwd {
+      //width: 850px;
+      //padding-left: 20px;
+      input {
+        width: 200px;
+      }
+      button {
+        padding: 5px 20px;
+        background-color: @c-purple-2;
+        color: @c-light-0;
+      }
+      p {
+        font-size: 18px;
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+      }
+      .check {
+        display: block;
+        &.hidden {
+          display: none;
+        }
+        .getCode {
+          width: 100%;
+          margin-bottom: 20px;
+          margin-top: 20px;
+        }
+        .fillCode {
+          width: 100%;
+          margin-bottom: 20px;
+        }
+      }
+      .updatePwd {
+        display: none;
+        &.show {
+          display: block;
+        }
+        >div {
+          span {
+            display: inline-block;
+            width: 100px;
+            margin-right: 10px;
+          }
+          margin-top: 20px;
+          margin-bottom: 20px;
+        }
+      }
+    }
+    .addr {
+      width: 100%;
+      height: auto;
+      position: relative;
+      .group {
+        width: 750px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        height: 30px;
+        border-bottom: 1px solid @c-border-sub;
+        >div {
+          float: left;
+          height: 100%;
+          line-height: 30px;
+          &.name {
+            width: 110px;
+            text-align: center;
+            border: 1px solid transparent;
+            cursor: pointer;
+            &:hover {
+              border: 1px solid @c-purple-2;
+            }
+            &.selected {
+              border: 1px solid @c-purple-2;
+            }
+          }
+          &.desc {
+            width: auto;
+            padding-left: 25px;
+            padding-right: 25px;
+          }
+          &.tel {
+            width: 100px
+          }
+        }
+      }
+      .newAddr {
+        position: absolute;
+        right: 20px;
+        top: 10px;
+        cursor: pointer;
+        &:hover {
+          color: @c-purple-3;
+        }
+      }
+    }
+    .star {
+
+    }
+  }
+}
+.newAddress {
+  background-color: @c-light-0;
+  border: 1px solid @c-border;
+  width: 680px;
+  height: 380px;
+  padding: 10px 10px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-left: -350px;
+  margin-top: -200px;
+  z-index: 999;
+  box-shadow: 0 0 10px 2px @c-dark-2;
+  display: none;
+  &.show {
+    display: block;
+  }
+  >div {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    &.title {
+      font-size: 16px;
+      position: relative;
+      span.ico-close {
+        padding: 10px;
+        position: absolute;
+        right: -5px;
+        top: -20px;
+        display: inline-block;
+        cursor: pointer;
+        font-size: 18px;
+        &:hover {
+          color: @c-purple-4;
+        }
+      }
+    }
+    &.area {
+      #chooseArea {
+        margin-left: 10px;
+        select {
+          min-width: 100px;
+          height: 30px;
+          outline: none;
+          border-color: @c-border;
+        }
+      }
+    }
+    &.detailArea {
+      input {
+        width: 350px;
+      }
+    }
+    &.save {
+      button {
+        background-color: @c-purple-2;
+        color: @c-light-0;
+        margin-left: 10px;
+      }
+    }
+    span {
+      &.name {
+        display: inline-block;
+        width: 80px;
+        text-align: right;
+      }
+      &.tips {
+        margin-left: 25px;
+        display: none;
+        color: @c-wrong;
+        &.show {
+          display: inline-block;
+        }
+      }
+    }
+    input {
+      width: 200px;
+      margin-left: 10px;
+      border-color: @c-border;
+      &.error {
+        border-color: @c-wrong;
       }
     }
   }

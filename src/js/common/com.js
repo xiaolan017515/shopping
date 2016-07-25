@@ -6,7 +6,10 @@ import "../../style/css/base.less";
 import "../../style/css/com.less";
 var count = 0;
 var core = {
-    debug: false,
+    /**
+     * 用于前端调试，开放接口调试改为false
+     */
+    debug: true,
     reg: {
         "color": /^(#[a-fA-F0-9]{3})|(#[a-fA-F0-9]{6})$/ig,
         "number": /^\-?\d+(\.\d+)?$/ig,
@@ -120,13 +123,13 @@ var core = {
             try {
                 $.each(t, function (i, d) {
                     var name = $(d).attr("name"), type = $(d).attr("type"), nodeName = d.nodeName;
-                    if(nodeName === "INPUT" || nodeName === "BUTTON" || nodeName === "TEXTAREA") {
+                    if (nodeName === "INPUT" || nodeName === "BUTTON" || nodeName === "TEXTAREA") {
                         rst.result[name] = $(d).val();
-                    }else if(nodeName === "DIV") {
+                    } else if (nodeName === "DIV") {
                         rst.result[name] = $(d).html();
                     }
                 });
-            }catch (e) {
+            } catch (e) {
                 rst.hasError = true;
                 rst.result = e.message;
             }
@@ -196,25 +199,30 @@ var common = {
             });
         },
         cartHover: function () {
-            if(!core.debug) {
+            if (!core.debug) {
                 $.ajax({
                     type: "get",
                     url: "/Home/Cart/ajaxGetCart",
                     dataType: "json",
                     success: function success(data) {
-                        var html = '', num = 0;
+                        var html = '',
+                            num = 0, money = 0;
                         if (data && data.length > 0) {
                             var i = 0;
                             for (data; i < data.length; i++) {
-                                html += '<div class="li clr-float"><div class="img"><img src="/Public/Uploads/{1}" alt=""></div><div class="desc"><a href="info.html">{2}{4}</a></div><div class="tl-price"><p class="money">{3}</p><p>x<span class="number">{5}</span></p><button id="delCart">删除<button><input type="hidden" value="{0}"/> <input type="hidden" value="{6}"/> <input type="hidden" value="{7}"/> </div> </div>'.format(data[i].goods_id, data[i].sm_logo, data[i].goods_name, data[i].price, data[i].goods_attr_str, data[i].goods_number, data[i].goods_attr_id, data[i].member_id);
+                                html += '<div class="li clr-float" id="{6}"><div class="img"><img src="/Public/Uploads/{1}" alt=""></div><div class="desc"><a href="info.html">{2}{4}</a></div><div class="tl-price"><p class="money">{3}</p><p>x<span class="number">{5}</span></p><button id="delCart">删除<button></div> </div>'.format(data[i].goods_id, data[i].sm_logo, data[i].goods_name, data[i].price, data[i].goods_attr_str, data[i].goods_number, data[i].id);
                                 num += Number(data[i].goods_number);
+                                money += Number(data[i].goods_number * data[i].price);
                             }
                         }
                         common.els.cartNum.html(num);
-                        $("#goods").html(html);
+                        common.els.sumCart.find("span.num").html(num);
+                        common.els.sumCart.find("span.money").html(money);
+                        common.els.goods.html(html);
+                        common.event.checkCart();
                     },
                     fail: function fail(e) {
-                        console.log(e);
+                        $("body").shortMessage(false, true, "购物车列表获取失败，请重试", 1500);
                     }
                 });
             }
@@ -246,17 +254,18 @@ var common = {
             var totalNum = Number(common.els.cartNum.html());
             common.els.cartNum.html(totalNum - _n);
 
-            var t = $(this).siblings("input");
-            var v = [];
-            $.each(t, function (i, d) {
-                v[i] = $(d).attr('value');
-            });
-            if(!core.debug) {
+            // var t = $(this).siblings("input");
+            // var v = [];
+            // $.each(t, function (i, d) {
+            //     v[i] = $(d).attr('value');
+            // });
+            var cart_id = $(this).parents(".li").attr('id');
+            if (!core.debug) {
                 $.ajax({
                     type: "get",
                     url: "/Home/Cart/ajaxDelCart",
                     dataType: "json",
-                    data: {'arr': v},
+                    data: {'cart_id': cart_id},
                     success: function success(data) {
                         $(this).parent().parent().remove();
                         common.event.checkCart();
@@ -278,7 +287,7 @@ var common = {
             }
         },
         isLogin: function () {
-            if(!core.debug) {
+            if (!core.debug) {
                 $.ajax({
                     type: "GET",
                     url: "/Home/Member/ajaxChkLogin",
@@ -295,7 +304,7 @@ var common = {
 
         },
         login: function () {
-            if(!core.debug) {
+            if (!core.debug) {
                 var url = window.location.pathname;
                 $.ajax({
                     type: "GET",
@@ -309,7 +318,7 @@ var common = {
             }
         },
         searchKey: function () {
-            if(!core.debug) {
+            if (!core.debug) {
                 var keywords = common.els.keywords.val();
                 location.href = "/Home/search/Search?keywords=" + keywords;
             }

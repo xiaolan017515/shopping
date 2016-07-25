@@ -126,27 +126,26 @@
     </div>
 </div>
 
-<div class="content userinfo clr-float">
-    <div class="tab">
-        <div class="group">
+<div class="content manage clr-float">
+    <div class="tab" id="tab">
+        <div class="group orderTab">
             <div class="dt">订单管理</div>
-            <div class="dd active">全部订单</div>
-            <div class="dd">待付款<span>5</span></div>
-            <div class="dd">待收货<span>3</span></div>
-            <div class="dd">待评价<span>10</span></div>
-            <div class="dd">已完成</div>
-            <div class="dd">已取消</div>
+            <div class="dd active" id="all">全部订单</div>
+            <div class="dd" id="paying">待付款<span>5</span></div>
+            <div class="dd" id="getting">待收货<span>3</span></div>
+            <div class="dd" id="toComment">待评价<span>10</span></div>
+            <div class="dd" id="done">已完成</div>
+            <div class="dd" id="cancel">已取消</div>
         </div>
-        <div class="group">
+        <div class="group accountTab">
             <div class="dt">账户管理</div>
-            <div class="dd">个人信息</div>
-            <div class="dd">账号绑定</div>
-            <div class="dd">修改密码</div>
-            <div class="dd active">收货地址</div>
-            <div class="dd">星级评定</div>
+            <div class="dd" id="data">个人信息</div>
+            <div class="dd" id="pwd">修改密码</div>
+            <div class="dd active" id="addr">收货地址</div>
+            <div class="dd" id="star">星级评定</div>
         </div>
     </div>
-    <div class="info">
+    <div class="orderInfo">
         <div class="head clr-float">
             <div id="time" class="time" data-popup="chooseTime">近三个订单</div>
             <div class="desc">商品详情</div>
@@ -154,7 +153,31 @@
             <div class="money">金额</div>
             <div class="operate">操作</div>
         </div>
-        <div class="items">
+        <div class="items" id="items">
+            <div class="item clr-float cancel">
+                <div class="goodName clr-float">
+                    <div class="pic">
+                        <img src="style/images/2.jpg" alt="">
+                    </div>
+                    <div class="desc">
+                        <p class="name">
+                            <a href="info.html">TCL XQB55-36SP 5.5公斤 全自动波轮洗衣机 一键脱水</a>
+                        </p>
+                        <p class="type">颜色：5.5公斤普及款</p>
+                    </div>
+                </div>
+                <div class="consignee">
+                    张三<br>
+                    四川省成都市双流县中和镇1253街道5号
+                </div>
+                <div class="price">100000.00</div>
+                <div class="operate">
+                    <button class="done">再次购买</button>
+                    <button class="paying">立即支付</button>
+                    <button class="getting">确认收货</button>
+                    <button class="toComment">马上评价</button>
+                </div>
+            </div>
             <div class="item clr-float">
                 <div class="goodName clr-float">
                     <div class="pic">
@@ -172,13 +195,110 @@
                     四川省成都市双流县中和镇1253街道5号
                 </div>
                 <div class="price">100000.00</div>
-                <div class="operate done">
-                    <button id="done">再次购买</button>
-                    <button id="paying">立即支付</button>
-                    <button id="getting">确认收货</button>
+                <div class="operate">
+                    <button class="done">再次购买</button>
+                    <button class="paying">立即支付</button>
+                    <button class="getting">确认收货</button>
+                    <button class="toComment">马上评价</button>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="account active">
+        <div class="data">
+            <div class="group">
+                <span class="t">登录名：</span>
+                <span class="d">
+                    <input class="notRadio" readonly type="text" name="loginName" value="vmente">
+                </span>
+                <span class="update">修改</span>
+                <span class="tips">
+                    可用于账户登录，修改后请牢记
+                </span>
+                <div class="error">
+                    <span class="ico ico-warning"></span>
+                    登录名由4-10位以英文字母开头，不能包含汉字和特殊字符组成
+                </div>
+            </div>
+            <div class="group">
+                <span class="t">昵称：</span>
+                <span class="d">
+                    <input class="notRadio" type="text" name="nickName" value="vmente">
+                </span>
+                <span class="update">修改</span>
+                <div class="error">
+                    <span class="ico ico-warning"></span>
+                </div>
+            </div>
+            <div class="group">
+                <span class="t">邮箱地址：</span>
+                <span class="d">
+                    <input readonly class="email notRadio" type="text" name="email" value="v*****e@vmente.com">
+                </span>
+
+                <span class="update">修改</span>
+                <div class="error">
+                    <span class="ico ico-warning"></span>
+                    邮箱地址格式有误，请重新填写
+                </div>
+            </div>
+            <div class="group">
+                <span class="t">性别：</span>
+                <span class="d">
+                    <input type="radio" name="sex" checked>男
+                    <input type="radio" name="sex">女
+                    <input type="radio" name="sex">保密
+                </span>
+            </div>
+            <div class="group">
+                <span class="t"></span>
+                <span class="d">
+                    <button class="saveInfo">保存</button>
+                </span>
+
+            </div>
+
+        </div>
+        <div class="pwd">
+            <div class="check">
+                <p>请输入已绑定的邮箱地址</p>
+                <div class="getCode">
+                    <input type="email" name="email">
+                    <button id="getCode">获取邮箱验证码</button>
+                </div>
+                <div class="fillCode">
+                    <input type="text" id="code">
+                    <span>输入邮箱验证码</span>
+                </div>
+                <button id="checkCode">开始校验</button>
+            </div>
+            <div class="updatePwd">
+                <p>验证成功，请填写新密码</p>
+                <div>
+                    <span>输入新密码：</span>
+                    <input type="password">
+                </div>
+                <div>
+                    <span>确认密码：</span>
+                    <input type="password" id="newPwd">
+                </div>
+                <button id="savePwd">提交</button>
+            </div>
+        </div>
+        <div class="addr active">
+            <div class="group clr-float">
+                <div class="name">公司</div>
+                <div class="desc">四川 成都市 高新区 城区益州大道中段1800号移动互联网创</div>
+                <div class="tel">17622220000</div>
+            </div>
+            <div class="group">
+                <div class="name">私人</div>
+                <div class="desc">四川 成都市 高新区 城区益州大道中段1800号移动互联网创</div>
+                <div class="tel">17622220000</div>
+            </div>
+            <div class="newAddr" id="newAddress">添加新地址</div>
+        </div>
+        <div class="star">星级评定</div>
     </div>
 </div>
 
@@ -205,6 +325,45 @@
     <button value="2014">2014年订单</button>
     <button value="far">更早</button>
 </div>
+
+<div class="newAddress">
+    <div class="title">新增收货人信息
+        <span class="ico ico-close"></span>
+    </div>
+    <div class="username">
+        <span class="name">收货人:</span>
+        <input id="username" type="text" placeholder="张三">
+        <span class="tips">必填项</span>
+    </div>
+    <div class="tel">
+        <span class="name">手机号码:</span>
+        <input id="tel" type="tel" placeholder="135xxxxxxxx">
+        <span class="tips">必填项，电话号码格式不正确</span>
+    </div>
+    <div class="area">
+        <span class="name">地区:</span>
+        <span id="chooseArea" data-toggle="distpicker">
+            <select id="province" data-province="---- 所在省 ----"></select>
+            <select id="city" data-city="---- 所在市 ----"></select>
+            <select data-district="---- 所在区 ----"></select>
+        </span>
+    </div>
+    <div class="detailArea">
+        <span class="name">详细地址:</span>
+        <input type="text" id="detailAddr" placeholder="柳城大道花园小区">
+        <span class="tips">必填项，请输入字符串</span>
+    </div>
+    <div class="email">
+        <span class="name">邮箱:</span>
+        <input id="email" type="text" placeholder="user@vmente.com">
+        <span class="tips">选填项，格式不正确</span>
+    </div>
+    <div class="save">
+        <span class="name"></span>
+        <button id="submit">保存收货人信息</button>
+    </div>
+</div>
+<div class="mask"></div>
 
 <script src="../assets/commons.js"></script>
 <script src="../assets/userinfo.js"></script>
