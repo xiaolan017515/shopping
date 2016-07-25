@@ -6,7 +6,7 @@ import "../../style/css/base.less";
 import "../../style/css/com.less";
 var count = 0;
 var core = {
-    debug: true,
+    debug: false,
     reg: {
         "color": /^(#[a-fA-F0-9]{3})|(#[a-fA-F0-9]{6})$/ig,
         "number": /^\-?\d+(\.\d+)?$/ig,
@@ -173,7 +173,9 @@ var common = {
         cart: $("#cart"),
         cartEmpty: $(".cartEmpty"),
         cartNum: $(".cart .num"),
-        login: $("#login")
+        login: $("#login"),
+        searchBtn: $("#searchBtn"),
+        keywords: $("#keywords")
     },
     event: {
         gotoTop: function (min_height) {
@@ -298,12 +300,18 @@ var common = {
                 $.ajax({
                     type: "GET",
                     dataType: "json",
-                    url: "/Home/Member/saveLogin",
+                    url: "/Home/Member/saveUrl",
                     data: {'url': url},
                     success: function (data) {
                         location.href = '/Home/Member/login?u=' + data;
                     }
                 });
+            }
+        },
+        searchKey: function () {
+            if(!core.debug) {
+                var keywords = common.els.keywords.val();
+                location.href = "/Home/search/Search?keywords=" + keywords;
             }
         }
     }
@@ -337,5 +345,11 @@ common.event.isLogin();
  * 点击登录时，把当前地址存到SESSIO
  */
 common.els.login.on("click", common.event.login);
+
+/**
+ * 关键字搜索
+ */
+
+common.els.searchBtn.on("click", common.event.searchKey);
 
 export {core};

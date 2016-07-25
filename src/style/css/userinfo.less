@@ -111,6 +111,7 @@
             }
           }
           &.consignee {
+            color: @c-dark-2;
             width: 200px;
             word-break: break-all;
           }
@@ -121,9 +122,35 @@
           }
           &.operate {
             width: 100px;
-            text-align: center;
             button {
-              padding: 5px;
+              width: 100%;
+              text-align: center;
+              padding-top: 5px;
+              padding-bottom: 5px;
+              display: none;
+              &:hover {
+                color: @c-purple-4;
+              }
+            }
+            &.done {
+              #done {
+                display: none;
+              }
+            }
+            &.done {
+              #done {
+                display: block;
+              }
+            }
+            &.paying {
+              #paying {
+                display: block;
+              }
+            }
+            &.getting {
+              #getting {
+                display: block;
+              }
             }
           }
         }

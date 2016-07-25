@@ -11,32 +11,33 @@ import "msg";
 var condition = {
     els: {
         cm: $(".checkmore"),
-        sp:　$(".select>span"),
-        st:　$(".sort"),
+        sp: $(".select>span"),
+        st: $(".sort"),
+        sortRst: $("#sortRst"),
         sv: $(".selectVal")
     },
     event: {
         init: function () {
-                var t = $(".condition"), fold = $(".expand"), h = t.height();
-                if (h > 220) {
-                    t.css({height: "200px"});
-                    t.addClass("autoExpand");
-                    fold.on("click", function () {
-                        var fold = !$(this).hasClass("fold");
-                        if (fold) {
-                            t.css({height: h + "px"});
-                            $(this).css({top: (h - 1) + "px"}).children(".tips").html('收起');
-                            $(this).addClass("fold");
-                        } else {
-                            t.css({height: "200px"});
-                            $(this).css({top: "199px"}).children(".tips").html('更多');
-                            $(this).removeClass("fold");
-                        }
-                    })
-                } else {
-                    t.removeClass("autoExpand");
-                }
-            },
+            var t = $(".condition"), fold = $(".expand"), h = t.height();
+            if (h > 220) {
+                t.css({height: "200px"});
+                t.addClass("autoExpand");
+                fold.on("click", function () {
+                    var fold = !$(this).hasClass("fold");
+                    if (fold) {
+                        t.css({height: h + "px"});
+                        $(this).css({top: (h - 1) + "px"}).children(".tips").html('收起');
+                        $(this).addClass("fold");
+                    } else {
+                        t.css({height: "200px"});
+                        $(this).css({top: "199px"}).children(".tips").html('更多');
+                        $(this).removeClass("fold");
+                    }
+                })
+            } else {
+                t.removeClass("autoExpand");
+            }
+        },
         radio: function () {
             $(this).addClass("active").siblings("span").removeClass("active");
             var _id = $(this).parent().parent().attr("id");
@@ -49,7 +50,7 @@ var condition = {
             $(".hasSelected").append(group);
 
             var target = $(".hasSelected .group"), _data = [];
-            $.each(target, function(i, d) {
+            $.each(target, function (i, d) {
                 _data[i] = $(d).find("span.val").html();
             });
 
@@ -67,10 +68,10 @@ var condition = {
 
                 $("#" + id).css({display: "block"}).children(".select").children("span").removeClass("active");
                 var t = $(".hasSelected .group"), _data = [];
-                $.each(t, function(i, d) {
+                $.each(t, function (i, d) {
                     _data[i] = $(d).find("span.val").html();
                 });
-                
+
                 condition.event.select(_data);
             })
         },
@@ -99,7 +100,7 @@ var condition = {
                     $(".hasSelected").append(group);
 
                     var target = $(".hasSelected .group"), _data = [];
-                    $.each(target, function(i, d) {
+                    $.each(target, function (i, d) {
                         _data[i] = $(d).find("span.val").html();
                     });
 
@@ -130,18 +131,44 @@ var condition = {
         },
         sort: function () {
             $(this).toggleClass("active").children("span").toggleClass("ico-sort-asc");
-        },
-        select: function (data) {
-            //获取url中的参数
-            var str =window.location.pathname;
-            var reg = /cid\/.+?[\.\/]/;
-            var result = reg.exec(str)[0].replace(/cid\//, "").replace(/[\.\/]$/, "");
+
+            var cat = $("#cat").val(),
+                btn = $(this).find('.btn').attr('id'),
+                order = $(this).children("span").attr('class');
+
+            var target = $(".hasSelected .group"),
+                _data = [];
+            $.each(target, function (i, d) {
+                _data[i] = $(d).find("span.val").html();
+            });
+
             if(!core.debug) {
                 $.ajax({
                     type: "post",
-                    url: "/Home/Search/ajaxAttr/cat/"+result,
+                    url: "/Home/Search/ajaxSort/cat/" + cat,
                     dataType: "json",
-                    data: { 'arr': data },
+                    data: {'arr': _data, 'btn': btn, 'order': order},
+                    success: function success(data) {
+                        var html = '';
+                        if (data && data.length > 0) {
+                            var i = 0;
+                            for (data; i < data.length; i++) {
+                                html += "<div class='item'> <a href='/Home/Index/Info/goods/{0}'><img src='/Public/Uploads/{1}' alt=''><div class='info'><p class='name'>{2}</p><p class='price'>￥<span>{3}</span></p><p class='desc'></p></div></a> </div>".format(data[i].id, data[i].sm_logo, data[i].goods_name, data[i].shop_price, data[i].goods_desc);
+                            }
+                        }
+                        condition.els.sortRst.html(html);
+                    }
+                })
+            }
+        },
+        select: function (data) {
+            if (!core.debug) {
+                var cat = $("#cat").val();
+                $.ajax({
+                    type: "post",
+                    url: "/Home/Search/ajaxAttr/cat/" + cat,
+                    dataType: "json",
+                    data: {'arr': data},
                     success: function success(data) {
                         var html = '';
                         if (data && data.length > 0) {
@@ -153,11 +180,11 @@ var condition = {
                             html = "<span class='ico ico-sad2'></span>没有找到符合你要求的信息";
                         }
 
-                        $(".section").html(html);
+                        condition.els.sortRst.html(html);
                     }
                 });
             }
-            
+
         }
     }
 };

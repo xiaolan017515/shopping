@@ -6,6 +6,7 @@ import "base";
 import "comCss";
 import "../../style/css/pay.less";
 import "comJs";
+import "msg";
 // import "../lib/qrcode.min"
 
 var cards = {

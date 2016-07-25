@@ -66,7 +66,7 @@ var login = {
                     _data.url_search = window.location.search;
                     $.ajax({
                         type: "POST",
-                        url: "/Home/Member/ajaxGetLogin",
+                        url: "/Home/Member/ajaxLogin",
                         dataType: "json",
                         data: _data,
                         success: function (data) {
