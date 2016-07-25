@@ -74,8 +74,7 @@
             ev.data._this.unbind("mousemove");
         }
     };
-    $.fn.drag = function (dragable) {
-        console.log(dragable);
+    $.fn.drag = function () {
         this.children(".title").on("mousedown", {_this: this}, drag.mousedown).on("mouseup", {_this: this}, drag.mouseup);
     };
 });

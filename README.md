@@ -1,6 +1,6 @@
-# frame base on webpack
+# 电子商务类网站
 
-基于webpack实现模块化和前端代码管理
+基于webpack实现模块化和前端代码管理的购物网站
 
 ## 目录结构
 
@@ -35,7 +35,7 @@
 
 ## 组件
 
-所有组件基于jQeury，仍在不断完善中，可能存在些许bug
+组件基于jQeury
 
 ### message组件
 

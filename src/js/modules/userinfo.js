@@ -7,6 +7,7 @@ import "comCss";
 import "../../style/css/userinfo.less";
 import {core} from "comJs";
 import "msg";
+import "../lib/drfu.drag";
 import "../components/popup";
 
 var orderMange = {
@@ -23,7 +24,7 @@ var orderMange = {
             var t = orderMange.els.items.children(".item"),
                 ico = '<span class="ico ico-times-circle-o"></span>';
             $.each(t, function (i, d) {
-                if($(d).hasClass("cancel")) {
+                if ($(d).hasClass("cancel")) {
                     $(d).append(ico);
                 }
             })
@@ -46,13 +47,15 @@ var accountMange = {
         newAddr: $("#newAddress"),
         addrBox: $(".newAddress"),
         detailAddr: $("#detailAddr"),
+        delAddr: $(".delAddr"),
         input: $(".newAddress input"),
         mask: $(".mask"),
         tel: $("#tel"),
         email: $("#email"),
         username: $("#username"),
         submit: $("#submit"),
-        close: $(".ico-close")
+        close: $(".ico-close"),
+        msgBox: null
     },
     event: {
         update: function () {
@@ -60,16 +63,15 @@ var accountMange = {
         },
         getCode: function () {
             var v = $(this).prev().val();
-            if(!core.debug) {
+            if (!core.debug) {
                 $.ajax({
-                    
+
                 })
             }
-
         },
         checkCode: function () {
             var v = accountMange.els.code.val();
-            if(!core.debug) {
+            if (!core.debug) {
                 $.ajax({
 
                 })
@@ -80,33 +82,57 @@ var accountMange = {
         },
         savePwd: function () {
             var v = accountMange.els.np.val();
-            if(!core.debug) {
-                $.ajax({
-
-                })
+            if (!core.debug) {
+                $.ajax({})
             }
         },
         newAddr: function () {
             accountMange.els.addrBox.addClass("show");
             accountMange.els.mask.addClass("show");
         },
+        delAddr: function () {
+            var _this = $(this);
+            $("body").message({
+                title: "删除",
+                content: "删除该收货地址后将无法恢复",
+                buttons: {
+                    submit: "依然删除",
+                    cancel: "取消"
+                }
+            }, "warn", function () {
+                // if (!core.debug) {
+                    _this.parent().remove();
+                    accountMange.els.msgBox.remove();
+                    // $.ajax({
+                    //
+                    // });
+                // }
+            }, function () {
+                accountMange.els.msgBox.remove();
+            }, true, {
+                width: "400px"
+            });
+            accountMange.els.msgBox = $(".con-msg, .con-mark");
+            $(".con-msg").drag();
+        },
         submit: function () {
             if (accountMange.event.username && accountMange.event.tel && accountMange.event.email) {
-                var shr_name = accountMange.els.username.val();
-                var shr_tel = accountMange.els.tel.val();
-                var shr_province = $("#province option:selected").html();
-                var shr_city = $("#city option:selected").html();
-                var shr_area = $("#area option:selected").html();
-                var shr_address = accountMange.els.detailAddr.val();
-                var shr_email = accountMange.els.email.val();
-                if(!core.debug) {
+                var _data = {};
+                _data.shr_name = accountMange.els.username.val();
+                _data.shr_tel = accountMange.els.tel.val();
+                _data.shr_province = $("#province option:selected").html();
+                _data.shr_city = $("#city option:selected").html();
+                _data.shr_area = $("#area option:selected").html();
+                _data.shr_address = accountMange.els.detailAddr.val();
+                _data.shr_email = accountMange.els.email.val();
+                if (!core.debug) {
                     $.ajax({
-                        type:'get',
-                        url:'/Home/Order/ajaxAddress',
-                        dataType:'json',
-                        data:{'shr_name':shr_name,'shr_tel':shr_tel,'shr_province':shr_province,'shr_city':shr_city,'shr_area':shr_area,'shr_address':shr_address,'shr_email':shr_email},
-                        success:function(data){
-                            if(data.info=='ok'){
+                        type: 'get',
+                        url: '/Home/Order/ajaxAddress',
+                        dataType: 'json',
+                        data: _data,
+                        success: function (data) {
+                            if (data.info == 'ok') {
                                 $("body").shortMessage(true, false, '收货人信息保存成功，请选择收货人，提交订单！', 1000);
                                 accountMange.els.addrBox.removeClass("show");
                                 accountMange.els.mask.removeClass("show");
@@ -217,6 +243,7 @@ accountMange.els.sp.on("click", accountMange.event.savePwd);
  * 新增收货地址
  */
 accountMange.els.newAddr.click(accountMange.event.newAddr);
+accountMange.els.delAddr.click(accountMange.event.delAddr);
 
 accountMange.els.username.blur(accountMange.event.username);
 accountMange.els.tel.blur(accountMange.event.tel);

@@ -17,7 +17,8 @@ var cart = {
         cb: $(".checkbox"),
         it: $(".item"),
         op: $(".operate"),
-        pay: $("#gotoPay")
+        pay: $("#gotoPay"),
+        msgBox: $(".con-msg, .con-mark")
     },
     event: {
         addGoods: function () {
@@ -35,17 +36,20 @@ var cart = {
                 $(this).siblings("input").val(++v);
                 oper = 'add';
             }
+            var _data = {};
+            _data.oper = oper;
+            _data.cart_id = cart_id;
             $.ajax({
                 type:'get',
                 url:'/Home/Cart/ajaxUpdateCart',
                 dataType:'json',
-                data:{'oper':oper,'cart_id':cart_id},
+                data: _data,
                 success:function success(data){
                     cart.event.calcMoney($(this), Number(v));
                     cart.event.calcAllMoney();
                 },
                 fail:function fail(e){
-                    $("body").shortMessage(true, false, e, 2000);
+                    $("body").shortMessage(true, false, "添加失败，请重试", 1500);
                 }
             });
 
@@ -107,11 +111,11 @@ var cart = {
                                 _this.parent().parent().remove();
                                 cart.event.isCheckedAll();
                                 cart.event.calcAllMoney();
-                                $(".con-msg, .con-mark").remove();
+                                cart.els.msgBox.remove();
                             }
                         },
                         fail:function fail(e){
-                            $("body").shortMessage(false, true, e, 2000);
+                            $("body").shortMessage(false, true, "删除失败，请重试", 1500);
                         }
                     });
                 }
@@ -131,10 +135,10 @@ var cart = {
                     _this.parent().parent().remove();
                     cart.event.isCheckedAll();
                     cart.event.calcAllMoney();
-                    $(".con-msg, .con-mark").remove();
+                    cart.els.msgBox.remove();
                     //     },
                     //     fail: function (e) {
-                    //         $("body").shortMessage(false, true, e, 1000);
+                    //         $("body").shortMessage(false, true, "商品收藏失败，请重试", 1500);
                     //     }
                     // })
                 }
@@ -142,9 +146,7 @@ var cart = {
             }, true, {
                 width: "400px"
             });
-            
-            $(".con-msg").drag(true);
-            
+            $(".con-msg").drag();
         },
         isCheckedAll: function () {
             var goods = $("#lists>.item").find("input[type=checkbox]"),
@@ -184,7 +186,7 @@ var cart = {
                             }
                         },
                         fail:function fail(e){
-                            console.log(e);
+                            $("body").shortMessage(false, true, "订单提交失败，请重试！", 1500);
                         }
                     });
                 }
