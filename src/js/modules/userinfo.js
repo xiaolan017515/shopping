@@ -95,11 +95,11 @@ var accountMange = {
             $("body").message({
                 title: "删除",
                 content: "删除该收货地址后将无法恢复",
-                buttons: {
+                button: {
                     submit: "依然删除",
                     cancel: "取消"
                 }
-            }, "warn", function () {
+            }, "warn", true, false, function () {
                 // if (!core.debug) {
                     _this.parent().remove();
                     accountMange.els.msgBox.remove();
@@ -109,7 +109,7 @@ var accountMange = {
                 // }
             }, function () {
                 accountMange.els.msgBox.remove();
-            }, true, {
+            }, {
                 width: "400px"
             });
             accountMange.els.msgBox = $(".con-msg, .con-mark");

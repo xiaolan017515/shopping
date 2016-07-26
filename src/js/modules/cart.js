@@ -98,7 +98,7 @@ const cart = {
                     submit: "直接删除",
                     cancel: "添加到收藏夹"
                 }
-            }, "warn", function () {
+            }, "warn", true, true, function () {
                 const cart_id = _this.parent().parent().attr('id');
                 if(!core.debug) {
                     $.ajax({
@@ -143,7 +143,7 @@ const cart = {
                     // })
                 }
          
-            }, true, {
+            }, {
                 width: "400px"
             });
             cart.els.msgBox = $(".con-msg, .con-mark");

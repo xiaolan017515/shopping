@@ -6,12 +6,13 @@ import "./message.less";
  * 页面弹框消息
  * @param option[title, content, button[submit, cancel]] 配置信息，包括标题，内容，按钮文本
  * @param type 弹出框类型 （warn/wrong）
+ * @param mark 遮罩（boolean）
+ * @param close 关闭图标（boolean）
  * @param submitFun 提交事件
  * @param cancelFun 取消事件
- * @param mark 遮罩（boolean）
  * @param css 样式设置
  */
-$.fn.message = function (option, type, submitFun, cancelFun, mark, css) {
+$.fn.message = function (option, type, mark, close, submitFun, cancelFun, css) {
     var defSet = {
         title: "Title",
         content: "content",
@@ -22,28 +23,40 @@ $.fn.message = function (option, type, submitFun, cancelFun, mark, css) {
     };
     var opt = $.extend(true, {}, defSet, option),
         box = '<div class="con con-msg"><div class="title">{0}</div><div class="content">{1}</div><div class="commands"><button class="submit" value="{2}">{2}</button><button class="cancel" value="{3}">{3}</button></div></div>'.format(opt.title, opt.content, opt.button.submit, opt.button.cancel);
-    // this.css({position: "relative"});
-    if(mark && (mark === true || mark === "true")) {
+    this.css({position: "relative"});
+    if(mark === true || mark === "true") {
         this.append('<div class="con-mark"></div>');
     }
-
+    
     this.append(box);
 
-    var ele = {
-        t: $(".con-msg > .title"),
-        h: $(".con-msg")
+    var els = {
+        title: $(".con-msg > .title"),
+        msg: $(".con-msg"),
+        mask: $(".con-mark")
     };
+    
+    if(close === true || close === "true") {
+        var ico = "<span class='ico ico-close'></span>";
+        els.msg.append(ico);
+
+        $("span.ico-close").click(function () {
+            els.msg.remove();
+            els.mask.remove();
+        })
+    }
 
     if (type && type === "warn") {
-        ele.t.css({backgroundColor: "#ffff66"});
+        els.title.css({backgroundColor: "#ffff66"});
     }else if(type && type === "wrong") {
-        ele.t.css({backgroundColor: "#eb524e", color: "#ffff66"});
+        els.title.css({backgroundColor: "#eb524e", color: "#ffff66"});
     }
+    
     if(css && $.isPlainObject(css)) {
-        ele.h.css(css);
+        els.msg.css(css);
     }
 
-    ele.h.css({marginTop: "-" + ele.h.height() / 2 + "px", marginLeft:  "-" + ele.h.width() / 2 + "px"});
+    els.msg.css({marginTop: "-" + els.msg.height() / 2 + "px", marginLeft:  "-" + els.msg.width() / 2 + "px"});
     
     this.find("button.submit").on("click", submitFun);
     this.find("button.cancel").on("click", cancelFun);
@@ -76,6 +89,7 @@ $.fn.shortMessage = function(type, mark, txt, duration, css) {
         _mark.fadeOut();
         
     }, duration < 1000 ? 1000 : duration);
+    
     if(css && $.isPlainObject(css)) {
         tar.css(css);
     }
