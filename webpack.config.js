@@ -12,6 +12,10 @@ for (var i = 0, len = jsDir.length; i < len; i++) {
     entryFiles[fileList[0]] = __dirname + '/src/js/modules/' + jsDir[i];
 }
 
+var date = new Date(),
+    timeTxt = date.getFullYear() + "年" + (date.getMonth()+1) + "月" + date.getDate() + "日"
+        + date.getHours() + ":" + date.getMinutes()+ ":" + date.getSeconds();
+
 module.exports = {
     devtool: "source-map", // 便于调试
     entry: entryFiles,
@@ -27,41 +31,32 @@ module.exports = {
         ],
         loaders: [
             {
-                test: /\.less$/,
-                loader: ExtractTextPlugin.extract('style', "css!less!postcss!less")
+                test: /\.css|\.less$/,
+                loader: ExtractTextPlugin.extract("style", "css!postcss!less")
             },
             // {test: /\.less$/,loader: "style-loader!css-loader!autoprefixer-loader!less-loader?sourceMap"},
-            {test: /\.css$/, loader: "style!css!postcss"},
+            // {test: /\.css$/, loader: "style!css!postcss"},
             {test: /\.(eot|woff|svg|ttf|woff2|gif|swf)(\?|$)/, loader: 'file?name=[hash].[ext]'},
             {test: /\.(png|jpg)$/, loader: 'url?limit=8192&name=[hash].[ext]'},
             {test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel?presets=es2015'}
         ]
     },
-    postcss: [autoprefixer({browsers: ['last 2 versions']})],
+    postcss: [ autoprefixer({ browsers: ['last 5 versions'] }) ],
     plugins: [
         // new webpack.optimize.UglifyJsPlugin({
         //    compress: {
         //        warnings: false
         //    }
         // }), // 压缩
-        // new webpack.optimize.CommonsChunkPlugin({
-        //     name: "common",
-        //     chunks: jsDir, // important because elsewise it would use "vendor" too
-        //     minChunks: Infinity
-        // }),
-        // new webpack.optimize.CommonsChunkPlugin("commons", "commons.js"),//提取多个页面之间的公共模块
-        // new webpack.optimize.CommonsChunkPlugin({
-        //     name:      'common', // Move dependencies to our main file
-        //     children:  true, // Look for common dependencies in all children,
-        //     minChunks: 2 // How many times a dependency must come up before being extracted
-        // }),
+        
         //全局引入，避免每个页面重复书写
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery'
         }),
+        // new webpack.HotModuleReplacementPlugin(),
         new CommonsChunkPlugin("commons", "commons.js"),
-        // new webpack.BannerPlugin('test plugin!'),// 头部注释
+        new webpack.BannerPlugin('发布时间: '+ timeTxt),// 头部注释
         new ExtractTextPlugin("[name].css")
 
     ],

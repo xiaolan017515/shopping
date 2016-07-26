@@ -145,27 +145,25 @@ var verify = {
             })
         },
         submitOrder: function () {
-            var uAddr = $('#uAddr').html(),
-                uName = $('#uName').html(),
-                uTel = $('#uTel').html(),
-                totalMoney = $('#totalMoney').html(),
-                payMethod = $(".methods").find(".selected").html();
+            var _data = {};
+            _data.uAddr = $('#uAddr').html();
+            _data.uName = $('#uName').html();
+            _data.uTel = $('#uTel').html();
+            _data.totalMoney = $('#totalMoney').html();
+            _data.payMethod = $(".methods").find(".selected").html();
             if (!core.debug) {
                 $.ajax({
                     type: 'get',
                     url: '/Home/Order/ajaxOrder',
                     dataType: "json",
-                    data: {
-                        'uAddr': uAddr,
-                        'uName': uName,
-                        'uTel': uTel,
-                        'totalMoney': totalMoney,
-                        'payMethod': payMethod
-                    },
+                    data: _data,
                     success: function success(data) {
                         if (data.info == 'success') {
                             location.href = '/Home/Member/pay';
                         }
+                    },
+                    fail: function (e) {
+                        $("body").shortMessage(false, true, "订单提交失败，请重试！", 1500);
                     }
                 })
             }

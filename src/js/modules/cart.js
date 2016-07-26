@@ -146,6 +146,7 @@ var cart = {
             }, true, {
                 width: "400px"
             });
+            cart.els.msgBox = $(".con-msg, .con-mark");
             $(".con-msg").drag();
         },
         isCheckedAll: function () {
@@ -164,14 +165,14 @@ var cart = {
         },
         topay: function () {
             var goods = $("#lists>.item").find("input[type=checkbox]"),
-                temp = [];
+                carID = [];
             $.each(goods, function (i, d) {
                 if ($(d).prop("checked")) {
-                    temp.push($(goods[i]).parent().parent().attr("id"));
+                    cart_id.push($(goods[i]).parent().parent().attr("id"));
 
                 }
             });
-            if (temp.length === 0) {
+            if (carID.length === 0) {
                 $("body").shortMessage(false, true, "请至少选择一件商品！", 1500);
             } else {
                 if(!core.debug) {
@@ -179,14 +180,14 @@ var cart = {
                         type: "get",
                         url: "/Home/Cart/ajaxCartOrder",
                         dataType: "json",
-                        data: {'cart_id': temp},
+                        data: {'cart_id': carID},
                         success: function success(data) {
                             if(data.info=='ok'){
                                 window.location.href = '/Home/Cart/order';
                             }
                         },
                         fail:function fail(e){
-                            $("body").shortMessage(false, true, "订单提交失败，请重试！", 1500);
+                            $("body").shortMessage(false, true, "提交失败，请重试！", 1500);
                         }
                     });
                 }
