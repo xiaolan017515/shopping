@@ -1,14 +1,14 @@
 /**
  * Created by fdr08 on 2016/7/12.
  */
-import "awesome";
-import "base";
-import "comCss";
-import "../../style/css/index.less";
-import "comJs";
-import "msg";
+import "awesome"
+import "base"
+import "comCss"
+import "../../style/css/index.less"
+import "comJs"
+import "msg"
 
-var waterFall = {
+const waterFall = {
     maxH: 0,
     event: {
         load: function () {

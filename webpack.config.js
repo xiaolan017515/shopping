@@ -26,9 +26,10 @@ module.exports = {
     },
     // watch: true,// 观察者模式
     module: {
-        preLoaders: [
+        // preLoaders: [
             // 预先加载的loader
-        ],
+            // {test: /\.js$/, loader: "eslint-loader", exclude: /node_modules/}
+        // ],
         loaders: [
             {
                 test: /\.css|\.less$/,
@@ -39,16 +40,25 @@ module.exports = {
             {test: /\.(eot|woff|svg|ttf|woff2|gif|swf)(\?|$)/, loader: 'file?name=[hash].[ext]'},
             {test: /\.(png|jpg)$/, loader: 'url?limit=8192&name=[hash].[ext]'},
             {test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel?presets=es2015'}
+            // {test: /\.js$/, exclude: /node_modules/, loader: ['babel-loader', "eslint-loader"]}
         ]
     },
     postcss: [ autoprefixer({ browsers: ['last 5 versions'] }) ],
+    // eslint: {
+    //     formatter: require("eslint/lib/formatters/stylish"),
+    //     configFile: ".eslintrc",
+    //     quiet: true,
+    //     failOnWarning: false,
+    //     failOnError: true
+    // },
+
     plugins: [
         // new webpack.optimize.UglifyJsPlugin({
         //    compress: {
         //        warnings: false
         //    }
         // }), // 压缩
-        
+
         //全局引入，避免每个页面重复书写
         new webpack.ProvidePlugin({
             $: 'jquery',

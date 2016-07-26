@@ -1,11 +1,11 @@
 /**
  * Created by fdr08 on 2016/7/3.
  */
-import "../../style/css/awesome.less";
-import "../../style/css/base.less";
-import "../../style/css/com.less";
-var count = 0;
-var core = {
+import "../../style/css/awesome.less"
+import "../../style/css/base.less"
+import "../../style/css/com.less"
+let count = 0;
+const core = {
     /**
      * 用于前端调试，开放接口调试改为false
      */
@@ -19,7 +19,7 @@ var core = {
         "ip": /^((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]\d)|\d)(.((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]\d)|\d)){3}$/ig,
         "host": /^[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+.?$/ig,
         "url": new RegExp('^((https|http|ftp|rtsp|mms)?://)'
-            + '(([0-9a-z_!~*\'().&=+$%-]+: )?[0-9a-z_!~*\'().&=+$%-]+@)?' //ftp的user@
+            + '(([0-9a-z_!~*\'().&=+$%-]+: )?[0-9a-z_!~*\'().&=+$%-]+@)?' // ftp的user@
             + '(([0-9]{1,3}.){3}[0-9]{1,3}' // IP形式的URL- 199.194.52.184
             + '|' // 允许IP和DOMAIN（域名）
             + '([0-9a-z_!~*\'()-]+.)*' // 域名- www.
@@ -67,15 +67,15 @@ var core = {
                 var val = $.isPlainObject(value) ? $.extend(true, {}, value) : value, target = $(dom);
                 if (target.is("input,button,textarea")) {
                     if (target.is("input:radio")) {
-                        target.prop("checked", target.val() === val);
+                        target.prop("checked", target.val() === val)
                     } else if (target.is("input:checkbox")) {
                         if ($.type(val) !== "array") val = [val];
-                        target.prop("checked", val.indexOf(target.val()) >= 0);
+                        target.prop("checked", val.indexOf(target.val()) >= 0)
                     } else {
-                        target.val(val);
+                        target.val(val)
                     }
                 } else {
-                    target.html(val);
+                    target.html(val)
                 }
             });
             return this;
@@ -119,7 +119,7 @@ var core = {
                 hasError: false,
                 result: {}
             };
-            var t = obj.find("[name]");
+            let t = obj.find("[name]");
             try {
                 $.each(t, function (i, d) {
                     var name = $(d).attr("name"), type = $(d).attr("type"), nodeName = d.nodeName;
@@ -165,7 +165,7 @@ String.prototype.format = function (args) {
     return result;
 };
 
-var common = {
+const common = {
     els: {
         body: $("body"),
         top: null,
@@ -228,12 +228,12 @@ var common = {
             }
         },
         calcCart: function () {
-            var t = common.els.goods.find(".li"),
-                num = 0,
+            const t = common.els.goods.find(".li");
+            let num = 0,
                 money = 0;
             $.each(t, function (i, d) {
-                var o = $(d).find(".tl-price");
-                var _num = Number(o.find(".number").html());
+                const o = $(d).find(".tl-price");
+                const _num = Number(o.find(".number").html());
                 num += _num;
                 money += Number(o.children(".money").html()) * _num;
             });
@@ -243,15 +243,15 @@ var common = {
             common.els.sumCart.find(".money").html(money);
         },
         remove: function () {
-            var n = Number(common.els.sumCart.find(".num").html());
-            var m = Number(common.els.sumCart.find(".money").html());
-            var _m = Number($(this).siblings(".money").html());
-            var _n = Number($(this).prev().find(".number").html());
+            const n = Number(common.els.sumCart.find(".num").html()),
+                m = Number(common.els.sumCart.find(".money").html()),
+                _m = Number($(this).siblings(".money").html()),
+                _n = Number($(this).prev().find(".number").html());
 
             common.els.sumCart.find(".num").html(n - _n);
             common.els.sumCart.find(".money").html(m - (_m * _n));
 
-            var totalNum = Number(common.els.cartNum.html());
+            const totalNum = Number(common.els.cartNum.html());
             common.els.cartNum.html(totalNum - _n);
 
             // var t = $(this).siblings("input");
@@ -259,7 +259,7 @@ var common = {
             // $.each(t, function (i, d) {
             //     v[i] = $(d).attr('value');
             // });
-            var cart_id = $(this).parents(".li").attr('id');
+            const cart_id = $(this).parents(".li").attr('id');
             if (!core.debug) {
                 $.ajax({
                     type: "get",
@@ -271,7 +271,7 @@ var common = {
                         common.event.checkCart();
                     },
                     fail: function fail(e) {
-                        console.log(e);
+                        $("body").shortMessage(false, true, "删除失败，请重试！", 1500, {width: "300px"});
                     }
                 });
             }
@@ -293,11 +293,13 @@ var common = {
                     url: "/Home/Member/ajaxChkLogin",
                     dataType: "json",
                     success: function (data) {
-
                         if (data.ok == 'success') {
-                            var html = "<button class='ico ico-user'>" + data.username + "</button><a href='/Home/Member/logout'>[退出]</a>";
+                            const html = "<button class='ico ico-user'>" + data.username + "</button><a href='/Home/Member/logout'>[退出]</a>";
                             $("#logInfo").html(html);
                         }
+                    },
+                    fail: function (e) {
+                       console.log(e);
                     }
                 });
             }
@@ -305,7 +307,7 @@ var common = {
         },
         login: function () {
             if (!core.debug) {
-                var url = window.location.pathname;
+                const url = window.location.pathname;
                 $.ajax({
                     type: "GET",
                     dataType: "json",
@@ -313,6 +315,9 @@ var common = {
                     data: {'url': url},
                     success: function (data) {
                         location.href = '/Home/Member/login?u=' + data;
+                    },
+                    fail: function (e) {
+                        console.log(e);
                     }
                 });
             }

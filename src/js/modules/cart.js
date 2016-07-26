@@ -1,15 +1,15 @@
 /**
  * Created by fdr08 on 2016/7/15.
  */
-import "awesome";
-import "base";
-import "comCss";
-import "../../style/css/cart.less";
-import {core} from "comJs";
-import "msg";
-import "../lib/drfu.drag";
+import "awesome"
+import "base"
+import "comCss"
+import "../../style/css/cart.less"
+import {core} from "comJs"
+import "msg"
+import "../lib/drfu.drag"
 
-var cart = {
+const cart = {
     els: {
         at: $(".addTool"),
         atinput: $(".addTool>input"),
@@ -22,9 +22,9 @@ var cart = {
     },
     event: {
         addGoods: function () {
-            var oper='', cart_id = $(this).parents(".item").attr("id"),
-                t = $(this).hasClass("reduce"),
-                v = $(this).siblings("input").val();
+            let oper='', v = $(this).siblings("input").val();
+            const cart_id = $(this).parents(".item").attr("id"),
+                t = $(this).hasClass("reduce");
             if (t) {
                 if (v == 1) {
                     $(this).siblings("input").val(1);
@@ -36,7 +36,7 @@ var cart = {
                 $(this).siblings("input").val(++v);
                 oper = 'add';
             }
-            var _data = {};
+            const _data = {};
             _data.oper = oper;
             _data.cart_id = cart_id;
             $.ajax({
@@ -55,12 +55,12 @@ var cart = {
 
         },
         inputGoodNum: function () {
-            var v = $(this).val();
+            const v = $(this).val();
             cart.event.calcMoney($(this), v);
             cart.event.calcAllMoney();
         },
         checkAll: function () {
-            var checked = $(this).prop("checked");
+            const checked = $(this).prop("checked");
             if (checked) {
                 $(".checkbox").children("input").prop("checked", true);
             } else {
@@ -73,12 +73,12 @@ var cart = {
          * @param v input的value值
          */
         calcMoney: function (t, v) {
-            var price = Number(t.parent().parent().prev().text());
+            const price = Number(t.parent().parent().prev().text());
             t.parent().parent().next().text(parseFloat(price * v).toFixed(2));
         },
         calcAllMoney: function () {
-            var goods = $("#lists>.item").find("input[type=checkbox]"),
-                sum = 0;
+            const goods = $("#lists>.item").find("input[type=checkbox]");
+            let sum = 0;
             $.each(goods, function (i, d) {
                 if ($(d).prop("checked")) {
                     sum += Number($(d).parent().siblings(".money").text());
@@ -90,7 +90,7 @@ var cart = {
             /**
              * 点击删除
              */
-            var _this = $(this);
+            const _this = $(this);
             $("body").message({
                 title: "删除",
                 content: "<span class='ico ico-warning'></span>您可以直接删除该商品或者删除并添加到收藏夹",
@@ -99,7 +99,7 @@ var cart = {
                     cancel: "添加到收藏夹"
                 }
             }, "warn", function () {
-                var cart_id = _this.parent().parent().attr('id');
+                const cart_id = _this.parent().parent().attr('id');
                 if(!core.debug) {
                     $.ajax({
                         type: "get",
@@ -150,8 +150,8 @@ var cart = {
             $(".con-msg").drag();
         },
         isCheckedAll: function () {
-            var goods = $("#lists>.item").find("input[type=checkbox]"),
-                temp = [];
+            const goods = $("#lists>.item").find("input[type=checkbox]");
+            const temp = [];
             $.each(goods, function (i, d) {
                 if ($(d).prop("checked")) {
                     temp.push(goods[i]);
@@ -164,8 +164,8 @@ var cart = {
             }
         },
         topay: function () {
-            var goods = $("#lists>.item").find("input[type=checkbox]"),
-                carID = [];
+            const goods = $("#lists>.item").find("input[type=checkbox]");
+            const carID = [];
             $.each(goods, function (i, d) {
                 if ($(d).prop("checked")) {
                     cart_id.push($(goods[i]).parent().parent().attr("id"));
